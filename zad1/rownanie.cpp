@@ -22,7 +22,10 @@ void WprowadzWspTrojmianu(TrojmianKw *wTKw) //wczytywanie parametrów wielomianu
 
 void WyswietlTrojmian(TrojmianKw TKw) //wyświetlanie wielomianu z podanymi parametrami
 {
-	if(TKw.a == 1)
+
+	cout << std::showpos << TKw.a << TKw.b << TKw.c << "\n" << std::noshowpos;
+	
+	/*if(TKw.a == 1)
 		cout << "x^2";
 	else if(TKw.a == -1)
 		cout << "-x^2";
@@ -34,7 +37,7 @@ void WyswietlTrojmian(TrojmianKw TKw) //wyświetlanie wielomianu z podanymi para
 			cout << "+x";
 		else
 			cout << "+" << TKw.b << "x";
-	else if (TKw.b < 0)
+	else if(TKw.b < 0)
 		if(TKw.b == -1)
 			cout << "-x";
 		else
@@ -45,7 +48,7 @@ void WyswietlTrojmian(TrojmianKw TKw) //wyświetlanie wielomianu z podanymi para
 	else if (TKw.c < 0)
 		cout << TKw.c;
 	
-	cout << endl;
+	cout << endl;*/
 }
 
 /*!
