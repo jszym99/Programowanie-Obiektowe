@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 	cout << "\n Oczekikawny wynik: -5+10i \n ";
 	Wynik = L1 * L2;
 	cout << Wynik << endl;
-	
+
 	cout << "\n Oczekikawny wynik: 6+8i \n ";
 	Wynik = L0 * L2;
 	cout << Wynik << endl;
@@ -81,6 +81,9 @@ int main(int argc, char **argv)
 
 	cout << "\n Oczekikawny wynik: 3-4i \n ";
 	cout << sprzezenie(L2) << endl;
+
+	cout << "\n Oczekikawny wynik: 5+6i \n ";
+	cout << inicjuj(5,6) << endl;
 	//Koniec testu
 
 	cout << endl;

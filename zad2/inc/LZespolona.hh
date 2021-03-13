@@ -47,4 +47,6 @@ bool operator == (const LZespolona & Skl1, const LZespolona & Skl2);
 
 bool operator != (const LZespolona & Skl1, const LZespolona & Skl2);
 
+LZespolona inicjuj (const double & re, const double & im);
+
 #endif

@@ -145,3 +145,13 @@ bool operator != (const LZespolona & Skl1, const LZespolona & Skl2)
 {
 	return !(Skl1 == Skl2);
 }
+
+LZespolona inicjuj (const double & re, const double & im)
+{
+	LZespolona Wynik;
+
+	Wynik.re = re;
+	Wynik.im = im;
+
+	return Wynik;
+}
