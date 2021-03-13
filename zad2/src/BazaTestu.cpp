@@ -9,12 +9,13 @@ using namespace std;
  * Tablica, ktora jest widoczna tylko w tym module.
  * Zawiera ona tresc latwego testu.
  */
-static WyrazenieZesp  TestLatwy[] =
-  { {{2,1}, Op_Dodaj, {1,2}},
-    {{1,0}, Op_Odejmij, {0,1}},
-    {{3,0}, Op_Mnoz, {0,3}},
-    {{4,8}, Op_Dziel, {1,0}},
-  };
+static WyrazenieZesp TestLatwy[] =
+	{
+		{{2, 1}, Op_Dodaj, {1, 2}},
+		{{1, 0}, Op_Odejmij, {0, 1}},
+		{{3, 0}, Op_Mnoz, {0, 3}},
+		{{4, 8}, Op_Dziel, {1, 0}},
+};
 
 /*
  * Analogicznie zdefiniuj test "trudne"
@@ -42,11 +43,11 @@ static WyrazenieZesp  TestLatwy[] =
  *      - Parametr IloscPytan zawiera wartosc, ktora nie przekracza ilosci elementow
  *        w tablicy dostepnej poprzez wskTabTestu.
  */
-void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan )
+void UstawTest(BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan)
 {
-  wskBazaTestu->wskTabTestu = wskTabTestu;
-  wskBazaTestu->IloscPytan = IloscPytan;
-  wskBazaTestu->IndeksPytania = 0;
+	wskBazaTestu->wskTabTestu = wskTabTestu;
+	wskBazaTestu->IloscPytan = IloscPytan;
+	wskBazaTestu->IndeksPytania = 0;
 }
 
 
@@ -71,18 +72,19 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
  *              zainicjalizowany,
  *       false - w przypadku przeciwnym.
  */
-bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
+bool InicjalizujTest(BazaTestu *wskBazaTestu, const char *sNazwaTestu)
 {
-  if (!strcmp(sNazwaTestu,"latwy")) {
-    UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
-    return true;
-  }
-  /*
+	if (!strcmp(sNazwaTestu, "latwy"))
+	{
+		UstawTest(wskBazaTestu, TestLatwy, sizeof(TestLatwy) / sizeof(WyrazenieZesp));
+		return true;
+	}
+	/*
    * Analogicznie zrob inicjalizacje dla testu trudne
    */
 
-  cerr << "Otwarcie testu '" << sNazwaTestu << "' nie powiodlo sie." << endl;
-  return false;
+	cerr << "Otwarcie testu '" << sNazwaTestu << "' nie powiodlo sie." << endl;
+	return false;
 }
 
 
@@ -106,11 +108,12 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazenie )
+bool PobierzNastpnePytanie(BazaTestu *wskBazaTestu, WyrazenieZesp *wskWyrazenie)
 {
-  if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan) return false;
+	if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan)
+		return false;
 
-  *wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
-  ++wskBazaTestu->IndeksPytania;
-  return true;
+	*wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
+	++wskBazaTestu->IndeksPytania;
+	return true;
 }
