@@ -76,12 +76,6 @@ int main(int argc, char **argv)
 	Wynik = L1 / L2;
 	cout << Wynik << endl;
 
-	cout << "\n Oczekikawny wynik: 5 \n ";
-	cout << modul(L2) << endl;
-
-	cout << "\n Oczekikawny wynik: 3-4i \n ";
-	cout << sprzezenie(L2) << endl;
-
 	cout << "\n Oczekikawny wynik: 5+6i \n ";
 	cout << inicjuj(5,6) << endl;
 	//Koniec testu
