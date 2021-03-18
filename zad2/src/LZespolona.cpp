@@ -1,6 +1,9 @@
 #include "LZespolona.hh"
 
-#define DELTA 0,000000001
+namespace LZesp
+{
+	const double epsilon = __DBL_MIN__;
+}
 
 /*!
  * Realizuje dodawanie dwoch liczb zespolonych.
@@ -169,7 +172,7 @@ LZespolona sprzezenie (const LZespolona & LZ)
  */
 bool operator == (const LZespolona & Skl1, const LZespolona & Skl2)
 {
-	if(sqrt(modul2(Skl1 - Skl2)) <= DELTA)
+	if(sqrt(modul2(Skl1 - Skl2)) <= LZesp::epsilon)
 		return true;
 	else
 		return false;

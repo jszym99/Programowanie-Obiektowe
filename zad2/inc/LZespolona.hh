@@ -37,9 +37,9 @@ LZespolona operator / (const LZespolona & Skl1, const LZespolona & Skl2);
 
 std::ostream & operator << (std::ostream & strm, const LZespolona & dana);
 
-std::istream & operator >> (std::istream & strm, const LZespolona & dana);
+std::istream & operator >> (std::istream & strm, LZespolona & dana);
 
-double modul (const LZespolona & LZ);
+double modul2 (const LZespolona & LZ);
 
 LZespolona sprzezenie (const LZespolona & LZ);
 
