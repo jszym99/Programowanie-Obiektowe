@@ -33,15 +33,41 @@ int main(int argc, char **argv)
 	cout << endl;
 
 	WyrazenieZesp WyrZ_PytanieTestowe;
+	LZespolona Odp;
 
 	while (PobierzNastpnePytanie(&BazaT, &WyrZ_PytanieTestowe))
 	{
-		cout << " Czesc rzeczywista pierwszego argumentu: ";
-		cout << WyrZ_PytanieTestowe.Arg1.re << endl;
+		LZespolona PopOdp = Oblicz(WyrZ_PytanieTestowe);
+		//cout << "\n " << WyrZ_PytanieTestowe << " = ";
+		
+		for(int i = 2; i >= 0; i--)
+		{
+			cout << "\n " << WyrZ_PytanieTestowe << " = ";
+
+			cin >> Odp;
+			if(!cin.good())
+			{
+				cin.clear();
+				cin.ignore(1000,'\n');
+				cout << " Bledny format odpowiedzi. Poprawny format: '(x+yi)'\n Pozostale proby: " << i << endl;
+			}
+			else
+				break;
+		}
+		
+		if(Odp == PopOdp)
+			cout << " Poprawna odpowiedz." << endl;
+		else
+			cout << " Bledna odpowiedz.\n Poprawna odpowiedz: " << PopOdp << endl;
+
+
+		//cout << " " << Oblicz(WyrZ_PytanieTestowe) << endl;
+		//cout << " Czesc rzeczywista pierwszego argumentu: ";
+		//cout << WyrZ_PytanieTestowe.Arg1.re << endl;
 	}
 
 
-	// Test dzialan
+	/* Test dzialan
 	cout << "\n Test operacji na liczbach zespolonych \n ----------------------------------------------" << endl;
 
 	LZespolona L0, L1, L2, Wynik;
@@ -78,7 +104,7 @@ int main(int argc, char **argv)
 
 	cout << "\n Oczekikawny wynik: 5+6i \n ";
 	cout << inicjuj(5,6) << endl;
-	//Koniec testu
+	//Koniec testu */
 
 	cout << endl;
 	cout << " Koniec testu" << endl;

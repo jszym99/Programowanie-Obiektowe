@@ -4,6 +4,7 @@
 
 
 #include "LZespolona.hh"
+#include <iostream>
 
 
 /*!
@@ -30,12 +31,18 @@ struct WyrazenieZesp
 };
 
 
+
+std::istream & operator >> (std::istream & strm, Operator & Op);
+std::istream & operator >> (std::istream & strm, WyrazenieZesp & Wyraz);
+std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & Wyraz);
+
+
 /*
  * Funkcje ponizej nalezy zdefiniowac w module.
  *
  */
 
-void Wyswietl(WyrazenieZesp WyrZ);
-LZespolona Oblicz(WyrazenieZesp WyrZ);
+void Wyswietl(const WyrazenieZesp & WyrZ);
+LZespolona Oblicz(const WyrazenieZesp & WyrZ);
 
 #endif
