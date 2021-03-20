@@ -1,5 +1,6 @@
 #include <iostream>
 #include "BazaTestu.hh"
+#include "Statystyki.hh"
 
 using namespace std;
 
@@ -34,11 +35,14 @@ int main(int argc, char **argv)
 
 	WyrazenieZesp WyrZ_PytanieTestowe;
 	LZespolona Odp;
+	Statystyki StatyTestu;
+
+	Inicjuj(StatyTestu); //Inicjalizacja zmiennej zawierajacej statystyki testu
+
 
 	while (PobierzNastpnePytanie(&BazaT, &WyrZ_PytanieTestowe))
 	{
 		LZespolona PopOdp = Oblicz(WyrZ_PytanieTestowe);
-		//cout << "\n " << WyrZ_PytanieTestowe << " = ";
 		
 		for(int i = 2; i >= 0; i--)
 		{
@@ -56,55 +60,20 @@ int main(int argc, char **argv)
 		}
 		
 		if(Odp == PopOdp)
+		{
 			cout << " Poprawna odpowiedz." << endl;
+			DodajPoprawna(StatyTestu);
+		}
 		else
+		{
 			cout << " Bledna odpowiedz.\n Poprawna odpowiedz: " << PopOdp << endl;
+			DodajNiepoprawna(StatyTestu);
+		}
 
 
-		//cout << " " << Oblicz(WyrZ_PytanieTestowe) << endl;
-		//cout << " Czesc rzeczywista pierwszego argumentu: ";
-		//cout << WyrZ_PytanieTestowe.Arg1.re << endl;
 	}
 
-
-	/* Test dzialan
-	cout << "\n Test operacji na liczbach zespolonych \n ----------------------------------------------" << endl;
-
-	LZespolona L0, L1, L2, Wynik;
-	L0.re = 2;
-	L0.im = 0;
-	L1.re = 1;
-	L1.im = 2;
-	L2.re = 3;
-	L2.im = 4;
-
-	cout << "\n Oczekikawny wynik: 4+6i \n ";
-	Wynik = L1 + L2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: -2-2i \n ";
-	Wynik = L1 - L2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: -5+10i \n ";
-	Wynik = L1 * L2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: 6+8i \n ";
-	Wynik = L0 * L2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: 0.44+0.08i \n ";
-	Wynik = L1 / 2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: 0.44+0.08i \n ";
-	Wynik = L1 / L2;
-	cout << Wynik << endl;
-
-	cout << "\n Oczekikawny wynik: 5+6i \n ";
-	cout << inicjuj(5,6) << endl;
-	//Koniec testu */
+	Wyswielt(StatyTestu);
 
 	cout << endl;
 	cout << " Koniec testu" << endl;
