@@ -10,6 +10,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
+	//Sprawdzenie czy podano parametr wejsciowy
 	if (argc < 2)
 	{
 		cout << endl;
@@ -21,7 +22,8 @@ int main(int argc, char **argv)
 
 	BazaTestu BazaT = {nullptr, 0, 0};
 
-	if (InicjalizujTest(&BazaT, argv[1]) == false)
+	//Inicjalizacja testu z odpowiedniej bazy pytan
+	if (InicjalizujTest(&BazaT, argv[1]) == false) //TODO: problem z inicjalizacja testu trudnego
 	{
 		cerr << " Inicjalizacja testu nie powiodla sie." << endl;
 		return 1;
@@ -39,16 +41,16 @@ int main(int argc, char **argv)
 
 	Inicjuj(StatyTestu); //Inicjalizacja zmiennej zawierajacej statystyki testu
 
-
+	//Wczytywanie po kolei wszystkich pytan z bazy testu
 	while (PobierzNastpnePytanie(&BazaT, &WyrZ_PytanieTestowe))
 	{
-		LZespolona PopOdp = Oblicz(WyrZ_PytanieTestowe);
+		LZespolona PopOdp = Oblicz(WyrZ_PytanieTestowe); //Wartosc poprawnej odpowiedzi
 		
-		for(int i = 2; i >= 0; i--)
+		for(int i = 2; i >= 0; i--) //3 proby przy blednym formacie odpowiedzi
 		{
 			cout << "\n " << WyrZ_PytanieTestowe << " = ";
 
-			cin >> Odp;
+			cin >> Odp; //Sprawdzenie poprawnosci zapisu odpowiedzi
 			if(!cin.good())
 			{
 				cin.clear();

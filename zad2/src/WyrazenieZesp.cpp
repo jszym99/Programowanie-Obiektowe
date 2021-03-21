@@ -1,8 +1,6 @@
 #include "WyrazenieZesp.hh"
 
-/*!
- * Przeciazenia operatorow
- */
+//Realizuje wczytywanie znaku w wyrazeniu zespolonym z wejscia standardowego
 std::istream & operator >> (std::istream & strm, Operator & Op)
 {
     char znak;
@@ -20,12 +18,14 @@ std::istream & operator >> (std::istream & strm, Operator & Op)
     return strm;
 }
 
+//Realizuje wczytywanie wyrazenia zespolonego na wejsciu standardowym
 std::istream & operator >> (std::istream & strm, WyrazenieZesp & Wyraz)
 {
     strm >> Wyraz.Arg1 >> Wyraz.Op >> Wyraz.Arg2;
     return strm;
 }
 
+//Realizuje wypisywanie wyrazenia zespolonego na wyjsciu standardowym
 std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & Wyraz)
 {
     char znak;
@@ -41,11 +41,14 @@ std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & Wyraz)
     return strm;
 }
 
+//Funkcja wyswietla wyrazenie zespolone
 void Wyswielt(const WyrazenieZesp & WyrZ)
 {
     std::cout << WyrZ;
 }
 
+
+//Funkcja oblicza wartosc wyrazenia zespolonego (liczba zespolona)
 LZespolona Oblicz(const WyrazenieZesp & WyraZ)
 {
     LZespolona Wynik;
