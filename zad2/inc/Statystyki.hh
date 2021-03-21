@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+
+/*
+ * Modeluje baze statystyk poprawnosci odpowiedzi uzytkownika
+ */
 struct Statystyki
 {
     int LPoprawnych;
