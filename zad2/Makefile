@@ -6,9 +6,9 @@ __start__: ${TRGDIR}/test_arytm_zesp
 	${TRGDIR}/test_arytm_zesp  latwy
 
 ${TRGDIR}/test_arytm_zesp: ${OBJ} ${OBJ}/main.o ${OBJ}/LZespolona.o\
-                     ${OBJ}/WyrazenieZesp.o ${OBJ}/BazaTestu.o ${OBJ}/BazaTestu.o
+                     ${OBJ}/WyrazenieZesp.o ${OBJ}/BazaTestu.o ${OBJ}/Statystyki.o
 	g++ -o ${TRGDIR}/test_arytm_zesp ${OBJ}/main.o ${OBJ}/LZespolona.o\
-                     ${OBJ}/WyrazenieZesp.o ${OBJ}/BazaTestu.o
+                     ${OBJ}/WyrazenieZesp.o ${OBJ}/BazaTestu.o ${OBJ}/Statystyki.o
 
 ${OBJ}:
 	mkdir ${OBJ}
@@ -26,6 +26,11 @@ ${OBJ}/BazaTestu.o: src/BazaTestu.cpp inc/BazaTestu.hh inc/WyrazenieZesp.hh\
 ${OBJ}/WyrazenieZesp.o: src/WyrazenieZesp.cpp inc/WyrazenieZesp.hh\
                        inc/LZespolona.hh
 	g++ -c ${FLAGS} -o ${OBJ}/WyrazenieZesp.o src/WyrazenieZesp.cpp
+
+${OBJ}/Statystyki.o: src/Statystyki.cpp inc/Statystyki.hh\
+                       #inc/LZespolona.hh
+	g++ -c ${FLAGS} -o ${OBJ}/Statystyki.o src/Statystyki.cpp
+
 
 
 
