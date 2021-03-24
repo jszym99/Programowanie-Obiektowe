@@ -4,7 +4,7 @@
 
 
 #include "LZespolona.hh"
-#include <iostream>
+//#include <iostream>
 
 
 /*!

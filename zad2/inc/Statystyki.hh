@@ -16,7 +16,7 @@ struct Statystyki
 void Inicjuj (Statystyki & Staty);
 void DodajPoprawna (Statystyki & Staty);
 void DodajNiepoprawna (Statystyki & Staty);
-double ObliczProcrnt(Statystyki & Staty);
+double ObliczProcent(Statystyki & Staty);
 void Wyswielt (Statystyki & Staty);
 
 
