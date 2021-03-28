@@ -2,8 +2,6 @@
 
 
 WyrazenieZesp::WyrazenieZesp (LZespolona LZ1, Operator Op, LZespolona LZ2): Arg1(LZ1), Op(Op), Arg2(LZ2) {}
-//Do sprawdzenia
-WyrazenieZesp::WyrazenieZesp (): Arg1(0,0), Op(Op_Dodaj), Arg2(0,0) {}
 
 // Chyba nie potrzebne
 //Realizuje wczytywanie znaku w wyrazeniu zespolonym z wejscia standardowego

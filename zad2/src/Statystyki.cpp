@@ -1,7 +1,6 @@
 #include "Statystyki.hh"
 
 Statystyki::Statystyki (int LPop, int LPyt): LPoprawnych(LPop), LPytan(LPyt) {}
-//Statystyki::Statystyki (): LPoprawnych(0), LPytan(0) {}
 
 // Nie potrzebna
 //Funkcja inicjuje strukture zawierajaca statystyki testu

@@ -3,31 +3,69 @@
 #include <cassert>
 #include "BazaTestu.hh"
 
-using namespace std;
+
+bool BazaTestu::pobierz_pytanie (WyrazenieZesp & Wyraz) //const
+{
+	strm_pliku_pytan >> Wyraz;
+	if(strm_pliku_pytan.good())
+		return true;
+	else if(strm_pliku_pytan.eof())
+		return false;
+	else
+	{
+		std::cerr << "Bledne dane w pliku" << std::endl;
+		return false;
+	}
+}
+
+bool BazaTestu::otworz_plik (std::string nazwa)
+{
+	strm_pliku_pytan.open(nazwa, std::fstream::in);
+	if(!strm_pliku_pytan.is_open())
+	{
+		std::cerr << "Nie udalo sie otworzyc pliku" << std::endl;
+		return false;
+	}
+	else
+		return true;
+}
+
+BazaTestu::BazaTestu(std::string nazwa)
+{
+	//Sprawdz czy naszwa w argumencie zawiera ".txt"
+	if(nazwa.find(".txt") == std::string::npos)
+		nazwa.append(".txt");
+
+	otworz_plik(nazwa);
+}
+
+
+// Stary kod
+//using namespace std;
 
 /*
  * Tablica, ktora jest widoczna tylko w tym module.
  * Zawiera ona tresc latwego testu.
  */
-static WyrazenieZesp TestLatwy[] =
+/*static WyrazenieZesp TestLatwy[] =
 	{
 		{{2, 1}, Op_Dodaj, {1, 2}},
 		{{1, 0}, Op_Odejmij, {0, 1}},
 		{{3, 0}, Op_Mnoz, {0, 3}},
 		{{4, 8}, Op_Dziel, {1, 0}},
-};
+};*/
 
 /*
  * Analogicznie zdefiniuj test "trudne"
  *
  */
-static WyrazenieZesp TestTrudny[] =
+/*static WyrazenieZesp TestTrudny[] =
 	{
 		{{2, 0}, Op_Dodaj, {1, 2}},
 		{{1, 1}, Op_Odejmij, {0, 1}},
 		{{3, 2}, Op_Mnoz, {0, 3}},
 		{{4, 8}, Op_Dziel, {2, 0}},
-};
+};*/
 
 
 
@@ -49,12 +87,12 @@ static WyrazenieZesp TestTrudny[] =
  *      - Parametr IloscPytan zawiera wartosc, ktora nie przekracza ilosci elementow
  *        w tablicy dostepnej poprzez wskTabTestu.
  */
-void UstawTest(BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan)
+/*void UstawTest(BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan)
 {
 	wskBazaTestu->wskTabTestu = wskTabTestu;
 	wskBazaTestu->IloscPytan = IloscPytan;
 	wskBazaTestu->IndeksPytania = 0;
-}
+}*/
 
 
 
@@ -78,7 +116,7 @@ void UstawTest(BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int
  *              zainicjalizowany,
  *       false - w przypadku przeciwnym.
  */
-bool InicjalizujTest(BazaTestu *wskBazaTestu, const char *sNazwaTestu)
+/*bool InicjalizujTest(BazaTestu *wskBazaTestu, const char *sNazwaTestu)
 {
 	if (!strcmp(sNazwaTestu, "latwy"))
 	{
@@ -93,7 +131,7 @@ bool InicjalizujTest(BazaTestu *wskBazaTestu, const char *sNazwaTestu)
 
 	cerr << "Otwarcie testu '" << sNazwaTestu << "' nie powiodlo sie." << endl;
 	return false;
-}
+}*/
 
 
 
@@ -116,7 +154,7 @@ bool InicjalizujTest(BazaTestu *wskBazaTestu, const char *sNazwaTestu)
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie(BazaTestu *wskBazaTestu, WyrazenieZesp *wskWyrazenie)
+/*bool PobierzNastpnePytanie(BazaTestu *wskBazaTestu, WyrazenieZesp *wskWyrazenie)
 {
 	if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan)
 		return false;
@@ -124,4 +162,4 @@ bool PobierzNastpnePytanie(BazaTestu *wskBazaTestu, WyrazenieZesp *wskWyrazenie)
 	*wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
 	++wskBazaTestu->IndeksPytania;
 	return true;
-}
+}*/

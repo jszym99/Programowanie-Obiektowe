@@ -21,12 +21,13 @@ private:
 	Operator Op;	 // Opertor wyrazenia arytmetycznego
 	LZespolona Arg2; // Drugi argument wyrazenia arytmetycznego
 public:
+	//Konstruktory
 	WyrazenieZesp (LZespolona LZ1, Operator Op, LZespolona LZ2);
-	WyrazenieZesp ();
-
+	WyrazenieZesp () {};
+	//Metody
 	void Wyswietl() const;
 	LZespolona Oblicz() const;
-	
+	//Metody pomocnicze
 	LZespolona get_Arg1() const {return Arg1;};
 	Operator get_Op() const {return Op;};
 	LZespolona get_Arg2() const {return Arg2;};

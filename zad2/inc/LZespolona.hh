@@ -18,14 +18,14 @@ public:
 	LZespolona operator / (const LZespolona & Skl2) const;
 	bool operator == (const LZespolona & Skl2) const;
 	bool operator != (const LZespolona & Skl2) const;
-	// Funkcje
+	// Metody
 	double modul2 () const;
 	LZespolona sprzezenie () const;
 	// Konstruktory
 	LZespolona(double arg_re, double arg_im);
 	explicit LZespolona(double arg_re);
 	LZespolona();
-	// Funkcje pomocnicze
+	// Metody pomocnicze
 	double get_re() const {return re;};
 	double get_im() const {return im;};
 	void set_re (double _re) {re = _re;};

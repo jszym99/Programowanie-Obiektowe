@@ -2,10 +2,6 @@
 #include "BazaTestu.hh"
 #include "Statystyki.hh"
 
-using namespace std;
-
-
-
 
 int main(int argc, char **argv)
 {
@@ -13,27 +9,28 @@ int main(int argc, char **argv)
 	//Sprawdzenie czy podano parametr wejsciowy
 	if (argc < 2)
 	{
-		cout << endl;
-		cout << " Brak opcji okreslajacej rodzaj testu." << endl;
-		cout << " Dopuszczalne nazwy to:  latwy, trudny." << endl;
-		cout << endl;
+		std::cout << std::endl;
+		std::cout << " Brak opcji okreslajacej rodzaj testu." << std::endl;
+		std::cout << " Dopuszczalne nazwy to:  latwy, trudny." << std::endl;
+		std::cout << std::endl;
 		return 1;
 	}
 
+	/*
 	BazaTestu BazaT = {nullptr, 0, 0};
 
 	//Inicjalizacja testu z odpowiedniej bazy pytan
 	if (InicjalizujTest(&BazaT, argv[1]) == false)
 	{
-		cerr << " Inicjalizacja testu nie powiodla sie." << endl;
+		cerr << " Inicjalizacja testu nie powiodla sie." << std::endl;
 		return 1;
-	}
+	}*/
 
+	BazaTestu BazaT(argv[1]); //Inicjalizacja bazy testu
 
-
-	cout << endl;
-	cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
-	cout << endl;
+	std::cout << std::endl;
+	std::cout << "Start testu arytmetyki zespolonej: " << argv[1] << std::endl;
+	std::cout << std::endl;
 
 	WyrazenieZesp WyrZ_PytanieTestowe;
 	LZespolona Odp;
@@ -41,20 +38,20 @@ int main(int argc, char **argv)
 
 
 	//Wczytywanie po kolei wszystkich pytan z bazy testu
-	while (PobierzNastpnePytanie(&BazaT, &WyrZ_PytanieTestowe))
+	while (BazaT.pobierz_pytanie(WyrZ_PytanieTestowe))
 	{
 		LZespolona PopOdp = WyrZ_PytanieTestowe.Oblicz(); //Wartosc poprawnej odpowiedzi
 		
 		for(int i = 2; i >= 0; i--) //3 proby przy blednym formacie odpowiedzi
 		{
-			cout << "\n " << WyrZ_PytanieTestowe << " = ";
+			std::cout << "\n" << WyrZ_PytanieTestowe << " = ";
 
-			cin >> Odp; //Sprawdzenie poprawnosci zapisu odpowiedzi
-			if(!cin.good())
+			std::cin >> Odp; //Sprawdzenie poprawnosci zapisu odpowiedzi
+			if(!std::cin.good())
 			{
-				cin.clear();
-				cin.ignore(1000,'\n');
-				cout << " Bledny format odpowiedzi. Poprawny format: '(x+yi)'\n Pozostale proby: " << i << endl;
+				std::cin.clear();
+				std::cin.ignore(1000,'\n');
+				std::cout << "Bledny format odpowiedzi. Poprawny format: '(x+yi)'\n Pozostale proby: " << i << std::endl;
 			}
 			else
 				break;
@@ -62,12 +59,12 @@ int main(int argc, char **argv)
 		
 		if(Odp == PopOdp)
 		{
-			cout << " Poprawna odpowiedz." << endl;
+			std::cout << "Poprawna odpowiedz." << std::endl;
 			StatyTestu.DodajPoprawna();
 		}
 		else
 		{
-			cout << " Bledna odpowiedz.\n Poprawna odpowiedz: " << PopOdp << endl;
+			std::cout << "Bledna odpowiedz.\n Poprawna odpowiedz: " << PopOdp << std::endl;
 			StatyTestu.DodajNiepoprawna();
 		}
 
@@ -76,8 +73,8 @@ int main(int argc, char **argv)
 
 	StatyTestu.Wyswielt();
 
-	cout << endl;
-	cout << " Koniec testu" << endl;
-	cout << endl;
+	std::cout << std::endl;
+	std::cout << "Koniec testu" << std::endl;
+	std::cout << std::endl;
 	
 }

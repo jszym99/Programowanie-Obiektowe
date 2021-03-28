@@ -10,9 +10,9 @@ private:
     int LPoprawnych;
     int LPytan;
 public:
+    //Konstruktor
     Statystyki (int LPop, int LPyt);
-    //Statystyki ();
-
+    //Metody
     void DodajPoprawna();
     void DodajNiepoprawna();
     double ObliczProcent() const;
