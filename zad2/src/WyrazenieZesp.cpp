@@ -1,5 +1,11 @@
 #include "WyrazenieZesp.hh"
 
+
+WyrazenieZesp::WyrazenieZesp (LZespolona LZ1, Operator Op, LZespolona LZ2): Arg1(LZ1), Op(Op), Arg2(LZ2) {}
+//Do sprawdzenia
+WyrazenieZesp::WyrazenieZesp (): Arg1(0,0), Op(Op_Dodaj), Arg2(0,0) {}
+
+// Chyba nie potrzebne
 //Realizuje wczytywanie znaku w wyrazeniu zespolonym z wejscia standardowego
 std::istream & operator >> (std::istream & strm, Operator & Op)
 {
@@ -21,7 +27,25 @@ std::istream & operator >> (std::istream & strm, Operator & Op)
 //Realizuje wczytywanie wyrazenia zespolonego na wejsciu standardowym
 std::istream & operator >> (std::istream & strm, WyrazenieZesp & Wyraz)
 {
-    strm >> Wyraz.Arg1 >> Wyraz.Op >> Wyraz.Arg2;
+    LZespolona LZ1, LZ2;
+    char znak;
+    
+    strm >> LZ1;
+
+    strm >> znak;
+    switch (znak)
+    {
+    case '+': Wyraz.set_op(Op_Dodaj); break;
+    case '-': Wyraz.set_op(Op_Odejmij); break;
+    case '*': Wyraz.set_op(Op_Mnoz); break;
+    case '/': Wyraz.set_op(Op_Dziel); break;
+    default: strm.setstate(std::ios::failbit);
+    }
+
+    strm >> LZ2;
+    Wyraz.set_arg1(LZ1);
+    Wyraz.set_arg2(LZ2);
+
     return strm;
 }
 
@@ -29,7 +53,7 @@ std::istream & operator >> (std::istream & strm, WyrazenieZesp & Wyraz)
 std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & Wyraz)
 {
     char znak;
-    switch (Wyraz.Op)
+    switch (Wyraz.get_Op())
     {
     case Op_Dodaj: znak = '+'; break;
     case Op_Odejmij: znak = '-'; break;
@@ -37,27 +61,27 @@ std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & Wyraz)
     case Op_Dziel: znak = '/'; break;
     }
 
-    strm << Wyraz.Arg1 << znak << Wyraz.Arg2;
+    strm << Wyraz.get_Arg1() << znak << Wyraz.get_Arg2();
     return strm;
 }
 
 //Funkcja wyswietla wyrazenie zespolone
-void Wyswielt(const WyrazenieZesp & WyrZ)
+void WyrazenieZesp::Wyswietl() const
 {
-    std::cout << WyrZ;
+    std::cout << *this;
 }
 
 
 //Funkcja oblicza wartosc wyrazenia zespolonego (liczba zespolona)
-LZespolona Oblicz(const WyrazenieZesp & WyraZ)
+LZespolona WyrazenieZesp::Oblicz() const
 {
     LZespolona Wynik;
-    switch (WyraZ.Op)
+    switch (Op)
     {
-    case Op_Dodaj: Wynik = WyraZ.Arg1 + WyraZ.Arg2; break;
-    case Op_Odejmij: Wynik = WyraZ.Arg1 - WyraZ.Arg2; break;
-    case Op_Mnoz: Wynik = WyraZ.Arg1 * WyraZ.Arg2; break;
-    case Op_Dziel: Wynik = WyraZ.Arg1 / WyraZ.Arg2; break;
+    case Op_Dodaj: Wynik = Arg1 + Arg2; break;
+    case Op_Odejmij: Wynik = Arg1 - Arg2; break;
+    case Op_Mnoz: Wynik = Arg1 * Arg2; break;
+    case Op_Dziel: Wynik = Arg1 / Arg2; break;
     }
     return Wynik;
 }

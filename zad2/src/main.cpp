@@ -37,14 +37,13 @@ int main(int argc, char **argv)
 
 	WyrazenieZesp WyrZ_PytanieTestowe;
 	LZespolona Odp;
-	Statystyki StatyTestu;
+	Statystyki StatyTestu(0,0); //Inicjalizacja zmiennej zawierajacej statystyki testu
 
-	Inicjuj(StatyTestu); //Inicjalizacja zmiennej zawierajacej statystyki testu
 
 	//Wczytywanie po kolei wszystkich pytan z bazy testu
 	while (PobierzNastpnePytanie(&BazaT, &WyrZ_PytanieTestowe))
 	{
-		LZespolona PopOdp = Oblicz(WyrZ_PytanieTestowe); //Wartosc poprawnej odpowiedzi
+		LZespolona PopOdp = WyrZ_PytanieTestowe.Oblicz(); //Wartosc poprawnej odpowiedzi
 		
 		for(int i = 2; i >= 0; i--) //3 proby przy blednym formacie odpowiedzi
 		{
@@ -64,18 +63,18 @@ int main(int argc, char **argv)
 		if(Odp == PopOdp)
 		{
 			cout << " Poprawna odpowiedz." << endl;
-			DodajPoprawna(StatyTestu);
+			StatyTestu.DodajPoprawna();
 		}
 		else
 		{
 			cout << " Bledna odpowiedz.\n Poprawna odpowiedz: " << PopOdp << endl;
-			DodajNiepoprawna(StatyTestu);
+			StatyTestu.DodajNiepoprawna();
 		}
 
 
 	}
 
-	Wyswielt(StatyTestu);
+	StatyTestu.Wyswielt();
 
 	cout << endl;
 	cout << " Koniec testu" << endl;

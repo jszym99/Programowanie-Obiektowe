@@ -4,49 +4,35 @@
 #include <iostream>
 #include <cmath>
 
-/*!
- *  Plik zawiera definicje struktury LZesplona oraz zapowiedzi
- *  przeciazen operatorow arytmetycznych dzialajacych na tej 
- *  strukturze.
- */
-
-
-/*!
- * Modeluje pojecie liczby zespolonej
- */
-struct LZespolona
+class LZespolona
 {
-	double re; /*! Pole repezentuje czesc rzeczywista. */
-	double im; /*! Pole repezentuje czesc urojona. */
+private:
+	double re; //Pole repezentuje czesc rzeczywista.
+	double im; //Pole repezentuje czesc urojona.
+public:
+	// Przeciazenia operatorow
+	LZespolona operator + (const LZespolona & Skl2) const;
+	LZespolona operator - (const LZespolona & Skl2) const;
+	LZespolona operator * (const LZespolona & Skl2) const;
+	LZespolona operator / (const double & dziel) const;
+	LZespolona operator / (const LZespolona & Skl2) const;
+	bool operator == (const LZespolona & Skl2) const;
+	bool operator != (const LZespolona & Skl2) const;
+	// Funkcje
+	double modul2 () const;
+	LZespolona sprzezenie () const;
+	// Konstruktory
+	LZespolona(double arg_re, double arg_im);
+	explicit LZespolona(double arg_re);
+	LZespolona();
+	// Funkcje pomocnicze
+	double get_re() const {return re;};
+	double get_im() const {return im;};
+	void set_re (double _re) {re = _re;};
+	void set_im (double _im) {im = _im;};
 };
 
-
-/*
- * Dalej powinny pojawic sie zapowiedzi definicji przeciazen operatorow
- */
-
-LZespolona operator + (const LZespolona & Skl1, const LZespolona & Skl2);
-
-LZespolona operator - (const LZespolona & Skl1, const LZespolona & Skl2);
-
-LZespolona operator * (const LZespolona & Skl1, const LZespolona & Skl2);
-
-LZespolona operator / (const LZespolona & Skl1, const double & dziel);
-
-LZespolona operator / (const LZespolona & Skl1, const LZespolona & Skl2);
-
 std::ostream & operator << (std::ostream & strm, const LZespolona & dana);
-
 std::istream & operator >> (std::istream & strm, LZespolona & dana);
-
-double modul2 (const LZespolona & LZ);
-
-LZespolona sprzezenie (const LZespolona & LZ);
-
-bool operator == (const LZespolona & Skl1, const LZespolona & Skl2);
-
-bool operator != (const LZespolona & Skl1, const LZespolona & Skl2);
-
-LZespolona inicjuj (const double & re, const double & im);
 
 #endif

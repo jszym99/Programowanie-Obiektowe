@@ -4,6 +4,11 @@ namespace LZesp
 {
 	const double epsilon = __DBL_MIN__;
 }
+// Konstruktory
+LZespolona::LZespolona(double arg_re, double arg_im): re(arg_re), im(arg_im) {}
+LZespolona::LZespolona(double arg_re): re(arg_re), im(0.0) {}
+LZespolona::LZespolona(): re(0.0), im(0.0) {}
+
 
 /*!
  * Realizuje dodawanie dwoch liczb zespolonych.
@@ -12,12 +17,12 @@ namespace LZesp
  * 
  *    \param[out] Wynik Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator + (const LZespolona & Skl1, const LZespolona & Skl2)
+LZespolona LZespolona::operator + (const LZespolona & Skl2) const
 {
 	LZespolona Wynik;
 
-	Wynik.re = Skl1.re + Skl2.re;
-	Wynik.im = Skl1.im + Skl2.im;
+	Wynik.re = re + Skl2.re;
+	Wynik.im = im + Skl2.im;
 
 	return Wynik;
 }
@@ -30,12 +35,12 @@ LZespolona operator + (const LZespolona & Skl1, const LZespolona & Skl2)
  * 
  *    \param[out] Wynik Roznice dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator - (const LZespolona & Skl1, const LZespolona & Skl2)
+LZespolona LZespolona::operator - (const LZespolona & Skl2) const
 {
 	LZespolona Wynik;
 
-	Wynik.re = Skl1.re - Skl2.re;
-	Wynik.im = Skl1.im - Skl2.im;
+	Wynik.re = re - Skl2.re;
+	Wynik.im = im - Skl2.im;
 
 	return Wynik;
 }
@@ -49,12 +54,12 @@ LZespolona operator - (const LZespolona & Skl1, const LZespolona & Skl2)
  * 
  *    \param[out] Wynik Iloczyn dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator * (const LZespolona & Skl1, const LZespolona & Skl2)
+LZespolona LZespolona::operator * (const LZespolona & Skl2) const
 {
 	LZespolona Wynik;
 
-	Wynik.re = Skl1.re * Skl2.re - Skl1.im * Skl2.im;
-	Wynik.im = Skl1.re * Skl2.im + Skl2.re * Skl1.im;
+	Wynik.re = re * Skl2.re - im * Skl2.im;
+	Wynik.im = re * Skl2.im + Skl2.re * im;
 
 	return Wynik;
 }	
@@ -67,11 +72,11 @@ LZespolona operator * (const LZespolona & Skl1, const LZespolona & Skl2)
  * 
  *    \param[out] Wynik Iloraz dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator / (const LZespolona &Skl1, const double & dziel)
+LZespolona LZespolona::operator / (const double & dziel) const
 {
 	LZespolona Wynik;
-	Wynik.re = Skl1.re / dziel;
-	Wynik.im = Skl1.im / dziel;
+	Wynik.re = re / dziel;
+	Wynik.im = im / dziel;
 
 	return Wynik;
 }
@@ -84,11 +89,11 @@ LZespolona operator / (const LZespolona &Skl1, const double & dziel)
  * 
  *    \param[out] Wynik Iloraz dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator / (const LZespolona & Skl1, const LZespolona & Skl2)
+LZespolona LZespolona::operator / (const LZespolona & Skl2) const
 {
 	LZespolona Wynik;
 	
-	Wynik = (Skl1 * sprzezenie(Skl2) / modul2(Skl2));
+	Wynik = (*this * Skl2.sprzezenie() / Skl2.modul2());
 
 	return Wynik;
 }
@@ -103,7 +108,7 @@ LZespolona operator / (const LZespolona & Skl1, const LZespolona & Skl2)
  */
 std::ostream & operator << (std::ostream & strm, const LZespolona & dana)
 {
-	strm << "(" << dana.re << std::showpos << dana.im << "i)" << std::noshowpos;
+	strm << "(" << dana.get_re() << std::showpos << dana.get_im() << "i)" << std::noshowpos;
 
 	return strm;
 }
@@ -119,11 +124,15 @@ std::ostream & operator << (std::ostream & strm, const LZespolona & dana)
 std::istream & operator >> (std::istream & strm, LZespolona & dana)
 {
 	char znak;
+	double liczba; //zmienna pomocnicza przechowująca zmienną liczbową
+
 	strm >> znak;
 	if(znak != '(')
 		strm.setstate(std::ios::failbit);
-	strm >> dana.re;
-	strm >> dana.im;
+	strm >> liczba;
+	dana.set_re(liczba); // przepisanie wartości liczbowej do zmienne
+	strm >> liczba;
+	dana.set_im(liczba); // przepisanie wartości liczbowej do zmienne
 	strm >> znak;
 	if (znak != 'i')
 		strm.setstate(std::ios::failbit);
@@ -140,9 +149,9 @@ std::istream & operator >> (std::istream & strm, LZespolona & dana)
  * 
  *    \param[out] |LZ|^2 Kwadrat modulu liczby zespolonej
  */
-double modul2 (const LZespolona & LZ)
+double LZespolona::modul2 () const
 {
-	return (pow(LZ.re, 2) + pow(LZ.im, 2));
+	return (pow(re, 2) + pow(im, 2));
 }
 
 
@@ -152,12 +161,12 @@ double modul2 (const LZespolona & LZ)
  * 
  *    \param[out] Wynik Sprzezenie liczby zespolonej
  */
-LZespolona sprzezenie (const LZespolona & LZ)
+LZespolona LZespolona::sprzezenie () const
 {
 	LZespolona Wynik;
 
-	Wynik.re = LZ.re;
-	Wynik.im = -LZ.im;
+	Wynik.re = re;
+	Wynik.im = -im;
 
 	return Wynik;
 }
@@ -170,9 +179,9 @@ LZespolona sprzezenie (const LZespolona & LZ)
  * 
  *    \param[out] true/false sa lub nie sa rowne
  */
-bool operator == (const LZespolona & Skl1, const LZespolona & Skl2)
+bool LZespolona::operator == (const LZespolona & Skl2) const
 {
-	if(sqrt(modul2(Skl1 - Skl2)) <= LZesp::epsilon)
+	if(sqrt((*this - Skl2).modul2()) <= LZesp::epsilon)
 		return true;
 	else
 		return false;
@@ -186,20 +195,22 @@ bool operator == (const LZespolona & Skl1, const LZespolona & Skl2)
  * 
  *    \param[out] true/false nie sa lub sa rowne
  */
-bool operator != (const LZespolona & Skl1, const LZespolona & Skl2)
+bool LZespolona::operator != (const LZespolona & Skl2) const
 {
-	return !(Skl1 == Skl2);
+	return !(*this == Skl2);
 }
 
 
 /*!
+ * Juz nie potrzebna!
+ *
  * Funkcja inicjujaca liczbe zespolona z dwoch liczb rzeczywistych
  *    \param[in] re czesc rzeczywista liczby zespolonej
  *    \param[in] im czesc urojona liczby zespolonej
  * 
  *    \param[out] Wynik Liczba zespolona o zadanje wartosci
  */
-LZespolona inicjuj (const double & re, const double & im)
+/*LZespolona inicjuj (const double & re, const double & im)
 {
 	LZespolona Wynik;
 
@@ -207,4 +218,4 @@ LZespolona inicjuj (const double & re, const double & im)
 	Wynik.im = im;
 
 	return Wynik;
-}
+}*/

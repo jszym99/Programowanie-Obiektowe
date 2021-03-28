@@ -1,36 +1,40 @@
 #include "Statystyki.hh"
 
+Statystyki::Statystyki (int LPop, int LPyt): LPoprawnych(LPop), LPytan(LPyt) {}
+//Statystyki::Statystyki (): LPoprawnych(0), LPytan(0) {}
+
+// Nie potrzebna
 //Funkcja inicjuje strukture zawierajaca statystyki testu
-void Inicjuj (Statystyki & Staty)
+/*void Inicjuj (Statystyki & Staty)
 {
     Staty.LPoprawnych = 0;
     Staty.LPytan = 0;
-}
+}*/
 
 //Funkcja aktualizuje liczbe poprawnych odpowiedzi i liczbe pytan
-void DodajPoprawna (Statystyki & Staty)
+void Statystyki::DodajPoprawna()
 {
-    Staty.LPoprawnych++;
-    Staty.LPytan++;
+    LPoprawnych++;
+    LPytan++;
 }
 
 //Funkcja aktualizuje liczbe pytan (i blednych odpowiedzi)
-void DodajNiepoprawna (Statystyki & Staty)
+void Statystyki::DodajNiepoprawna ()
 {
-    Staty.LPytan++;
+    LPytan++;
 }
 
 //Funkcja oblicza wartosc procentowo poprawnych odpowiedzi
-double ObliczProcent(Statystyki & Staty)
+double Statystyki::ObliczProcent() const
 {
-    return 1.0*Staty.LPoprawnych/Staty.LPytan*100;
+    return 100*LPoprawnych/LPytan;
 }
 
 //Funkcja wyswietla statystyki testu
-void Wyswielt (Statystyki & Staty)
+void Statystyki::Wyswielt () const
 {
-    std::cout << "\n Liczba poprawnych odpowiedzi: " << Staty.LPytan << std::endl;
-    std::cout << " Liczba poprawnych odpowiedzi: " << Staty.LPoprawnych << std::endl;
-    std::cout << " Liczba blednych odpowiedzi: " << (Staty.LPytan-Staty.LPoprawnych) << std::endl;
-    std::cout << " Wynik testu: " << ObliczProcent(Staty) << "%" << std::endl;
+    std::cout << "\n Liczba poprawnych odpowiedzi: " << LPytan << std::endl;
+    std::cout << " Liczba poprawnych odpowiedzi: " << LPoprawnych << std::endl;
+    std::cout << " Liczba blednych odpowiedzi: " << (LPytan-LPoprawnych) << std::endl;
+    std::cout << " Wynik testu: " << (*this).ObliczProcent() << "%" << std::endl;
 }
