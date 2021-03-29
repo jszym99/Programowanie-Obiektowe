@@ -16,24 +16,14 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	/*
-	BazaTestu BazaT = {nullptr, 0, 0};
-
-	//Inicjalizacja testu z odpowiedniej bazy pytan
-	if (InicjalizujTest(&BazaT, argv[1]) == false)
-	{
-		cerr << " Inicjalizacja testu nie powiodla sie." << std::endl;
-		return 1;
-	}*/
-
 	BazaTestu BazaT(argv[1]); //Inicjalizacja bazy testu
 
 	std::cout << std::endl;
 	std::cout << "Start testu arytmetyki zespolonej: " << argv[1] << std::endl;
 	std::cout << std::endl;
 
-	WyrazenieZesp WyrZ_PytanieTestowe;
-	LZespolona Odp;
+	WyrazenieZesp WyrZ_PytanieTestowe; //Zmienna przechowujaca pytanie testowe (wyrazenie zespolone)
+	LZespolona Odp; // Zmienna przechowujaca odpowiedz uzytkownika
 	Statystyki StatyTestu(0,0); //Inicjalizacja zmiennej zawierajacej statystyki testu
 
 
