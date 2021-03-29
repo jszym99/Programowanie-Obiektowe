@@ -3,7 +3,6 @@
 
 WyrazenieZesp::WyrazenieZesp (LZespolona LZ1, Operator Op, LZespolona LZ2): Arg1(LZ1), Op(Op), Arg2(LZ2) {}
 
-// Chyba nie potrzebne
 //Realizuje wczytywanie znaku w wyrazeniu zespolonym z wejscia standardowego
 std::istream & operator >> (std::istream & strm, Operator & Op)
 {
@@ -26,23 +25,18 @@ std::istream & operator >> (std::istream & strm, Operator & Op)
 std::istream & operator >> (std::istream & strm, WyrazenieZesp & Wyraz)
 {
     LZespolona LZ1, LZ2;
-    char znak;
+    Operator Oper;
     
     strm >> LZ1;
-
-    strm >> znak;
-    switch (znak)
-    {
-    case '+': Wyraz.set_op(Op_Dodaj); break;
-    case '-': Wyraz.set_op(Op_Odejmij); break;
-    case '*': Wyraz.set_op(Op_Mnoz); break;
-    case '/': Wyraz.set_op(Op_Dziel); break;
-    default: strm.setstate(std::ios::failbit);
-    }
-
+    strm >> Oper;
     strm >> LZ2;
-    Wyraz.set_arg1(LZ1);
-    Wyraz.set_arg2(LZ2);
+
+    if(strm.good())
+    {
+        Wyraz.set_arg1(LZ1);
+        Wyraz.set_op(Oper);
+        Wyraz.set_arg2(LZ2);
+    }
 
     return strm;
 }

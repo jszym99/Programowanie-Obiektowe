@@ -32,8 +32,8 @@ double Statystyki::ObliczProcent() const
 //Funkcja wyswietla statystyki testu
 void Statystyki::Wyswielt () const
 {
-    std::cout << "\n Liczba poprawnych odpowiedzi: " << LPytan << std::endl;
-    std::cout << " Liczba poprawnych odpowiedzi: " << LPoprawnych << std::endl;
-    std::cout << " Liczba blednych odpowiedzi: " << (LPytan-LPoprawnych) << std::endl;
-    std::cout << " Wynik testu: " << (*this).ObliczProcent() << "%" << std::endl;
+    std::cout << "\nLiczba poprawnych odpowiedzi: " << LPytan << std::endl;
+    std::cout << "Liczba poprawnych odpowiedzi: " << LPoprawnych << std::endl;
+    std::cout << "Liczba blednych odpowiedzi: " << (LPytan-LPoprawnych) << std::endl;
+    std::cout << "Wynik testu: " << (*this).ObliczProcent() << "%" << std::endl;
 }
