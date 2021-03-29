@@ -11,7 +11,7 @@ private:
 	std::fstream strm_pliku_pytan;
 public:
 	//Metody
-	bool pobierz_pytanie(WyrazenieZesp & Wyraz) /*const*/;
+	bool pobierz_pytanie(WyrazenieZesp & Wyraz);
 	bool otworz_plik(std::string nazwa);
 	//Konstruktory
 	BazaTestu(std::string nazwa);

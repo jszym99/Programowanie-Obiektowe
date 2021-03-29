@@ -4,17 +4,25 @@
 #include "BazaTestu.hh"
 
 
-bool BazaTestu::pobierz_pytanie (WyrazenieZesp & Wyraz) //const
+bool BazaTestu::pobierz_pytanie (WyrazenieZesp & Wyraz)
 {
 	strm_pliku_pytan >> Wyraz;
 	if(strm_pliku_pytan.good())
 		return true;
 	else if(strm_pliku_pytan.eof())
+	{
+		strm_pliku_pytan.close();
 		return false;
+	}
 	else
 	{
+		//Jesli dane w pliku sa bledne
 		std::cerr << "Bledne dane w pliku" << std::endl;
-		return false;
+		//Pomija cala linijke
+		strm_pliku_pytan.clear();
+		strm_pliku_pytan.ignore(1000,'\n');
+		//Proboje wczytac kolejna linijke
+		return pobierz_pytanie(Wyraz);
 	}
 }
 
