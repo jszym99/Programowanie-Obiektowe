@@ -48,7 +48,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
    // W programie nalezy uzywać pojęcia wektora, a nie oddzielnych 
    // zmiennych do reprezentowania wspolrzednych!
    //
-  double  x1, y1, x2, y2, x3, y3, x4, y4; 
+  /*double  x1, y1, x2, y2, x3, y3, x4, y4; 
 
   x1 = y1 = 10;
   x2 = x1 + DL_DLUGI_BOK;  y2 = y1;
@@ -68,6 +68,21 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
          << setw(16) << fixed << setprecision(10) << y1+Przesuniecie << endl; 
                              // Jeszcze raz zapisujemy pierwszy punkt,
                              // aby gnuplot narysowal zamkniętą linię.
+*/
+
+
+	Wektor2D w1, w2, w3, w4, przesun(Przesuniecie, Przesuniecie);
+
+	w1[0] = w1[1] = 10;
+	w2[0] = w1[0] + DL_DLUGI_BOK;  w2[1] = w1[1];
+	w3[0] = w2[0];  w3[1] = w2[1] + DL_KROTKI_BOK;
+	w4[0] = w3[0] - DL_DLUGI_BOK; w4[1] = w3[1];
+
+	StrmWy << w1+przesun;
+	StrmWy << w2+przesun;
+	StrmWy << w3+przesun;
+	StrmWy << w4+przesun;
+	StrmWy << w1+przesun;
 }
 
 
@@ -107,6 +122,31 @@ bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
 
 int main()
 {
+	//Testowanie zaimplementowanych metod
+	Wektor2D w1;
+	w1[0] = w1[1] = 10;
+
+
+	//Operacje na wektorze
+	cout << "\n";
+	cout << w1 + w1;
+	cout << w1 - w1;
+	cout << w1 * w1 << endl;
+	cout << w1 * 2;
+	cout << w1 / 2;
+
+	//Operacje na macierzy
+	Macierz2x2 obrot(1);
+	cout << "\n" << obrot;
+
+	obrot = obrot * obrot;
+
+	cout << "\n" << obrot;
+
+	cout << "\n" <<obrot * w1 << endl;
+
+	//return 0;
+
   Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
   PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata

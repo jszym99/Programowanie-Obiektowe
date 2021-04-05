@@ -3,20 +3,24 @@
 
 
 #include <iostream>
+#include <cmath>
+#include <Wektor2D.hh>
 
 
 /*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
+ * Modeluje klase dla macierzy dwuwymiarowej
  */
 class Macierz2x2 {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
-  public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+private:
+	std::vector<Wektor2D> wiersze;
+public:
+	Macierz2x2();
+	Macierz2x2(double kat);
+	const Macierz2x2 operator * (const Macierz2x2 & arg2) const;
+	//dodaj/zmien kat obrotu
+	//pobierz kat obrotu
+	const Wektor2D operator * (const Wektor2D & wektor) const;
+	const Wektor2D & operator [] (int ind) const;
 };
 
 
