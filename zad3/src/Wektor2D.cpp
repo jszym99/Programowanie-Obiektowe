@@ -4,8 +4,8 @@ const Wektor2D & Wektor2D::operator + (const Wektor2D & Wek2) const
 {
     Wektor2D wynik;
 
-    wynik[0] = xy[0] +  Wek2[0];
-    wynik[1] = xy[1] +  Wek2[1];
+    wynik.xy[0] = xy[0] +  Wek2.xy[0];
+    wynik.xy[1] = xy[1] +  Wek2.xy[1];
 
     return wynik;
 }
@@ -14,8 +14,8 @@ const Wektor2D & Wektor2D::operator - (const Wektor2D & Wek2) const
 {
     Wektor2D wynik;
 
-    wynik[0] = xy[0] -  Wek2[0];
-    wynik[1] = xy[1] -  Wek2[1];
+    wynik.xy[0] = xy[0] -  Wek2.xy[0];
+    wynik.xy[1] = xy[1] -  Wek2.xy[1];
 
     return wynik;
 }
@@ -24,7 +24,7 @@ const double & Wektor2D::operator * (const Wektor2D & Wek2) const
 {
     double wynik;
 
-    wynik = xy[0] * Wek2[0] + xy[1] * Wek2[1];
+    wynik = xy[0] * Wek2.xy[0] + xy[1] * Wek2.xy[1];
 
     return wynik;
 }
@@ -33,8 +33,8 @@ const Wektor2D & Wektor2D::operator * (const double & k) const
 {
     Wektor2D wynik;
 
-    wynik[0] = k * xy[0];
-    wynik[1] = k * xy[1];
+    wynik.xy[0] = k * xy[0];
+    wynik.xy[1] = k * xy[1];
 
     return wynik;
 }
@@ -43,8 +43,8 @@ const Wektor2D & Wektor2D::operator / (const double & k) const
 {
     Wektor2D wynik;
 
-    wynik[0] = k / xy[0];
-    wynik[1] = k / xy[1];
+    wynik.xy[0] = k / xy[0];
+    wynik.xy[1] = k / xy[1];
 
     return wynik;
 }

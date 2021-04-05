@@ -5,7 +5,7 @@
 #include <vector>
 
 
-/*!
+/*
  * Modeluje klase wektora dwuwymiarowego 
  */
 class Wektor2D {
