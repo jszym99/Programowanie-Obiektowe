@@ -49,7 +49,7 @@ const Wektor2D Wektor2D::operator / (const double & k) const
     return wynik;
 }
 
-const double & Wektor2D::operator [] (int ind) const
+const double Wektor2D::operator [] (int ind) const
 {
     return xy[ind];
 }

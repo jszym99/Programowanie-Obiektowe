@@ -14,13 +14,11 @@ class Macierz2x2 {
 private:
 	std::vector<Wektor2D> wiersze;
 public:
-	Macierz2x2();
+	Macierz2x2(); //Macierz identycznosciowa
 	Macierz2x2(double kat);
 	const Macierz2x2 operator * (const Macierz2x2 & arg2) const;
-	//dodaj/zmien kat obrotu
-	//pobierz kat obrotu
 	const Wektor2D operator * (const Wektor2D & wektor) const;
-	const Wektor2D & operator [] (int ind) const;
+	const Wektor2D operator [] (int ind) const;
 };
 
 

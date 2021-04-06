@@ -35,7 +35,7 @@ const Wektor2D Macierz2x2::operator* (const Wektor2D & wektor) const
     return wynik;
 }
 
-const Wektor2D & Macierz2x2::operator [] (int ind) const
+const Wektor2D Macierz2x2::operator [] (int ind) const
 {
     return wiersze[ind];
 }
