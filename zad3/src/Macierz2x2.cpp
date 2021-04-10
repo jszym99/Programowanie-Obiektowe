@@ -29,14 +29,16 @@ const Wektor2D Macierz2x2::operator* (const Wektor2D & wektor) const
 {
     Wektor2D wynik;
 
-    wynik[0] = wiersze[0][0] * wektor[0] + wiersze[0][1] * wektor[1];
-    wynik[1] = wiersze[1][0] * wektor[0] + wiersze[1][1] * wektor[1];
+    wynik[0] = wiersze[0] * wektor;
+    wynik[1] = wiersze[1] * wektor;
 
     return wynik;
 }
 
-const Wektor2D Macierz2x2::operator [] (int ind) const
+const Wektor2D & Macierz2x2::operator [] (int ind) const
 {
+    if (ind < 0 || ind > 1)
+        std::cerr << "Odwolanie poza pamiec" << std::endl;
     return wiersze[ind];
 }
 

@@ -18,7 +18,7 @@ public:
 	Macierz2x2(double kat);
 	const Macierz2x2 operator * (const Macierz2x2 & arg2) const;
 	const Wektor2D operator * (const Wektor2D & wektor) const;
-	const Wektor2D operator [] (int ind) const;
+	const Wektor2D & operator [] (int ind) const;
 };
 
 

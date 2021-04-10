@@ -21,7 +21,7 @@ public:
 	const double operator * (const Wektor2D & Wek2) const; //iloczyn skalarny
 	const Wektor2D operator * (const double & k) const; //mnożenie przez liczbe
 	const Wektor2D operator / (const double & k) const; //dzielenie przez liczbe
-	const double operator [] (int ind) const; //get
+	const double & operator [] (int ind) const; //get
 	double & operator [] (int ind); //set
 };
 

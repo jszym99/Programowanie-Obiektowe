@@ -49,8 +49,10 @@ const Wektor2D Wektor2D::operator / (const double & k) const
     return wynik;
 }
 
-const double Wektor2D::operator [] (int ind) const
+const double & Wektor2D::operator [] (int ind) const
 {
+    if (ind < 0 || ind > 1)
+        std::cerr << "Odwolanie poza pamiec" << std::endl;
     return xy[ind];
 }
 
