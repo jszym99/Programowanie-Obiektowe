@@ -63,6 +63,11 @@ double & Wektor2D::operator [] (int ind)
     return xy[ind];
 }
 
+const double Wektor2D::dlugosc () const
+{
+    return sqrt(pow(xy[0],2)+pow(xy[1],2));
+}
+
 std::ostream& operator << (std::ostream &Strm, const Wektor2D &Wek)
 {
     Strm << std::setw(16) << std::fixed << std::setprecision(10) << Wek[0] 

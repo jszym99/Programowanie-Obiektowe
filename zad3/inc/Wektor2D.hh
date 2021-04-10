@@ -5,6 +5,8 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
+#include "Dr2D_gnuplot_api.hh"
 
 
 /*
@@ -23,9 +25,10 @@ public:
 	const Wektor2D operator / (const double & k) const; //dzielenie przez liczbe
 	const double & operator [] (int ind) const; //get
 	double & operator [] (int ind); //set
+	const double dlugosc () const;
 };
 
-//Point2D konwertuj(Wektor2D arg) {return Point2D(arg[0],arg[1]);}
+drawNS::Point2D konwertuj(Wektor2D arg) {return drawNS::Point2D(arg[0],arg[1]);}
 
 
 /*

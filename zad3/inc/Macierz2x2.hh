@@ -1,6 +1,7 @@
 #ifndef MACIERZ2X2_HH
 #define MACIERZ2X2_HH
 
+#define _USE_MATH_DEFINES
 
 #include <iostream>
 #include <cmath>
@@ -10,17 +11,20 @@
 /*
  * Modeluje klase dla macierzy dwuwymiarowej
  */
-class Macierz2x2 {
+class MacierzObr2x2 {
 private:
 	std::vector<Wektor2D> wiersze;
 public:
-	Macierz2x2(); //Macierz identycznosciowa
-	Macierz2x2(double kat);
-	const Macierz2x2 operator * (const Macierz2x2 & arg2) const;
+	MacierzObr2x2(); //Macierz identycznosciowa
+	MacierzObr2x2(double deg);
+	const MacierzObr2x2 operator * (const MacierzObr2x2 & arg2) const;
 	const Wektor2D operator * (const Wektor2D & wektor) const;
 	const Wektor2D & operator [] (int ind) const;
 };
 
+
+double toDeg (double rad);
+double toRad (double deg);
 
 /*
  * To przeciazenie trzeba opisac. Co ono robi. Jaki format
@@ -31,6 +35,6 @@ public:
  *
  * Przeciążenie to może być użyteczne w trakcie debugowania programu.
  */
-std::ostream& operator << (std::ostream &Strm, const Macierz2x2 &Mac);
+std::ostream& operator << (std::ostream &Strm, const MacierzObr2x2 &Mac);
 
 #endif

@@ -22,7 +22,7 @@ using namespace std;
 #define DL_DLUGI_BOK   150
 
 
-
+drawNS::Draw2DAPI * rysownik = new drawNS::APIGnuPlot2D(-5,5,-5,5,1000);
 
 
 /*!
@@ -123,8 +123,12 @@ bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
 int main()
 {
 	//Testowanie zaimplementowanych metod
-	Wektor2D w1;
+	Wektor2D w1, w2, w3, w4;
+
 	w1[0] = w1[1] = 10;
+	w2[0] = w1[0] + DL_DLUGI_BOK;  w2[1] = w1[1];
+	w3[0] = w2[0];  w3[1] = w2[1] + DL_KROTKI_BOK;
+	w4[0] = w3[0] - DL_DLUGI_BOK; w4[1] = w3[1];
 
 
 	//Operacje na wektorze
@@ -136,7 +140,7 @@ int main()
 	cout << w1 / 2;
 
 	//Operacje na macierzy
-	Macierz2x2 obrot(1);
+	MacierzObr2x2 obrot(45);
 	cout << "\n" << obrot;
 
 	obrot = obrot * obrot;
@@ -145,9 +149,13 @@ int main()
 
 	cout << "\n" <<obrot * w1 << endl;
 
-	//return 0;
+	Prostokat Pr(w1,w2,w3,w4);
 
-  Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
+	std::cout << Pr;
+
+	return 0;
+
+  //Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
   PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
 
