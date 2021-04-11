@@ -7,15 +7,15 @@ __start__: obroty_2D
 	./obroty_2D
 
 obroty_2D: obj obj/main.o obj/Prostokat.o obj/Macierz2x2.o obj/Wektor2D.o\
-           obj/lacze_do_gnuplota.o
+           obj/Dr2D_gnuplot_api.o
 	g++ -Wall -pedantic -std=c++0x -o obroty_2D obj/main.o obj/Wektor2D.o\
-                        obj/Macierz2x2.o obj/Prostokat.o obj/lacze_do_gnuplota.o
+                        obj/Macierz2x2.o obj/Prostokat.o obj/Dr2D_gnuplot_api.o
 
 obj:
 	mkdir obj
 
-obj/lacze_do_gnuplota.o: inc/lacze_do_gnuplota.hh src/lacze_do_gnuplota.cpp
-	g++ -c ${CXXFLAGS} -o obj/lacze_do_gnuplota.o src/lacze_do_gnuplota.cpp
+obj/Dr2D_gnuplot_api.o: inc/Dr2D_gnuplot_api.hh src/Dr2D_gnuplot_api.cpp
+	g++ -c ${CXXFLAGS} -o obj/Dr2D_gnuplot_api.o src/Dr2D_gnuplot_api.cpp
 
 obj/main.o: src/main.cpp inc/Prostokat.hh inc/Macierz2x2.hh inc/Wektor2D.hh
 	g++ -c ${CXXFLAGS} -o obj/main.o src/main.cpp

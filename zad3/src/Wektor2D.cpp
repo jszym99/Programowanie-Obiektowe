@@ -75,3 +75,8 @@ std::ostream& operator << (std::ostream &Strm, const Wektor2D &Wek)
     
     return Strm;
 }
+
+drawNS::Point2D konwertuj(Wektor2D arg)
+{
+	return drawNS::Point2D(arg[0],arg[1]);
+}

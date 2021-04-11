@@ -28,7 +28,7 @@ public:
 	const double dlugosc () const;
 };
 
-drawNS::Point2D konwertuj(Wektor2D arg) {return drawNS::Point2D(arg[0],arg[1]);}
+drawNS::Point2D konwertuj(Wektor2D arg);
 
 
 /*

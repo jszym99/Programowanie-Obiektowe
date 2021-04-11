@@ -3,7 +3,7 @@
 namespace pros
 {
 	const double epsilon = __DBL_MIN__;
-	int rozmiar = 3; //ilosc pol (liczac od 0)
+	int rozmiar = 4; //ilosc pol (liczac od 0 + 1 do zamkniecia lancucha)
 }
 
 //Konstruktor

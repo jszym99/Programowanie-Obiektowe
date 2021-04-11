@@ -4,7 +4,8 @@
 #include "Wektor2D.hh"
 #include "Macierz2x2.hh"
 #include "Prostokat.hh"
-#include "lacze_do_gnuplota.hh"
+//#include "lacze_do_gnuplota.hh"
+#include "Dr2D_gnuplot_api.hh"
 
 
 
@@ -22,7 +23,7 @@ using namespace std;
 #define DL_DLUGI_BOK   150
 
 
-drawNS::Draw2DAPI * rysownik = new drawNS::APIGnuPlot2D(-5,5,-5,5,1000);
+
 
 
 /*!
@@ -39,7 +40,7 @@ drawNS::Draw2DAPI * rysownik = new drawNS::APIGnuPlot2D(-5,5,-5,5,1000);
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy, 
+/*void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy, 
                                               double       Przesuniecie
                                             )
 {
@@ -48,7 +49,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
    // W programie nalezy uzywać pojęcia wektora, a nie oddzielnych 
    // zmiennych do reprezentowania wspolrzednych!
    //
-  /*double  x1, y1, x2, y2, x3, y3, x4, y4; 
+  double  x1, y1, x2, y2, x3, y3, x4, y4; 
 
   x1 = y1 = 10;
   x2 = x1 + DL_DLUGI_BOK;  y2 = y1;
@@ -68,7 +69,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
          << setw(16) << fixed << setprecision(10) << y1+Przesuniecie << endl; 
                              // Jeszcze raz zapisujemy pierwszy punkt,
                              // aby gnuplot narysowal zamkniętą linię.
-*/
+
 
 
 	Wektor2D w1, w2, w3, w4, przesun(Przesuniecie, Przesuniecie);
@@ -83,7 +84,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
 	StrmWy << w3+przesun;
 	StrmWy << w4+przesun;
 	StrmWy << w1+przesun;
-}
+}*/
 
 
 
@@ -99,7 +100,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
+/*bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
                                          double       Przesuniecie
                                        )
 {
@@ -116,12 +117,14 @@ bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
 
   StrmPlikowy.close();
   return !StrmPlikowy.fail();
-}
+}*/
 
 
 
 int main()
 {
+       drawNS::Draw2DAPI * rysownik = new drawNS::APIGnuPlot2D(-200,200,-200,200,1000);
+
 	//Testowanie zaimplementowanych metod
 	Wektor2D w1, w2, w3, w4;
 
@@ -153,9 +156,13 @@ int main()
 
 	std::cout << Pr;
 
+	Pr.rysuj(rysownik);
+
+	delete rysownik;
+
 	return 0;
 
-  //Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
+  /*//Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
   PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
 
@@ -192,5 +199,5 @@ int main()
   if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",50)) return 1;
   Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
   cout << "Naciśnij ENTER, aby kontynuowac" << endl;
-  cin.ignore(100000,'\n');
+  cin.ignore(100000,'\n');*/
 }
