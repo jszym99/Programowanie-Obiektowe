@@ -72,6 +72,7 @@ std::ostream& operator << (std::ostream &Strm, const Wektor2D &Wek)
 {
     Strm << std::setw(16) << std::fixed << std::setprecision(10) << Wek[0] 
          << std::setw(16) << std::fixed << std::setprecision(10) << Wek[1] << std::endl;
+    Strm.unsetf(std::ios_base::fixed);
     
     return Strm;
 }

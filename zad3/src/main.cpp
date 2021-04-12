@@ -16,8 +16,9 @@ using namespace std;
  * jedynie absolutne minimum.
  */
 
-#define DL_KROTKI_BOK 100
-#define DL_DLUGI_BOK 150
+#define PRZESUN 1
+#define DL_KROTKI_BOK 5
+#define DL_DLUGI_BOK 10
 
 /*!
  * Przyklad zapisu wspolrzednych zbioru punktow do strumienia wyjściowego.
@@ -112,12 +113,13 @@ using namespace std;
 
 int main()
 {
-	//drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-200, 200, -200, 200, 1000);
+	//drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-20, 20, -20, 20, 1000);
+	//rysownik->change_ref_time_ms(0);
 
-	//Testowanie zaimplementowanych metod
+	//Tworzenie prostokata na ktorym beda wykonywane operacje
 	Wektor2D w1, w2, w3, w4;
 
-	w1[0] = w1[1] = 10;
+	w1[0] = w1[1] = 1;
 	w2[0] = w1[0] + DL_DLUGI_BOK;
 	w2[1] = w1[1];
 	w3[0] = w2[0];
@@ -125,17 +127,18 @@ int main()
 	w4[0] = w3[0] - DL_DLUGI_BOK;
 	w4[1] = w3[1];
 
-	Prostokat Pr(w1, w2, w3, w4);
-
+	Prostokat Pr(Wektor2D(PRZESUN,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN + DL_KROTKI_BOK), Wektor2D(PRZESUN,PRZESUN + DL_KROTKI_BOK));
 	Prostokat tmp = Pr;
 
-	std::cout << "Menu:" << std::endl;
+	//std::cout << "Wspolrzedne poczatkowego prostokata\n" << Pr << std::endl;
+
+	std::cout << "Menu:";
 
 	int opcje = 0;
 
 	do
 	{
-		std::cout << "[1] Obrot\n[2] Translacja\n[3] Wyswietl wsporzedne\n[4] Koniec" << std::endl;
+		std::cout << "\n[1] Obrot\n[2] Translacja\n[3] Wyswietl wsporzedne\n[4] Koniec" << std::endl;
 		std::cin >> opcje;
 		if (cin.fail())
 		{
@@ -154,7 +157,8 @@ int main()
 			{
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
-				std::cerr << "Blad\n";
+				std::cout << "Niepoprawny format danych\n";
+				continue;
 			}
 			std::cout << "Podaj liczbe powtorzen: ";
 			std::cin >> powtorzenia;
@@ -162,23 +166,25 @@ int main()
 			{
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
-				std::cerr << "Blad\n";
+				std::cout << "Niepoprawny format danych\n";
+				continue;
 			}
-			std::cout << MacierzObr2x2(deg) << std::endl;
-			tmp = tmp.rotacja(MacierzObr2x2(deg * powtorzenia));
+			//std::cout << MacierzObr2x2(deg*powtorzenia) << std::endl;
+			//for(int i = 0; i < powtorzenia; i++)
+			tmp = tmp.rotacja(MacierzObr2x2(deg*powtorzenia));
 			break;
 		case 2: //Przesuniecie
 			{
 				Wektor2D przesun(0, 0);
-				std::cout << "Podaj wektor przesuniecia: ";
+				std::cout << "Podaj wektor przesuniecia (w postaci [x,y]): ";
 				std::cin >> przesun;
 				if (cin.fail())
 				{
 					std::cin.clear();
 					std::cin.ignore(1000, '\n');
-					std::cerr << "Blad\n";
+					std::cout << "Niepoprawny format danych\n";
+					continue;
 				}
-				std::cout << przesun << std::endl;
 				tmp = tmp.translacja(przesun);
 			}
 			break;
@@ -186,10 +192,17 @@ int main()
 			std::cout << tmp << std::endl;
 			break;
 		case 4:
-			break;
+			continue;
 		default:
 			std::cout << "Bledna opcja!" << std::endl;
+			continue;
 		}
+
+		std::cout << "Roznica dlugosci bokow wzgledem oryginalu\n";
+		std::cout << "|P1 P2| " << (tmp[0]-tmp[1]).dlugosc() - (Pr[0]-Pr[1]).dlugosc() << std::endl;
+		std::cout << "|P2 P3| " << (tmp[1]-tmp[2]).dlugosc() - (Pr[1]-Pr[2]).dlugosc() << std::endl;
+		std::cout << "|P3 P4| " << (tmp[2]-tmp[3]).dlugosc() - (Pr[2]-Pr[3]).dlugosc() << std::endl;
+		std::cout << "|P4 P1| " << (tmp[3]-tmp[0]).dlugosc() - (Pr[3]-Pr[0]).dlugosc() << std::endl;
 
 		//std::cout << tmp << std::endl;
 
@@ -197,71 +210,4 @@ int main()
 
 	//delete rysownik;
 	return 0;
-
-	/*//Operacje na wektorze
-	cout << "\n";
-	cout << w1 + w1;
-	cout << w1 - w1;
-	cout << w1 * w1 << endl;
-	cout << w1 * 2;
-	cout << w1 / 2;
-
-	//Operacje na macierzy
-	MacierzObr2x2 obrot(45);
-	cout << "\n" << obrot;
-
-	obrot = obrot * obrot;
-
-	cout << "\n" << obrot;
-
-	cout << "\n" <<obrot * w1 << endl;
-
-	Prostokat Pr(w1,w2,w3,w4);
-
-	std::cout << Pr;
-
-	Pr.rysuj(rysownik);
-
-	delete rysownik;
-
-	return 0;*/
-
-	/*//Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
-  PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
-                                // rysunku prostokata
-
-   //-------------------------------------------------------
-   //  Wspolrzedne wierzcholkow beda zapisywane w pliku "prostokat.dat"
-   //  Ponizsze metody powoduja, ze dane z pliku beda wizualizowane
-   //  na dwa sposoby:
-   //   1. Rysowane jako linia ciagl o grubosci 2 piksele
-   //
-  Lacze.DodajNazwePliku("prostokat.dat",PzG::RR_Ciagly,2);
-   //
-   //   2. Rysowane jako zbior punktow reprezentowanych przez kwadraty,
-   //      których połowa długości boku wynosi 2.
-   //
-  Lacze.DodajNazwePliku("prostokat.dat",PzG::RR_Punktowy,2);
-   //
-   //  Ustawienie trybu rysowania 2D, tzn. rysowany zbiór punktów
-   //  znajduje się na wspólnej płaszczyźnie. Z tego powodu powoduj
-   //  jako wspolrzedne punktow podajemy tylko x,y.
-   //
-  Lacze.ZmienTrybRys(PzG::TR_2D);
-
-  
-  PrzykladZapisuWspolrzednychDoStrumienia(cout,0);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",0)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  cout << "Naciśnij ENTER, aby kontynuowac" << endl;
-  cin.ignore(100000,'\n');
-
-   //----------------------------------------------------------
-   // Ponownie wypisuje wspolrzedne i rysuje prostokąt w innym miejscu.
-   //
-  PrzykladZapisuWspolrzednychDoStrumienia(cout,50);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",50)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  cout << "Naciśnij ENTER, aby kontynuowac" << endl;
-  cin.ignore(100000,'\n');*/
 }
