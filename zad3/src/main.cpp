@@ -91,11 +91,28 @@ int main()
 			continue;
 		}
 
-		std::cout << "Roznica dlugosci bokow wzgledem oryginalu:\n";
+		std::cout << "Roznica dlugosci bokow wzgledem oryginalu:\n" << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10+1);
 		std::cout << "|P1 P2| " << (tmp[0]-tmp[1]).dlugosc() - (Pr[0]-Pr[1]).dlugosc() << std::endl;
 		std::cout << "|P2 P3| " << (tmp[1]-tmp[2]).dlugosc() - (Pr[1]-Pr[2]).dlugosc() << std::endl;
 		std::cout << "|P3 P4| " << (tmp[2]-tmp[3]).dlugosc() - (Pr[2]-Pr[3]).dlugosc() << std::endl;
 		std::cout << "|P4 P1| " << (tmp[3]-tmp[0]).dlugosc() - (Pr[3]-Pr[0]).dlugosc() << std::endl;
+
+		std::cout << "\nDluzsze boki ";
+		if((tmp[0]-tmp[1]).dlugosc() == (tmp[2]-tmp[3]).dlugosc())
+			std::cout << "sa rowne.\n";
+		else
+			std::cout << "nie sa rowne.\n";
+		std::cout << "|P1 P2| = " << (tmp[0]-tmp[1]).dlugosc() << std::endl;
+		std::cout << "|P3 P4| = " << (tmp[2]-tmp[3]).dlugosc() << std::endl;
+		
+		std::cout << "\nKrotsze boki ";
+		if((tmp[1]-tmp[2]).dlugosc() == (tmp[3]-tmp[0]).dlugosc())
+			std::cout << "sa rowne.\n";
+		else
+			std::cout << "nie sa rowne.\n";
+		std::cout << "|P2 P3| = " << (tmp[1]-tmp[2]).dlugosc() << std::endl;
+		std::cout << "|P4 P1| = " << (tmp[3]-tmp[0]).dlugosc() << std::endl;
+
 
 		//std::cout << tmp << std::endl;
 		//tmp.rysuj(rysownik, "blue");
