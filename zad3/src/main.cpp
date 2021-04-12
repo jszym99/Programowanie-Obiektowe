@@ -116,13 +116,13 @@ int main()
 		std::cout << "|P2 P3| = " << (tmp[1]-tmp[2]).dlugosc() << std::endl;
 		std::cout << "|P4 P1| = " << (tmp[3]-tmp[0]).dlugosc() << std::endl;
 
-		if(kolNum >= 4)
+		std::cout << tmp << std::endl;
+		tmp.rysuj(rysownik, kol[kolNum]);
+        
+        if(kolNum >= 4)
 			kolNum = 0;
 		else
 			kolNum++;
-
-		std::cout << tmp << std::endl;
-		tmp.rysuj(rysownik, "blue");
 
 	} while (opcje != 4);
 
