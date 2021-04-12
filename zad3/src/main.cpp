@@ -15,13 +15,16 @@ using namespace std;
 
 int main()
 {
-	//drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-20, 20, -20, 20, 1000);
-	//rysownik->change_ref_time_ms(0);
+	drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-20, 20, -20, 20, 1000);
+	rysownik->change_ref_time_ms(0);
+
+	std::string kol [5] = {"blue","orange","yellow","green","red"};
+	int kolNum = 0;
 
 	//Tworzenie prostokata na ktorym beda wykonywane operacje
 	Prostokat Pr(Wektor2D(PRZESUN,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN + DL_KROTKI_BOK), Wektor2D(PRZESUN,PRZESUN + DL_KROTKI_BOK));
 	Prostokat tmp = Pr;
-	//Pr.rysuj(rysownik, "black");
+	Pr.rysuj(rysownik, "black");
 
 	std::cout << "Wspolrzedne poczatkowego prostokata\n" << Pr << std::endl;
 
@@ -113,12 +116,16 @@ int main()
 		std::cout << "|P2 P3| = " << (tmp[1]-tmp[2]).dlugosc() << std::endl;
 		std::cout << "|P4 P1| = " << (tmp[3]-tmp[0]).dlugosc() << std::endl;
 
+		if(kolNum >= 4)
+			kolNum = 0;
+		else
+			kolNum++;
 
-		//std::cout << tmp << std::endl;
-		//tmp.rysuj(rysownik, "blue");
+		std::cout << tmp << std::endl;
+		tmp.rysuj(rysownik, "blue");
 
 	} while (opcje != 4);
 
-	//delete rysownik;
+	delete rysownik;
 	return 0;
 }
