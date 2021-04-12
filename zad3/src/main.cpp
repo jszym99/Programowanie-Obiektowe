@@ -98,6 +98,7 @@ int main()
 		std::cout << "|P4 P1| " << (tmp[3]-tmp[0]).dlugosc() - (Pr[3]-Pr[0]).dlugosc() << std::endl;
 
 		//std::cout << tmp << std::endl;
+		//tmp.rysuj(rysownik);
 
 	} while (opcje != 4);
 

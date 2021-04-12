@@ -2,15 +2,15 @@
 
 namespace pros
 {
-	const double epsilon = 0.000001;// __DBL_MIN__;
-	int rozmiar = 4; //ilosc pol (liczac od 0 + 1 do zamkniecia lancucha)
+	const double epsilon = 0.000001; // __DBL_MIN__;
+	int rozmiar = 4;				 //ilosc pol (liczac od 0 + 1 do zamkniecia lancucha)
 }
 
 //Konstruktor
 Prostokat::Prostokat(Wektor2D p1, Wektor2D p2, Wektor2D p3, Wektor2D p4)
 {
 	if ((p2 - p1).dlugosc() - (p4 - p3).dlugosc() < pros::epsilon && (p3 - p2).dlugosc() - (p1 - p4).dlugosc() < pros::epsilon //rownosc dlugosci przeciwleglych bokow
-		&& (p2 - p1) * (p3 - p2) < pros::epsilon && (p3 - p2) * (p4 - p3) < pros::epsilon)									 //prostopadlosc bokow
+		&& (p2 - p1) * (p3 - p2) < pros::epsilon && (p3 - p2) * (p4 - p3) < pros::epsilon)									   //prostopadlosc bokow
 	{
 		punkty.push_back(p1);
 		punkty.push_back(p2);
@@ -41,7 +41,15 @@ const Wektor2D &Prostokat::operator[](int ind) const
 
 std::ostream &operator<<(std::ostream &Strm, const Prostokat &Pr)
 {
-	for(int i = 0; i < pros::rozmiar; i++)
+	for (int i = 0; i < pros::rozmiar; i++)
 		Strm << Pr[i];
 	return Strm;
+}
+
+void Prostokat::rysuj(drawNS::Draw2DAPI *rysownik)
+{
+	if(id_rysunku != 0)
+		rysownik->erase_shape(id_rysunku);
+		
+	id_rysunku = rysownik->draw_polygonal_chain(std::vector<drawNS::Point2D>{konwertuj(punkty[0]), konwertuj(punkty[1]), konwertuj(punkty[2]), konwertuj(punkty[3]), konwertuj(punkty[0])});
 }
