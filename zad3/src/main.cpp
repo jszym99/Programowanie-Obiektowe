@@ -21,7 +21,7 @@ int main()
 	//Tworzenie prostokata na ktorym beda wykonywane operacje
 	Prostokat Pr(Wektor2D(PRZESUN,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN + DL_KROTKI_BOK), Wektor2D(PRZESUN,PRZESUN + DL_KROTKI_BOK));
 	Prostokat tmp = Pr;
-	//Pr.rysuj(rysownik);
+	//Pr.rysuj(rysownik, "black");
 
 	std::cout << "Wspolrzedne poczatkowego prostokata\n" << Pr << std::endl;
 
@@ -98,7 +98,7 @@ int main()
 		std::cout << "|P4 P1| " << (tmp[3]-tmp[0]).dlugosc() - (Pr[3]-Pr[0]).dlugosc() << std::endl;
 
 		//std::cout << tmp << std::endl;
-		//tmp.rysuj(rysownik);
+		//tmp.rysuj(rysownik, "blue");
 
 	} while (opcje != 4);
 

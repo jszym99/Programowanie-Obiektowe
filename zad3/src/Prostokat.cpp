@@ -2,7 +2,7 @@
 
 namespace pros
 {
-	const double epsilon = 0.000001; // __DBL_MIN__;
+	const double epsilon = 0.000001;
 	int rozmiar = 4;				 //ilosc pol (liczac od 0 + 1 do zamkniecia lancucha)
 }
 
@@ -21,17 +21,6 @@ Prostokat::Prostokat(Wektor2D p1, Wektor2D p2, Wektor2D p3, Wektor2D p4)
 		std::cerr << "To nie jest prostokat." << std::endl;
 }
 
-/*Prostokat Prostokat::rotacja (MacierzObr2x2 obrot) const
-{
-	return Prostokat(obrot*punkty[0],obrot*punkty[1],obrot*punkty[2],obrot*punkty[3]);
-}
-
-Prostokat Prostokat::translacja (Wektor2D wektor) const
-{
-	return Prostokat(wektor+punkty[0],wektor+punkty[1],wektor+punkty[2],wektor+punkty[3]);
-
-}*/
-
 const Wektor2D &Prostokat::operator[](int ind) const
 {
 	if (ind < 0 && ind > 3)
@@ -46,10 +35,10 @@ std::ostream &operator<<(std::ostream &Strm, const Prostokat &Pr)
 	return Strm;
 }
 
-void Prostokat::rysuj(drawNS::Draw2DAPI *rysownik)
+void Prostokat::rysuj(drawNS::Draw2DAPI *rysownik, std::string kolor)
 {
 	if(id_rysunku != 0)
 		rysownik->erase_shape(id_rysunku);
-		
-	id_rysunku = rysownik->draw_polygonal_chain(std::vector<drawNS::Point2D>{konwertuj(punkty[0]), konwertuj(punkty[1]), konwertuj(punkty[2]), konwertuj(punkty[3]), konwertuj(punkty[0])});
+
+	id_rysunku = rysownik->draw_polygonal_chain(std::vector<drawNS::Point2D>{konwertuj(punkty[0]), konwertuj(punkty[1]), konwertuj(punkty[2]), konwertuj(punkty[3]), konwertuj(punkty[0])}, kolor);
 }

@@ -22,11 +22,7 @@ const Wektor2D Wektor2D::operator - (const Wektor2D & Wek2) const
 
 const double Wektor2D::operator * (const Wektor2D & Wek2) const
 {
-    double wynik;
-
-    wynik = xy[0] * Wek2.xy[0] + xy[1] * Wek2.xy[1];
-
-    return wynik;
+    return xy[0] * Wek2.xy[0] + xy[1] * Wek2.xy[1];
 }
 
 const Wektor2D Wektor2D::operator * (const double & k) const
@@ -70,9 +66,10 @@ const double Wektor2D::dlugosc () const
 
 std::ostream& operator << (std::ostream &Strm, const Wektor2D &Wek)
 {
+	//Wyswietlanie w ustalonym formacie
     Strm << std::setw(16) << std::fixed << std::setprecision(10) << Wek[0] 
          << std::setw(16) << std::fixed << std::setprecision(10) << Wek[1] << std::endl;
-    Strm.unsetf(std::ios_base::fixed);
+    Strm.unsetf(std::ios_base::fixed); //Resetowanie flag ustawnien wyswietlania
     
     return Strm;
 }

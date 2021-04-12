@@ -15,26 +15,23 @@ class MacierzObr2x2 {
 private:
 	std::vector<Wektor2D> wiersze;
 public:
+	//Konstruktory
 	MacierzObr2x2(); //Macierz identycznosciowa
 	MacierzObr2x2(double deg);
+
+	//Przeciazenie operatora realizuje mnozenie macierzy
 	const MacierzObr2x2 operator * (const MacierzObr2x2 & arg2) const;
+	//Przeciazenie operatora realizuje mnozenie wektora przez macierz
 	const Wektor2D operator * (const Wektor2D & wektor) const;
-	const Wektor2D & operator [] (int ind) const;
+	const Wektor2D & operator [] (int ind) const; //get
 };
 
-
+//Funkcja zamienia wartosc kata w radianach na stopnie
 double toDeg (double rad);
+//Funkcja zamienia wartosc kata w stopniach na radiany
 double toRad (double deg);
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- *
- * Przeciążenie to może być użyteczne w trakcie debugowania programu.
- */
+//Przeciazenie operatora wypisywania realizuje wyswietlanie macierzy 2x2 na wyjsciu standardowym
 std::ostream& operator << (std::ostream &Strm, const MacierzObr2x2 &Mac);
 
 #endif
