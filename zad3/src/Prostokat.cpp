@@ -2,7 +2,7 @@
 
 namespace pros
 {
-	const double epsilon = __DBL_MIN__;
+	const double epsilon = 0.00000000001;// __DBL_MIN__;
 	int rozmiar = 4; //ilosc pol (liczac od 0 + 1 do zamkniecia lancucha)
 }
 

@@ -7,8 +7,6 @@
 //#include "lacze_do_gnuplota.hh"
 #include "Dr2D_gnuplot_api.hh"
 
-
-
 using namespace std;
 
 /*
@@ -18,13 +16,8 @@ using namespace std;
  * jedynie absolutne minimum.
  */
 
-
-#define DL_KROTKI_BOK  100
-#define DL_DLUGI_BOK   150
-
-
-
-
+#define DL_KROTKI_BOK 100
+#define DL_DLUGI_BOK 150
 
 /*!
  * Przyklad zapisu wspolrzednych zbioru punktow do strumienia wyjściowego.
@@ -86,8 +79,6 @@ using namespace std;
 	StrmWy << w1+przesun;
 }*/
 
-
-
 /*!
  * Przyklad zapisu wspolrzednych zbioru punktow do pliku, z ktorego
  * dane odczyta program gnuplot i narysuje je w swoim oknie graficznym.
@@ -119,22 +110,95 @@ using namespace std;
   return !StrmPlikowy.fail();
 }*/
 
-
-
 int main()
 {
-       drawNS::Draw2DAPI * rysownik = new drawNS::APIGnuPlot2D(-200,200,-200,200,1000);
+	//drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-200, 200, -200, 200, 1000);
 
 	//Testowanie zaimplementowanych metod
 	Wektor2D w1, w2, w3, w4;
 
 	w1[0] = w1[1] = 10;
-	w2[0] = w1[0] + DL_DLUGI_BOK;  w2[1] = w1[1];
-	w3[0] = w2[0];  w3[1] = w2[1] + DL_KROTKI_BOK;
-	w4[0] = w3[0] - DL_DLUGI_BOK; w4[1] = w3[1];
+	w2[0] = w1[0] + DL_DLUGI_BOK;
+	w2[1] = w1[1];
+	w3[0] = w2[0];
+	w3[1] = w2[1] + DL_KROTKI_BOK;
+	w4[0] = w3[0] - DL_DLUGI_BOK;
+	w4[1] = w3[1];
 
+	Prostokat Pr(w1, w2, w3, w4);
 
-	//Operacje na wektorze
+	Prostokat tmp = Pr;
+
+	std::cout << "Menu:" << std::endl;
+
+	int opcje = 0;
+
+	do
+	{
+		std::cout << "[1] Obrot\n[2] Translacja\n[3] Wyswietl wsporzedne\n[4] Koniec" << std::endl;
+		std::cin >> opcje;
+		if (cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			opcje = 0;
+		}
+
+		switch (opcje)
+		{
+		case 1: //Obrot
+			double deg, powtorzenia;
+			std::cout << "Podaj kat obrotu: ";
+			std::cin >> deg;
+			if (cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+				std::cerr << "Blad\n";
+			}
+			std::cout << "Podaj liczbe powtorzen: ";
+			std::cin >> powtorzenia;
+			if (cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+				std::cerr << "Blad\n";
+			}
+			std::cout << MacierzObr2x2(deg) << std::endl;
+			tmp = tmp.rotacja(MacierzObr2x2(deg * powtorzenia));
+			break;
+		case 2: //Przesuniecie
+			{
+				Wektor2D przesun(0, 0);
+				std::cout << "Podaj wektor przesuniecia: ";
+				std::cin >> przesun;
+				if (cin.fail())
+				{
+					std::cin.clear();
+					std::cin.ignore(1000, '\n');
+					std::cerr << "Blad\n";
+				}
+				std::cout << przesun << std::endl;
+				tmp = tmp.translacja(przesun);
+			}
+			break;
+		case 3: //Wyswietlanie wspolrzednych
+			std::cout << tmp << std::endl;
+			break;
+		case 4:
+			break;
+		default:
+			std::cout << "Bledna opcja!" << std::endl;
+		}
+
+		//std::cout << tmp << std::endl;
+
+	} while (opcje != 4);
+
+	//delete rysownik;
+	return 0;
+
+	/*//Operacje na wektorze
 	cout << "\n";
 	cout << w1 + w1;
 	cout << w1 - w1;
@@ -160,9 +224,9 @@ int main()
 
 	delete rysownik;
 
-	return 0;
+	return 0;*/
 
-  /*//Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
+	/*//Prostokat             Pr;   // To tylko przykladowe definicje zmiennej
   PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
 
