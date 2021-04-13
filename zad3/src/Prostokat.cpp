@@ -37,8 +37,8 @@ std::ostream &operator<<(std::ostream &Strm, const Prostokat &Pr)
 
 void Prostokat::rysuj(drawNS::Draw2DAPI *rysownik, std::string kolor)
 {
-	if(id_rysunku != 0)
-		rysownik->erase_shape(id_rysunku);
+	/*if(id_rysunku != 0)
+		rysownik->erase_shape(id_rysunku);*/
 
 	id_rysunku = rysownik->draw_polygonal_chain(std::vector<drawNS::Point2D>{konwertuj(punkty[0]), konwertuj(punkty[1]), konwertuj(punkty[2]), konwertuj(punkty[3]), konwertuj(punkty[0])}, kolor);
 }
