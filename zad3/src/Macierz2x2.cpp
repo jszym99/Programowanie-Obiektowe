@@ -55,5 +55,7 @@ double toDeg (double rad)
 
 double toRad (double deg)
 {
-    return deg * M_PI/180;
+    /*while(fmod(deg,10e20))
+        deg /= 10e20;*/
+    return fmod(deg, 360.0) * M_PI/180;
 }

@@ -67,7 +67,7 @@ int main()
 			}
 			/*for(int i = 0; i < powtorzenia; i++)
 				tmp = tmp.rotacja(MacierzObr2x2(deg));*/
-			tmp = tmp.rotacja(MacierzObr2x2(deg*powtorzenia)); //Przy 10^15 sin/cos zaczynaja sie rozjezdzac
+			tmp = tmp.rotacja(MacierzObr2x2(deg*powtorzenia)); //Przy 10^23 kat w radianach zaczyna sie rozjezdzac
 			break;
 		case 2: //Przesuniecie
 			{
@@ -116,7 +116,6 @@ int main()
 		std::cout << "|P2 P3| = " << (tmp[1]-tmp[2]).dlugosc() << std::endl;
 		std::cout << "|P4 P1| = " << (tmp[3]-tmp[0]).dlugosc() << std::endl;
 
-		std::cout << tmp << std::endl;
 		tmp.rysuj(rysownik, kol[kolNum]);
         
         if(kolNum >= 4)
