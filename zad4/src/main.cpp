@@ -2,12 +2,11 @@
 #include <iomanip>
 #include <fstream>
 #include "Wektor.hh"
-//#include "Macierz.hh"
+#include "Macierz.hh"
 //#include "Prostokat.hh"
 //#include "Dr2D_gnuplot_api.hh"
 
 using namespace std;
-
 
 #define PRZESUN 1
 #define DL_KROTKI_BOK 5
@@ -15,8 +14,40 @@ using namespace std;
 
 int main()
 {
-	Wektor<2> W({1,2});
-	W + W;
+	// Testowanie wektorów
+	Wektor<2> W2{1, 2};
+	Wektor<3> W3{1, 2, 3};
+	Wektor<6> W6{1, 2, 3, 4, 5, 6};
+	//std::cout << W2 << W3 << W6;
+	// Dodawanie
+	/*std::cout << "Dodawanie\n";
+	std::cout << W2 + W2;
+	std::cout << W3 + W3;
+	std::cout << W6 + W6;
+	// Odejmowanie
+	std::cout << "Odejmowanie\n";
+	std::cout << W2 - W2;
+	std::cout << W3 - W3;
+	std::cout << W6 - W6;
+	// Mnożenie skalarne
+	std::cout << "Mnożenie skalarne\n";
+	std::cout << W2 * W2 << std::endl;
+	std::cout << W3 * W3 << std::endl;
+	std::cout << W6 * W6 << std::endl;
+
+	// Wczytywanie
+	std::cin >> W2;
+	std::cin >> W3;
+	std::cin >> W6;
+	std::cout << W2 << W3 << W6;*/
+
+	MacierzObr<2> M2{};
+	MacierzObr<3> M3{45};
+
+	std::cout << M3 << std::endl;
+	//std::cout << M3*M3;
+
+
 	/*
 	drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-20, 20, -20, 20, 1000);
 	rysownik->change_ref_time_ms(0);
