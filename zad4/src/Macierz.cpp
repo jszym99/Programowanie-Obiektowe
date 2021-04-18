@@ -15,15 +15,26 @@ MacierzObr<ROZMIAR>::MacierzObr()
 template <int ROZMIAR>
 MacierzObr<ROZMIAR>::MacierzObr(double deg, Os os_obr) // TODO: doadać sin
 {
+    int j = os_obr+1;
     double rad = toRad(deg);
+    int negate = pow(-1, (os_obr%2)+1);//zmienna negująca
+
     for (int i = 0; i < ROZMIAR; i++)
     {
         Wektor<ROZMIAR> tmp{};
-        if(i != os_obr)
+        if (i == 2-os_obr)
+        {
+            tmp[i] = 1;
+        }
+        else
+        {
             tmp[i] = cos(rad);
+            tmp[j] = negate*sin(rad);
+            negate *= -1;
+        }
         wiersze.push_back(tmp);
+        j--;
     }
-    
 }
 
 template <int ROZMIAR>

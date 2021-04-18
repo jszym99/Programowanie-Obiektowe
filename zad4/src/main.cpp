@@ -14,13 +14,14 @@ using namespace std;
 
 int main()
 {
-	// Testowanie wektorów
-	Wektor<2> W2{1, 2};
-	Wektor<3> W3{1, 2, 3};
-	Wektor<6> W6{1, 2, 3, 4, 5, 6};
-	//std::cout << W2 << W3 << W6;
+	// Testowanie wektorow
+	std::cout << "Testowanie wektorow\n";
+	Wektor<2> W2{1, 2}; //Wektor 2-wymiarowy
+	Wektor<3> W3{1, 2, 3}; //Wektor 3-wymiarowy
+	Wektor<6> W6{1, 2, 3, 4, 5, 6}; //Wektor 6-wymiarowy
+	std::cout << W2 << W3 << W6;
 	// Dodawanie
-	/*std::cout << "Dodawanie\n";
+	std::cout << "Dodawanie\n";
 	std::cout << W2 + W2;
 	std::cout << W3 + W3;
 	std::cout << W6 + W6;
@@ -39,13 +40,24 @@ int main()
 	std::cin >> W2;
 	std::cin >> W3;
 	std::cin >> W6;
-	std::cout << W2 << W3 << W6;*/
+	std::cout << W2 << W3 << W6;
 
-	MacierzObr<2> M2{};
-	MacierzObr<3> M3{45};
+	// Testowanie macierzy
+	std::cout << "Testowanie macierzy\n";
+	//Macierz 2-wymiarowa
+	MacierzObr<2> M2{30}; //Inicjalizacja
+	std::cout << M2 << std::endl; //wyswietlanie
+	std::cout << M2 * M2; //Mnozenie
 
-	std::cout << M3 << std::endl;
-	//std::cout << M3*M3;
+	//Macierz 3-wymiarowa
+	MacierzObr<3> M3X{30,X}; //Inicjalizacja dla 30 stopni X
+	std::cout << M3X << std::endl;
+	MacierzObr<3> M3Y{30,Y}; //Inicjalizacja dla 30 stopni Y
+	std::cout << M3Y << std::endl;
+	MacierzObr<3> M3Z{30,Z}; //Inicjalizacja dla 30 stopni Z
+	std::cout << M3Z << std::endl;
+
+	std::cout << M3X*M3X; //Mnozenie
 
 
 	/*
