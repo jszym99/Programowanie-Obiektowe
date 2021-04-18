@@ -10,26 +10,26 @@ __start__: obroty_3D
 	g++ -Wall -pedantic -std=c++0x -o obroty_3D obj/main.o obj/Wektor.o\
                         obj/Macierz.o obj/Prostokat.o -lpthread
 
-obroty_3D: obj obj/main.o obj/Wektor.o\
+obroty_3D: obj obj/main.o obj/Macierz.o obj/Wektor.o\
 
-	g++ -Wall -pedantic -std=c++0x -o obroty_3D obj/main.o obj/Wektor.o -lpthread
-
+	g++ -Wall -pedantic -std=c++0x -o obroty_3D obj/main.o obj/Wektor.o\
+                        obj/Macierz.o -lpthread
 obj:
 	mkdir obj
 
 #obj/Dr2D_gnuplot_api.o: inc/Dr2D_gnuplot_api.hh inc/Draw2D_api_interface.hh src/Dr2D_gnuplot_api.cpp\
 	g++ -c ${CXXFLAGS} -o obj/Dr2D_gnuplot_api.o src/Dr2D_gnuplot_api.cpp
 
-#obj/main.o: src/main.cpp inc/Prostokat.hh inc/Macierz.hh inc/Wektor.hh
+#obj/main.o: src/main.cpp inc/Prostokat.hh inc/Macierz.hh inc/Wektor.hh \
 	g++ -c ${CXXFLAGS} -o obj/main.o src/main.cpp
 
-obj/main.o: src/main.cpp inc/Wektor.hh
+obj/main.o: src/main.cpp inc/Wektor.hh inc/Macierz.hh
 	g++ -c ${CXXFLAGS} -o obj/main.o src/main.cpp
 
 #obj/Prostokat.o: src/Prostokat.cpp inc/Prostokat.hh\
 	g++ -c ${CXXFLAGS} -o obj/Prostokat.o src/Prostokat.cpp
 
-#obj/Macierz.o: src/Macierz.cpp inc/Macierz.hh \
+obj/Macierz.o: src/Macierz.cpp inc/Macierz.hh 
 	g++ -c ${CXXFLAGS} -o obj/Macierz.o src/Macierz.cpp
 
 obj/Wektor.o: src/Wektor.cpp inc/Wektor.hh
