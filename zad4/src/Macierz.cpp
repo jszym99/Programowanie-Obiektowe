@@ -13,8 +13,11 @@ MacierzObr<ROZMIAR>::MacierzObr()
 }
 
 template <int ROZMIAR>
-MacierzObr<ROZMIAR>::MacierzObr(double deg, Os os_obr) // TODO: doadać sin
+MacierzObr<ROZMIAR>::MacierzObr(double deg, Os os_obr)
 {
+    if(ROZMIAR < 3 && os_obr != Z)
+        os_obr = Z;
+
     int j = os_obr+1;
     double rad = toRad(deg);
     int negate = pow(-1, (os_obr%2)+1);//zmienna negująca
