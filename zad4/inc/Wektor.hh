@@ -6,40 +6,64 @@
 #include <iomanip>
 #include <fstream>
 #include <cmath>
-//#include "Dr2D_gnuplot_api.hh"
+#include "Dr3D_gnuplot_api.hh"
 
 
-/*
- * Modeluje klase wektora dwuwymiarowego 
- */
+//! Modeluje klase wektora
 template <int ROZMIAR>
 class Wektor {
 private:
 	std::vector<double> tab;
 public:
+	//Konstruktory
+	//! Wektor inicjalizowany zerami
 	Wektor();
-	//Wektor(double _x, double _y) {xy.push_back(_x); xy.push_back(_y);};
+	//! Wektor inicjalizwoany zadanymi wartosciami
 	Wektor(std::initializer_list<double> il) : tab(il) {};
-	//Wektor(std::array<double, ROZMIAR> ini) : tab(ini) {};
-	Wektor<ROZMIAR> operator + (const Wektor<ROZMIAR> & Wek2) const; //dodawanie wektorow
-	Wektor<ROZMIAR> operator - (const Wektor<ROZMIAR> & Wek2) const; //odejmowanie wektorow
-	double operator * (const Wektor<ROZMIAR> & Wek2) const; //iloczyn skalarny
-	Wektor<ROZMIAR> operator * (const double & k) const; //mnożenie przez liczbe
-	Wektor<ROZMIAR> operator / (const double & k) const; //dzielenie przez liczbe
-	const double & operator [] (int ind) const; //get
-	double & operator [] (int ind); //set
-	double dlugosc () const; //Metoda liczaca dlugosc wektora
+
+	//Metody
+	//! Dodawanie wektorow
+	Wektor<ROZMIAR> operator + (const Wektor<ROZMIAR> & Wek2) const;
+	//! Odejmowanie wektorow
+	Wektor<ROZMIAR> operator - (const Wektor<ROZMIAR> & Wek2) const;
+	//! Iloczyn skalarny
+	double operator * (const Wektor<ROZMIAR> & Wek2) const;
+	//! Mnożenie przez liczbe
+	Wektor<ROZMIAR> operator * (const double & k) const;
+	//! Dzielenie przez liczbe
+	Wektor<ROZMIAR> operator / (const double & k) const;
+	//! Przeciazenie operatora realizuje pobieranie danych z obiektu
+	const double & operator [] (int ind) const;
+	//! Przeciazenie operatora realizuje wpisywanie danych do obiektu
+	double & operator [] (int ind);
+	//! Metoda liczaca dlugosc wektora
+	double dlugosc () const;
 };
 
-//Funkcja konwertuje wektor (Wektor) do punktu (Punkt2D)
-//drawNS::Point2D konwertuj(Wektor arg);
+/*!
+ * Funkcja konwertuje wektor (Wektor) do punktu (Punkt2D)
+ * \param[in] arg wektor do zamiany na punkt
+ * \return punkt 3D
+ */
+drawNS::Point3D konwertuj(Wektor<3> arg);
 
-
-//Przeciazenie operatora wypisywania realizujace wyswietlanie wektora
+/*!
+ * Przeciazenie operatora wypisywania realizujace wyswietlanie wektora
+ * \param[in] Strm strumien
+ * \param[in] Wek wektor do wypisania
+ * 
+ * \return strumien
+ */
 template<int ROZMIAR>
 std::ostream& operator << (std::ostream &Strm, const Wektor<ROZMIAR> &Wek);
 
-//Przeciazenie operatora wczytywania realizujace wczytywanien wektora na wejsciu standardowym
+/*!
+ * Przeciazenie operatora wczytywania realizujace wczytywanien wektora na wejsciu standardowym
+ * \param[in] Strm strumien
+ * \param[in] Wek wektor do wczytania
+ * 
+ * \return strumien
+ */
 template<int ROZMIAR>
 std::istream& operator >> (std::istream &Strm, Wektor<ROZMIAR> &Wek);
 

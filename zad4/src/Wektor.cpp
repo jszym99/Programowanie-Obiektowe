@@ -145,7 +145,7 @@ template std::istream &operator>>(std::istream &Strm, Wektor<4> &Wek);
 template std::istream &operator>>(std::istream &Strm, Wektor<5> &Wek);
 template std::istream &operator>>(std::istream &Strm, Wektor<6> &Wek);
 
-/*drawNS::Point2D konwertuj(Wektor arg)
+drawNS::Point3D konwertuj(Wektor<3> arg)
 {
-	return drawNS::Point2D(arg[0],arg[1]);
-}*/
+	return drawNS::Point3D(arg[0],arg[1],arg[2]);
+}

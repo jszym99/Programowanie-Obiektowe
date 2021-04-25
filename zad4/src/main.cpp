@@ -3,76 +3,46 @@
 #include <fstream>
 #include "Wektor.hh"
 #include "Macierz.hh"
+#include "Prostopadloscian.hh"
 //#include "Prostokat.hh"
-//#include "Dr2D_gnuplot_api.hh"
+#include "Dr3D_gnuplot_api.hh"
 
 using namespace std;
 
 #define PRZESUN 1
 #define DL_KROTKI_BOK 5
-#define DL_DLUGI_BOK 10
+#define DL_SREDNI_BOK 10
+#define DL_DLUGI_BOK 15
 
 int main()
 {
-	// Testowanie wektorow
-	std::cout << "Testowanie wektorow\n";
-	Wektor<2> W2{1, 2}; //Wektor 2-wymiarowy
-	Wektor<3> W3{1, 2, 3}; //Wektor 3-wymiarowy
-	Wektor<6> W6{1, 2, 3, 4, 5, 6}; //Wektor 6-wymiarowy
-	std::cout << W2 << W3 << W6;
-	// Dodawanie
-	std::cout << "Dodawanie\n";
-	std::cout << W2 + W2;
-	std::cout << W3 + W3;
-	std::cout << W6 + W6;
-	// Odejmowanie
-	std::cout << "Odejmowanie\n";
-	std::cout << W2 - W2;
-	std::cout << W3 - W3;
-	std::cout << W6 - W6;
-	// Mnożenie skalarne
-	std::cout << "Mnożenie skalarne\n";
-	std::cout << W2 * W2 << std::endl;
-	std::cout << W3 * W3 << std::endl;
-	std::cout << W6 * W6 << std::endl;
 
-	// Wczytywanie
-	std::cin >> W2;
-	std::cin >> W3;
-	std::cin >> W6;
-	std::cout << W2 << W3 << W6;
-
-	// Testowanie macierzy
-	std::cout << "Testowanie macierzy\n";
-	//Macierz 2-wymiarowa
-	MacierzObr<2> M2{30}; //Inicjalizacja
-	std::cout << M2 << std::endl; //wyswietlanie
-	std::cout << M2 * M2; //Mnozenie
-
-	//Macierz 3-wymiarowa
-	MacierzObr<3> M3X{30,X}; //Inicjalizacja dla 30 stopni X
-	std::cout << M3X << std::endl;
-	MacierzObr<3> M3Y{30,Y}; //Inicjalizacja dla 30 stopni Y
-	std::cout << M3Y << std::endl;
-	MacierzObr<3> M3Z{30,Z}; //Inicjalizacja dla 30 stopni Z
-	std::cout << M3Z << std::endl;
-
-	std::cout << M3X*M3X; //Mnozenie
-
-
-	/*
-	drawNS::Draw2DAPI *rysownik = new drawNS::APIGnuPlot2D(-20, 20, -20, 20, 1000);
+	drawNS::Draw3DAPI *rysownik = new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000);
 	rysownik->change_ref_time_ms(0);
 
+	/*Prostopadloscian Prost{Wektor<3>{0,0,0},Wektor<3>{10,0,0}, Wektor<3>{10,10,0},Wektor<3>{0,10,0},
+						   Wektor<3>{0,0,20},Wektor<3>{10,0,20}, Wektor<3>{10,10,20}, Wektor<3>{0,10,20}};*/
+
+	//Prostopadloscian poczatkowy
+	Prostopadloscian startProst{Wektor<3>{PRZESUN,PRZESUN,PRZESUN},Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN,PRZESUN},
+								Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN + DL_KROTKI_BOK,PRZESUN},Wektor<3>{PRZESUN,PRZESUN + DL_KROTKI_BOK,PRZESUN},
+								Wektor<3>{PRZESUN,PRZESUN,PRZESUN + DL_DLUGI_BOK},Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN,PRZESUN + DL_DLUGI_BOK},
+								Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN + DL_KROTKI_BOK,PRZESUN + DL_DLUGI_BOK},Wektor<3>{PRZESUN,PRZESUN + DL_KROTKI_BOK,PRZESUN + DL_DLUGI_BOK}};
+
+	
+
+	//Lista kolorow
 	std::string kol [5] = {"blue","orange","yellow","green","red"};
 	int kolNum = 0;
 
-	//Tworzenie prostokata na ktorym beda wykonywane operacje
-	Prostokat Pr(Wektor2D(PRZESUN,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN), Wektor2D(PRZESUN + DL_DLUGI_BOK,PRZESUN + DL_KROTKI_BOK), Wektor2D(PRZESUN,PRZESUN + DL_KROTKI_BOK));
-	Prostokat tmp = Pr;
-	Pr.rysuj(rysownik, "black");
+	
+	Prostopadloscian tmp = startProst;
+	MacierzObr<3> obrot{};
+	MacierzObr<3> tmpObr{};
 
-	std::cout << "Wspolrzedne poczatkowego prostokata\n" << Pr << std::endl;
+
+	std::cout << "Wspolrzedne poczatkowego prostokata\n" << startProst << std::endl;
+	startProst.rysuj(rysownik, "black");
 
 	std::cout << "Menu:";
 
@@ -80,7 +50,7 @@ int main()
 
 	do
 	{
-		std::cout << "\n[1] Obrot\n[2] Translacja\n[3] Wyswietl wsporzedne\n[4] Koniec" << std::endl;
+		std::cout << "\n[1] Obrot\n[2] Powtorzenie poprzedniego obrotu\n[3] Wyswietlenie macierzy obrotu\n[4] Translacja\n[5] Wyswietl wsporzedne\n[6] Sprawdzanie dlugosci bokow\n[7] Koniec" << std::endl;
 		std::cin >> opcje;
 		if (cin.fail())
 		{
@@ -93,15 +63,61 @@ int main()
 		{
 		case 1: //Obrot
 			double deg, powtorzenia;
-			std::cout << "Podaj kat obrotu: ";
-			std::cin >> deg;
-			if (cin.fail())
-			{
-				std::cin.clear();
-				std::cin.ignore(1000, '\n');
-				std::cout << "Niepoprawny format danych\n";
+			char znak;
+			obrot = MacierzObr<3> {};
+
+			//Rozpoczecie wczytywania sekwencji obrotow
+			std::cout << "Podaj sekwencje obrotu\n";
+			do{
+				std::cout << "Podaj os obrotu (X, Y lub Z) lub . aby zakonczyc sekwencje: ";
+				std::cin >> znak;
+
+				//Sprawdzeniew arunku zakonczenia sekwencji
+				if(znak == '.')
+				{
+					break;
+				}
+				
+				//Sprawdzenie poprawnosci danych wejsciowych
+				if(cin.fail() && znak != 'X' && znak != 'Y' && znak != 'Z'&& znak != 'x' && znak != 'y' && znak != 'z')
+				{
+					std::cout << znak << std::endl;
+					std::cin.clear();
+					std::cin.ignore(1000, '\n');
+					std::cout << "Niepoprawny format danych\n";
+					continue;
+				}
+				std::cout << "Podaj kat obrotu: ";
+				std::cin >> deg;
+				if (cin.fail())
+				{
+					std::cin.clear();
+					std::cin.ignore(1000, '\n');
+					std::cout << "Niepoprawny format danych\n";
+					continue;
+				}
+
+				//Sprawdzenie osi obrotu
+				switch(znak)
+				{
+					case 'X':
+					case 'x':
+						obrot = MacierzObr<3>(deg, X) * obrot;
+						break;
+					case 'Y':
+					case 'y':
+						obrot = MacierzObr<3>(deg, Y) * obrot;
+						break;
+					case 'Z':
+					case 'z':
+						obrot = MacierzObr<3>(deg, Z) * obrot;
+						break;
+				}
+			}while(znak != '.');
+
+			if(znak != '.') //Wyjscie spowodowane bledem danych
 				continue;
-			}
+
 			std::cout << "Podaj liczbe powtorzen: ";
 			std::cin >> powtorzenia;
 			if (cin.fail())
@@ -111,12 +127,24 @@ int main()
 				std::cout << "Niepoprawny format danych\n";
 				continue;
 			}
-			tmp = tmp.rotacja(MacierzObr2x2(deg*powtorzenia)); //Przy 10^23 kat w radianach zaczyna sie rozjezdzac
+
+			//Powielenie sekwencji obrotow o ilosc powtorzen
+			for(int i = 0; i < fmod(powtorzenia, 360.0); i++)
+				tmpObr = tmpObr * obrot;
+			
+			obrot = tmpObr;
+			tmp = tmp.rotacja(obrot);
 			break;
-		case 2: //Przesuniecie
+		case 2: //Powtorzenie ostatniej sekwencji obrotow
+			tmp = tmp.rotacja(obrot);
+			break;
+		case 3: //Wyswietlenie macierzy obrotu
+			std::cout << obrot;
+			continue;
+		case 4: //Przesuniecie
 			{
-				Wektor2D przesun(0, 0);
-				std::cout << "Podaj wektor przesuniecia (w postaci [x,y]): ";
+				Wektor<3> przesun{};
+				std::cout << "Podaj wektor przesuniecia (w postaci [x,y,z]): ";
 				std::cin >> przesun;
 				if (cin.fail())
 				{
@@ -128,47 +156,30 @@ int main()
 				tmp = tmp.translacja(przesun);
 			}
 			break;
-		case 3: //Wyswietlanie wspolrzednych
+		case 5: //Wyswietlanie wspolrzednych
 			std::cout << tmp << std::endl;
-			break;
-		case 4:
+			continue;
+		case 6: //Sprawdzenie bledow numerycznych
+			tmp.porownanie();
+			continue;
+		case 7: //Zakonczenie programu
 			continue;
 		default:
 			std::cout << "Bledna opcja!" << std::endl;
 			continue;
 		}
 
-		std::cout << "Roznica dlugosci bokow wzgledem oryginalu:\n" << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10+1);
-		std::cout << "|P1 P2| " << (tmp[0]-tmp[1]).dlugosc() - (Pr[0]-Pr[1]).dlugosc() << std::endl;
-		std::cout << "|P2 P3| " << (tmp[1]-tmp[2]).dlugosc() - (Pr[1]-Pr[2]).dlugosc() << std::endl;
-		std::cout << "|P3 P4| " << (tmp[2]-tmp[3]).dlugosc() - (Pr[2]-Pr[3]).dlugosc() << std::endl;
-		std::cout << "|P4 P1| " << (tmp[3]-tmp[0]).dlugosc() - (Pr[3]-Pr[0]).dlugosc() << std::endl;
-
-		std::cout << "\nDluzsze boki ";
-		if((tmp[0]-tmp[1]).dlugosc() == (tmp[2]-tmp[3]).dlugosc())
-			std::cout << "sa rowne.\n";
-		else
-			std::cout << "nie sa rowne.\n";
-		std::cout << "|P1 P2| = " << (tmp[0]-tmp[1]).dlugosc() << std::endl;
-		std::cout << "|P3 P4| = " << (tmp[2]-tmp[3]).dlugosc() << std::endl;
-		
-		std::cout << "\nKrotsze boki ";
-		if((tmp[1]-tmp[2]).dlugosc() == (tmp[3]-tmp[0]).dlugosc())
-			std::cout << "sa rowne.\n";
-		else
-			std::cout << "nie sa rowne.\n";
-		std::cout << "|P2 P3| = " << (tmp[1]-tmp[2]).dlugosc() << std::endl;
-		std::cout << "|P4 P1| = " << (tmp[3]-tmp[0]).dlugosc() << std::endl;
-
+		//Rysuj prostopadloscian
 		tmp.rysuj(rysownik, kol[kolNum]);
         
+		//Iteracja po kolorach
         if(kolNum >= 4)
 			kolNum = 0;
 		else
 			kolNum++;
 
-	} while (opcje != 4);
+	} while (opcje != 7);
 
-	delete rysownik;*/
+	delete rysownik;
 	return 0;
 }

@@ -4,15 +4,20 @@
 #include <iostream>
 #include "Macierz.hh"
 
-
+//! Modeluje klase dla prostopadloscianu
 class Prostopadloscian
 {
 private:
 	std::vector<Wektor<3>> punkty;
 public:
     //Konstruktory
-    Prostopadloscian(std::initializer_list<Wektor<3>> il); //! konstruktory przyjmuje 8 wartosci (punktow)
+    //! Konstruktory przyjmuje 8 wartosci (punktow)
+    Prostopadloscian(std::initializer_list<Wektor<3>> il);
+
+    //Metody
+    //! Metoda obracajaca prostopadloscian o macierz obrotu
     Prostopadloscian rotacja (MacierzObr<3> obrot) const;
+    //! Metoda przesuwajaca prostopadloscian o wektor
     Prostopadloscian translacja (Wektor<3> wektor) const;
     //! Przeciazenie operatora realizuje pobieranie danych z obiektu
     const Wektor<3> &operator[](int ind) const; 
