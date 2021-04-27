@@ -20,7 +20,6 @@ class MacierzObr {
 private:
 	std::vector<Wektor<ROZMIAR>> wiersze;
 public:
-	//Konstruktory
 	//! Tworzy macierz identycznosciowa
 	MacierzObr();
 	/*!

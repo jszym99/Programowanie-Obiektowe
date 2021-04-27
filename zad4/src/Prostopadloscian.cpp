@@ -8,17 +8,6 @@ namespace pros
 
 Prostopadloscian::Prostopadloscian(std::initializer_list<Wektor<3>> il) : punkty(il)
 {
-    /*if (il.size() == 8 && sprawdz())
-    {
-        std::cout << "Rozmiar jest 8\n";
-    }
-    else if (il.size() == 5 && prostokat(punkty[0],punkty[1],punkty[2],punkty[3]))
-    {
-        std::cout << "Rozmiar jest 5\n";
-    }
-    else
-        std::cerr << "To nie jest prostopadloscian\n";*/
-
     if(il.size() < 8)
         throw std::invalid_argument("Za malo wierzocholkow\n");
 }
@@ -105,6 +94,7 @@ void Prostopadloscian::porownanie()
         std::cout << std::setw(16) << std::fixed << std::setprecision(10) << dl[i] << std::endl;
     }
 
+    // Reset flag ustawien wyświetlania
     std::cout.unsetf(std::ios_base::fixed);
 }
 

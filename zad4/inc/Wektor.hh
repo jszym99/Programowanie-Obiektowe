@@ -15,13 +15,11 @@ class Wektor {
 private:
 	std::vector<double> tab;
 public:
-	//Konstruktory
 	//! Wektor inicjalizowany zerami
 	Wektor();
 	//! Wektor inicjalizwoany zadanymi wartosciami
 	Wektor(std::initializer_list<double> il) : tab(il) {};
 
-	//Metody
 	//! Dodawanie wektorow
 	Wektor<ROZMIAR> operator + (const Wektor<ROZMIAR> & Wek2) const;
 	//! Odejmowanie wektorow

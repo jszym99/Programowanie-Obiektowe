@@ -4,10 +4,7 @@
 #include "Wektor.hh"
 #include "Macierz.hh"
 #include "Prostopadloscian.hh"
-//#include "Prostokat.hh"
 #include "Dr3D_gnuplot_api.hh"
-
-using namespace std;
 
 #define PRZESUN 1
 #define DL_KROTKI_BOK 5
@@ -19,9 +16,6 @@ int main()
 
 	drawNS::Draw3DAPI *rysownik = new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000);
 	rysownik->change_ref_time_ms(0);
-
-	/*Prostopadloscian Prost{Wektor<3>{0,0,0},Wektor<3>{10,0,0}, Wektor<3>{10,10,0},Wektor<3>{0,10,0},
-						   Wektor<3>{0,0,20},Wektor<3>{10,0,20}, Wektor<3>{10,10,20}, Wektor<3>{0,10,20}};*/
 
 	//Prostopadloscian poczatkowy
 	Prostopadloscian startProst{Wektor<3>{PRZESUN,PRZESUN,PRZESUN},Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN,PRZESUN},
@@ -52,7 +46,7 @@ int main()
 	{
 		std::cout << "\n[1] Obrot\n[2] Powtorzenie poprzedniego obrotu\n[3] Wyswietlenie macierzy obrotu\n[4] Translacja\n[5] Wyswietl wsporzedne\n[6] Sprawdzanie dlugosci bokow\n[7] Koniec" << std::endl;
 		std::cin >> opcje;
-		if (cin.fail())
+		if (std::cin.fail())
 		{
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
@@ -79,7 +73,7 @@ int main()
 				}
 				
 				//Sprawdzenie poprawnosci danych wejsciowych
-				if(cin.fail() && znak != 'X' && znak != 'Y' && znak != 'Z'&& znak != 'x' && znak != 'y' && znak != 'z')
+				if(std::cin.fail() && znak != 'X' && znak != 'Y' && znak != 'Z'&& znak != 'x' && znak != 'y' && znak != 'z')
 				{
 					std::cout << znak << std::endl;
 					std::cin.clear();
@@ -89,7 +83,7 @@ int main()
 				}
 				std::cout << "Podaj kat obrotu: ";
 				std::cin >> deg;
-				if (cin.fail())
+				if (std::cin.fail())
 				{
 					std::cin.clear();
 					std::cin.ignore(1000, '\n');
@@ -120,7 +114,7 @@ int main()
 
 			std::cout << "Podaj liczbe powtorzen: ";
 			std::cin >> powtorzenia;
-			if (cin.fail())
+			if (std::cin.fail())
 			{
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
@@ -146,7 +140,7 @@ int main()
 				Wektor<3> przesun{};
 				std::cout << "Podaj wektor przesuniecia (w postaci [x,y,z]): ";
 				std::cin >> przesun;
-				if (cin.fail())
+				if (std::cin.fail())
 				{
 					std::cin.clear();
 					std::cin.ignore(1000, '\n');
