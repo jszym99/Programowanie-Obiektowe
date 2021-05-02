@@ -3,12 +3,12 @@
 #
 CXXFLAGS=-g -Iinc -Wall -pedantic -std=c++0x
 
-__start__: obroty_3D
-	./obroty_3D
+__start__: sterowanie_dronem
+	./sterowanie_dronem
 
-obroty_3D: obj obj/main.o obj/Macierz.o obj/Wektor.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o\
+sterowanie_dronem: obj obj/main.o obj/Macierz.o obj/Wektor.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o obj/Dron.o\
 
-	g++ -Wall -pedantic -std=c++0x -o obroty_3D obj/main.o obj/Wektor.o\
+	g++ -Wall -pedantic -std=c++0x -o sterowanie_dronem obj/main.o obj/Wektor.o obj/Dron.o\
                         obj/Macierz.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o -lpthread
 obj:
 	mkdir obj
@@ -31,8 +31,8 @@ obj/Macierz.o: src/Macierz.cpp inc/Macierz.hh
 obj/Wektor.o: src/Wektor.cpp inc/Wektor.hh
 	g++ -c ${CXXFLAGS} -o obj/Wektor.o src/Wektor.cpp
 
-#obj/Dron.o: src/Dron.cpp inc/Dron.hh\
+obj/Dron.o: src/Dron.cpp inc/Dron.hh
 	g++ -c ${CXXFLAGS} -o obj/Dron.o src/Dron.cpp
 
 clean:
-	rm -f obj/*.o obroty_3D
+	rm -f obj/*.o sterowanie_dronem

@@ -1,9 +1,14 @@
 #include "Dron.hh"
 
-namespace drone
+void Dron::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
 {
-    double dl_boku = 5;
-    double wys_korpusu = 3;
-    double r_wirnika = 2; 
-    double wys_wirnika = 1;
+    std::cout << srodek << std::endl;
+    korpus.rysuj(rysownik, kolor);
+    for(int i = 0; i < 4; i++)
+        wirnik[i].rysuj(rysownik, kolor);
+}
+
+void Dron::lec(double deg, double wys, double odleglosc)
+{
+    Wektor<3> lot{odleglosc,0,0};
 }

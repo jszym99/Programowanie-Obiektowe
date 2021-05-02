@@ -14,13 +14,55 @@
 #define DL_SREDNI_BOK 10
 #define DL_DLUGI_BOK 15
 
+namespace drone
+{
+    double dl_boku = 5;
+    double wys_korpusu = 3;
+    double r_wirnika = 2.5; 
+    double wys_wirnika = 1;
+}
+
 int main()
 {
 
 	drawNS::Draw3DAPI *rysownik = new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000);
 	rysownik->change_ref_time_ms(0);
 
-	MacierzObr<3> startObr{};
+	MacierzObr<3> obrPocz{};
+	Wektor<3> punktPocz{};
+
+	// Budowanie korpusu drona
+	std::array<Wektor<3>,8> wierzchKorp = {Wektor<3>{0,0,0}, Wektor<3>{0,drone::dl_boku,0},Wektor<3>{drone::dl_boku,drone::dl_boku,0},Wektor<3>{drone::dl_boku,0,0},
+	Wektor<3>{0,0,drone::wys_korpusu}, Wektor<3>{0,drone::dl_boku,drone::wys_korpusu},Wektor<3>{drone::dl_boku,drone::dl_boku,drone::wys_korpusu},Wektor<3>{drone::dl_boku,0,drone::wys_korpusu}};
+
+	Prostopadloscian prostKorp{punktPocz, obrPocz, wierzchKorp};
+
+	// Budowanie graniastoslupu o podstawie szesciokata foremengo (wirniki)
+	/////////////////////////////////////////////////////////////
+	std::array<Wektor<3>,12> gran;
+	Wektor<3> wierzcholek{0,drone::r_wirnika,0};
+	for(int i = 0; i < 6; i++)
+	{
+		gran[i] = MacierzObr<3>{60*i} * wierzcholek;
+	}
+	wierzcholek = {0,drone::r_wirnika,drone::wys_wirnika};
+	for(int i = 6; i < 12; i++)
+	{
+		gran[i] = MacierzObr<3>{60*i} * wierzcholek;
+	}
+	/////////////////////////////////////////////////////////////
+
+	//Tworzenie tablicy grianiastoslupow 
+	std::array<Graniastoslup6, 4> granWir = {Graniastoslup6{Wektor<3>{0,0,drone::wys_korpusu}, obrPocz, gran},Graniastoslup6{Wektor<3>{0,drone::dl_boku,drone::wys_korpusu}, obrPocz, gran},Graniastoslup6{Wektor<3>{drone::dl_boku,drone::dl_boku,drone::wys_korpusu}, obrPocz, gran},Graniastoslup6{Wektor<3>{drone::dl_boku,0,drone::wys_korpusu}, obrPocz, gran}};
+
+	Dron D1(punktPocz, obrPocz, prostKorp, granWir);
+	D1.rysuj(rysownik, "black");
+
+	D1.translacja(Wektor<3>{20,20,0});
+	D1.rysuj(rysownik, "blue");
+	while(true);
+
+	/*MacierzObr<3> startObr{};
 	Wektor<3> punktPocz{};
 	std::array<Wektor<3>,8> prost =  {Wektor<3>{PRZESUN,PRZESUN,PRZESUN},Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN,PRZESUN},
 								Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN + DL_KROTKI_BOK,PRZESUN},Wektor<3>{PRZESUN,PRZESUN + DL_KROTKI_BOK,PRZESUN},
@@ -34,9 +76,12 @@ int main()
 
 	Graniastoslup6 gran(punktPocz, startObr, rogi);
 
+	Dron D1(startProst);
 
-	startProst.rysuj(rysownik, "black");
-	while(true);
+	D1.rysuj(rysownik, "black");
+	while(true);*/
+
+	
 
 	/*//Prostopadloscian poczatkowy
 	Prostopadloscian startProst{Wektor<3>{PRZESUN,PRZESUN,PRZESUN},Wektor<3>{PRZESUN + DL_SREDNI_BOK,PRZESUN,PRZESUN},
