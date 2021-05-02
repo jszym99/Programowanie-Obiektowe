@@ -34,5 +34,8 @@ obj/Wektor.o: src/Wektor.cpp inc/Wektor.hh
 obj/Dron.o: src/Dron.cpp inc/Dron.hh
 	g++ -c ${CXXFLAGS} -o obj/Dron.o src/Dron.cpp
 
+obj/UkladW.o: src/UkladW.cpp inc/UkladW.hh
+	g++ -c ${CXXFLAGS} -o obj/UkladW.o src/UkladW.cpp
+
 clean:
 	rm -f obj/*.o sterowanie_dronem

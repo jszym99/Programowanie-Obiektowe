@@ -2,7 +2,6 @@
 
 void Dron::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
 {
-    std::cout << srodek << std::endl;
     korpus.rysuj(rysownik, kolor);
     for(int i = 0; i < 4; i++)
         wirnik[i].rysuj(rysownik, kolor);
