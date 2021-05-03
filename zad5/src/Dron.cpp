@@ -10,4 +10,9 @@ void Dron::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
 void Dron::lec(double deg, double wys, double odleglosc)
 {
     Wektor<3> lot{odleglosc,0,0};
+    Wektor<3> wznies{0,0,wys};
+    lot = MacierzObr<3>{deg} * lot;
+    srodek = srodek + wznies;
+    srodek = srodek + lot;
+    srodek = srodek - wznies;
 }
