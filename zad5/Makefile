@@ -6,9 +6,9 @@ CXXFLAGS=-g -Iinc -Wall -pedantic -std=c++0x
 __start__: sterowanie_dronem
 	./sterowanie_dronem
 
-sterowanie_dronem: obj obj/main.o obj/Macierz.o obj/Wektor.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o obj/Dron.o\
+sterowanie_dronem: obj obj/main.o obj/Macierz.o obj/Wektor.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o obj/Dron.o obj/UkladW.o obj/Powierzchnia.o\
 
-	g++ -Wall -pedantic -std=c++0x -o sterowanie_dronem obj/main.o obj/Wektor.o obj/Dron.o\
+	g++ -Wall -pedantic -std=c++0x -o sterowanie_dronem obj/main.o obj/Wektor.o obj/Dron.o obj/UkladW.o obj/Powierzchnia.o\
                         obj/Macierz.o obj/Prostopadloscian.o obj/Dr3D_gnuplot_api.o obj/Graniastoslup.o -lpthread
 obj:
 	mkdir obj
@@ -36,6 +36,9 @@ obj/Dron.o: src/Dron.cpp inc/Dron.hh
 
 obj/UkladW.o: src/UkladW.cpp inc/UkladW.hh
 	g++ -c ${CXXFLAGS} -o obj/UkladW.o src/UkladW.cpp
+
+obj/Powierzchnia.o: src/Powierzchnia.cpp inc/Powierzchnia.hh
+	g++ -c ${CXXFLAGS} -o obj/Powierzchnia.o src/Powierzchnia.cpp
 
 clean:
 	rm -f obj/*.o sterowanie_dronem
