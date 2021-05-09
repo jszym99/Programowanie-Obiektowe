@@ -1,6 +1,6 @@
 #include "Prostopadloscian.hh"
 
-Prostopadloscian::Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, double dlugosc, double szerokosc, double wysokosc) : UkladW(bazS, bazO, wsk)
+Prostopadloscian::Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc) : UkladW(bazS, bazO, wsk), InterfejsRysowania(rys, col)
 {
     //Tworzymy prostopadloscian o zadanych dlugosciach krawedzi
     //Dolna podstawa
@@ -17,7 +17,7 @@ Prostopadloscian::Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * 
     id = -1; // Ustawia identyfikator rysownika (obiek nie byl jeszcze rysowany)
 }
 
-void Prostopadloscian::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
+void Prostopadloscian::rysuj()
 {
     if(id != -1) // Jesli obiekt byl rysowany nalezy go usunac
         rysownik->erase_shape(id);

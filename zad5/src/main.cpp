@@ -23,7 +23,7 @@ int main()
 	rysownik->change_ref_time_ms(0);
 
 	//Punkt i obrot początkowe (0 i macierz jednostkowa)
-	MacierzObr<3> obrPocz{};
+	/*MacierzObr<3> obrPocz{};
 	Wektor<3> punktPocz{};
 
 	//Rysuje powierzchnie
@@ -44,7 +44,7 @@ int main()
 	wait4key();
 	D1.rotacja(MacierzObr<3>{30,X});
 	D1.rysuj(rysownik, "black");
-	wait4key();
+	wait4key();*/
 
 	delete rysownik;
 	return 0;

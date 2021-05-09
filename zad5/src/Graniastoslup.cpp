@@ -1,6 +1,6 @@
 #include "Graniastoslup.hh"
 
-Graniastoslup6::Graniastoslup6(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, double promien, double wysokosc) : UkladW(bazS, bazO, wsk)
+Graniastoslup6::Graniastoslup6(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double promien, double wysokosc) : UkladW(bazS, bazO, wsk), InterfejsRysowania(rys, col)
 {
 	Wektor<3> wierzcholek{0,promien,0}; //wektor pomocniczy reprezentujacy wierzcholek obracany wokol osi graniastoslupu
     //Tworzrenie dolnej podstawy graniastoslupa
@@ -19,7 +19,7 @@ Graniastoslup6::Graniastoslup6(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk,
     id = -1; // Ustawia identyfikator rysownika (obiek nie byl jeszcze rysowany)
 }
 
-void Graniastoslup6::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
+void Graniastoslup6::rysuj()
 {
     if(id != -1) // Jesli obiekt byl rysowany nalezy go usunac
         rysownik->erase_shape(id);

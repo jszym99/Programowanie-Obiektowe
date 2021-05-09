@@ -11,19 +11,19 @@ namespace drone
     double wys_wirnika = 1;
 }
 
-Dron::Dron(Wektor<3> bazS, MacierzObr<3> bazO, double skala) : UkladW(bazS, bazO, nullptr), korpus(Wektor<3>{0,0,0},bazO,this,skala*drone::dl_korp,skala*drone::szer_korp,skala*drone::wys_korp),
-    wirnik({Graniastoslup6(Wektor<3>{-skala*drone::szer_korp/2,-skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,skala*drone::r_wirnika, skala*drone::wys_wirnika),
-            Graniastoslup6(Wektor<3>{-skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,skala*drone::r_wirnika, skala*drone::wys_wirnika),
-            Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,skala*drone::r_wirnika, skala*drone::wys_wirnika),
-            Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,-skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,skala*drone::r_wirnika, skala*drone::wys_wirnika)}) {}
+Dron::Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala) : InterfejsRysowania(rys, col), UkladW(bazS, bazO, nullptr), korpus(Wektor<3>{0,0,0},bazO,this,rysownik,kolor,skala*drone::dl_korp,skala*drone::szer_korp,skala*drone::wys_korp),
+    wirnik({Graniastoslup6(Wektor<3>{-skala*drone::szer_korp/2,-skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika),
+            Graniastoslup6(Wektor<3>{-skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika),
+            Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika),
+            Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,-skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika)}) {}
 
-void Dron::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
+void Dron::rysuj()
 {
     //Rysuj korpus (prostopadloscian)
-    korpus.rysuj(rysownik, kolor);
+    korpus.rysuj();
     //Rysuje kazdy wirnik po kolei
     for(int i = 0; i < 4; i++)
-        wirnik[i].rysuj(rysownik, kolor);
+        wirnik[i].rysuj();
 }
 
 void Dron::lec(double deg, double wys, double odleglosc)
