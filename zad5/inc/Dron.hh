@@ -25,7 +25,7 @@ public:
     //! Metoda realizujaca animowany obrut drona w okol osi Z
     void obrocZ(double deg);
     //! Metoda realizujaca obracanie sie wirnikow
-    void krecWirnikami(double deg);
+    void krecWirnikami(double deg = 15);
 };
 
 #endif

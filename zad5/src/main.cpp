@@ -11,6 +11,9 @@
 #include "Scena.hh"
 #include "Dr3D_gnuplot_api.hh"
 
+#include <thread>
+#include <chrono>
+
 void wait4key() {
   do {
     std::cout << "\n Press a key to continue..." << std::endl;
@@ -20,38 +23,19 @@ void wait4key() {
 int main()
 {
 
-	std::shared_ptr<drawNS::Draw3DAPI> rysownik(new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000));
+	std::shared_ptr<drawNS::Draw3DAPI> rysownik(new drawNS::APIGnuPlot3D(-30, 30, -30, 30, -5, 30, 1000));
 	rysownik->change_ref_time_ms(0);
-
-
 
 	//Punkt i obrot początkowe (0 i macierz jednostkowa)
 	MacierzObr<3> obrPocz{};
-	Wektor<3> punktPocz{};
+	Wektor<3> punktPocz{0,0,1};
 
 	//Rysuje powierzchnie
 	Powierzchnia P1;
 	P1.rysuj(rysownik, "grey");
 
-	Scena scena1{Dron(Wektor<3>{0,0,1}, obrPocz, std::shared_ptr<drawNS::Draw3DAPI>(rysownik), "black")};
+	Scena scena1(punktPocz, obrPocz, std::shared_ptr<drawNS::Draw3DAPI>(rysownik), "black", 1);
 	scena1.Menu();
 
-	/*//Lot drona
-	Dron D1(Wektor<3>{0,0,1}, obrPocz);
-	D1.rysuj(rysownik, "black");
-	wait4key();
-	D1.lec(30,10,20);
-	D1.rysuj(rysownik, "black");
-	wait4key();
-	
-	//Test metod
-	D1.translacja(Wektor<3>{-5,-5,10});
-	D1.rysuj(rysownik, "black");
-	wait4key();
-	D1.rotacja(MacierzObr<3>{30,X});
-	D1.rysuj(rysownik, "black");
-	wait4key();*/
-
-	//delete rysownik;
 	return 0;
 }

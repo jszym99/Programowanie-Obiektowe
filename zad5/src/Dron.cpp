@@ -60,8 +60,10 @@ void Dron::krecWirnikami (double deg)
     {
         if(i%2) // Wirniki obracacają się w przeciwną stronę po przekątnej
         {
-            wirnik[i].rotacja(-deg);
+            wirnik[i].rotacja(MacierzObr<3>{-deg,Z});
+        }else
+        {
+            wirnik[i].rotacja(MacierzObr<3>{deg,Z});
         }
-        wirnik[i].rotacja(deg);
     }
 }
