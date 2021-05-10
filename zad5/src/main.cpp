@@ -11,15 +11,6 @@
 #include "Scena.hh"
 #include "Dr3D_gnuplot_api.hh"
 
-#include <thread>
-#include <chrono>
-
-void wait4key() {
-  do {
-    std::cout << "\n Press a key to continue..." << std::endl;
-  } while(std::cin.get() != '\n');
-}
-
 int main()
 {
 
