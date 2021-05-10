@@ -8,6 +8,7 @@
 #include "Graniastoslup.hh"
 #include "Dron.hh"
 #include "Powierzchnia.hh"
+#include "Scena.hh"
 #include "Dr3D_gnuplot_api.hh"
 
 void wait4key() {
@@ -19,18 +20,23 @@ void wait4key() {
 int main()
 {
 
-	drawNS::Draw3DAPI *rysownik = new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000);
+	std::shared_ptr<drawNS::Draw3DAPI> rysownik(new drawNS::APIGnuPlot3D(-20, 20, -20, 20, -20, 20, 1000));
 	rysownik->change_ref_time_ms(0);
 
+
+
 	//Punkt i obrot początkowe (0 i macierz jednostkowa)
-	/*MacierzObr<3> obrPocz{};
+	MacierzObr<3> obrPocz{};
 	Wektor<3> punktPocz{};
 
 	//Rysuje powierzchnie
 	Powierzchnia P1;
 	P1.rysuj(rysownik, "grey");
 
-	//Lot drona
+	Scena scena1{Dron(Wektor<3>{0,0,1}, obrPocz, std::shared_ptr<drawNS::Draw3DAPI>(rysownik), "black")};
+	scena1.Menu();
+
+	/*//Lot drona
 	Dron D1(Wektor<3>{0,0,1}, obrPocz);
 	D1.rysuj(rysownik, "black");
 	wait4key();
@@ -46,6 +52,6 @@ int main()
 	D1.rysuj(rysownik, "black");
 	wait4key();*/
 
-	delete rysownik;
+	//delete rysownik;
 	return 0;
 }

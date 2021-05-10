@@ -2,6 +2,7 @@
 #define SCENA_HH
 
 #include "Dron.hh"
+#include <iostream>
 
 class Scena 
 {
@@ -10,7 +11,7 @@ protected:
 public:
     Scena(Dron D1) : dron(D1) {}
     void Menu();
-    void Animacja_ruchu();
+    void AnimacjaRuchu(double deg, double dyst, double wys);
 };
 
 #endif

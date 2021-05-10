@@ -18,7 +18,7 @@ public:
     void rysuj();
     //! Metoda symuluje lot drona w zadanym kierunku na zadana odleglosc i na zadanej wysokosci
     void lec(double deg, double wys, double odleglosc);
-    //! Metoda realizująca animowany lot drona w gore/dol
+    //! Metoda realizująca animowany lot drona w gore/dol(ujemne)
     void lecPion(double wysokosc);
     //! Metoda realizujaca animowany lot drona do przodu
     void lecPrzod(double dystans);

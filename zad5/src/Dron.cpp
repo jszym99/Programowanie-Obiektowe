@@ -35,3 +35,33 @@ void Dron::lec(double deg, double wys, double odleglosc)
     srodek = srodek + lot; //lot
     srodek = srodek - wznies; //londowanie (powierchnia jest plaska)
 }
+
+void Dron::lecPion (double wysokosc)
+{
+    translacja(Wektor<3>{0,0,wysokosc});
+}
+
+void Dron::lecPrzod (double dystnas)
+{
+    Wektor<3> wek{dystnas, 0, 0};
+    wek = orient * wek;
+
+    translacja(wek);
+}
+
+void Dron::obrocZ (double deg)
+{
+    rotacja(MacierzObr<3>{deg,Z});
+}
+
+void Dron::krecWirnikami (double deg)
+{
+    for(int i = 0; i < 4; i++)
+    {
+        if(i%2) // Wirniki obracacają się w przeciwną stronę po przekątnej
+        {
+            wirnik[i].rotacja(-deg);
+        }
+        wirnik[i].rotacja(deg);
+    }
+}
