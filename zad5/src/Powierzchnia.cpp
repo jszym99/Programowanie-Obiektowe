@@ -1,6 +1,6 @@
 #include "Powierzchnia.hh"
 
-void Powierzchnia::rysuj(drawNS::Draw3DAPI *rysownik, std::string kolor)
+void Powierzchnia::rysuj(std::shared_ptr<drawNS::Draw3DAPI> rysownik, std::string kolor)
 {
     
     std::vector<std::vector<drawNS::Point3D>> surface; // pomocnicza dwuwymiarowa tablica punktow
