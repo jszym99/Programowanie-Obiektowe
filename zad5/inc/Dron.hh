@@ -15,7 +15,7 @@ public:
     Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala = 1);
 
     //! Metoda rysuje wszystkie figury bedace czesciami drona (korpus i wirniki)
-    void rysuj();
+    void rysuj() override;
     //! Metoda symuluje lot drona w zadanym kierunku na zadana odleglosc i na zadanej wysokosci
     void lec(double deg, double wys, double odleglosc);
     //! Metoda realizująca animowany lot drona w gore/dol(ujemne)

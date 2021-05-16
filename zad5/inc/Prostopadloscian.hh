@@ -14,7 +14,7 @@ public:
     Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc);
 
     //! Metoda rysujaca prostopadloscian
-    void rysuj();
+    void rysuj() override;
 };
 
 #endif

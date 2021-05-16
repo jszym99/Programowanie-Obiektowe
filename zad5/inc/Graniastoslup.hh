@@ -14,7 +14,7 @@ public:
     Graniastoslup6(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double promien, double wysokosc);
 
     //! Metoda rysujaca graniastoslup
-    void rysuj();
+    void rysuj() override;
 };
 
 #endif

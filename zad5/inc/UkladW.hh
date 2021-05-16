@@ -7,9 +7,9 @@
 class UkladW
 {
 protected:
-    UkladW* rodzic;
     Wektor<3> srodek;
     MacierzObr<3> orient;
+    UkladW* rodzic;
 public:
     //! Konstruktor przyjmujacy srodek lokalnego ukladu wspolrzednych, obrot ukladu i wskazni na rodzica
     UkladW(Wektor<3> bazS, MacierzObr<3> bazO, UkladW* pt = nullptr) : srodek(bazS), orient(bazO), rodzic(pt) {}
