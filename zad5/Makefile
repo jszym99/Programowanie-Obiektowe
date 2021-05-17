@@ -1,7 +1,7 @@
 #
 #  To sa opcje dla kompilacji
 #
-CXXFLAGS=-g -Iinc -Wall -pedantic -std=c++0x
+CXXFLAGS=-g -Iinc -Wall -pedantic -std=c++17
 
 __start__: sterowanie_dronem
 	./sterowanie_dronem

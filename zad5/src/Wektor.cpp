@@ -5,6 +5,17 @@ Wektor<ROZMIAR>::Wektor()
 {
     for(int i = 0; i < ROZMIAR; i++)
         tab.push_back(0.0);
+    
+    ile_suma++;
+    ile_aktualnie++;
+}
+
+template <int ROZMIAR>
+Wektor<ROZMIAR>::Wektor(const Wektor & nowy)
+{
+    tab = nowy.tab;
+    ile_suma++;
+    ile_aktualnie++;
 }
 
 template <int ROZMIAR>

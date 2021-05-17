@@ -14,11 +14,15 @@ template <int ROZMIAR>
 class Wektor {
 private:
 	std::vector<double> tab;
+	inline static unsigned int ile_suma = 0;
+	inline static unsigned int ile_aktualnie = 0;
 public:
 	//! Wektor inicjalizowany zerami
 	Wektor();
 	//! Wektor inicjalizwoany zadanymi wartosciami
-	Wektor(std::initializer_list<double> il) : tab(il) {};
+	Wektor(std::initializer_list<double> il) : tab(il) {ile_suma++;ile_aktualnie++;};
+	//! Konstruktor kopiujący wektora
+	Wektor(const Wektor & nowy);
 
 	//! Dodawanie wektorow
 	Wektor<ROZMIAR> operator + (const Wektor<ROZMIAR> & Wek2) const;
@@ -36,6 +40,12 @@ public:
 	double & operator [] (int ind);
 	//! Metoda liczaca dlugosc wektora
 	double dlugosc () const;
+
+	static unsigned int get_suma() {return ile_suma;}
+	static unsigned int get_aktualny() {return ile_aktualnie;}
+
+	//! Destruktor
+	~Wektor() {ile_aktualnie--;}
 };
 
 /*!

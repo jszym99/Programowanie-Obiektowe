@@ -14,6 +14,8 @@ void Scena::Menu()
     
     while (true)
     {
+        std::cout << Wektor<3>::get_suma() << std::endl;
+        std::cout << Wektor<3>::get_aktualny() << std::endl;
         double kat, dystans, wysokosc;
         std::cout << "Podaj kierunek lotu (w stopniach [-180;180]) lub [1111] aby zakonczyc program: ";
         std::cin >> kat;
@@ -46,6 +48,7 @@ void Scena::Menu()
         }
 
         AnimacjaRuchu(kat, dystans, wysokosc);
+        
     }
 }
 
