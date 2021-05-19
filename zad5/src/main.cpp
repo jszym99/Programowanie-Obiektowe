@@ -22,8 +22,8 @@ int main()
 	Wektor<3> punktPocz{0,0,1};
 
 	//Rysuje powierzchnie
-	Powierzchnia P1;
-	P1.rysuj(rysownik, "grey");
+	Powierzchnia P1(rysownik, "grey");
+	P1.rysuj();
 
 	Scena scena1(punktPocz, obrPocz, std::shared_ptr<drawNS::Draw3DAPI>(rysownik), "black", 1);
 	scena1.Menu();
