@@ -8,23 +8,43 @@
 class Dron : public UkladW, public InterfejsRysowania
 {
 private:
+    //! prostopadloscian tworzacy korpus drona
     Prostopadloscian korpus;
+    //! graniastoslupy tworzace wirniki drona
     std::array<Graniastoslup6, 4> wirnik;
 public:
-    //! Konstruktor tworzy drona o danej skali
+    /*! \brief Konstruktor tworzy drona o danej skali
+     * \param[in] bazS - poczatkowy srodek lokalnego ukladu wspolrzednych drona
+     * \param[in] bazO - poczatkwowa orientacja drona
+     * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
+     * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
+     * \param[in] skala - skala tworzonego drona
+     */
     Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala = 1);
 
     //! Metoda rysuje wszystkie figury bedace czesciami drona (korpus i wirniki)
     void rysuj() override;
-    //! Metoda symuluje lot drona w zadanym kierunku na zadana odleglosc i na zadanej wysokosci
+    /*! Metoda symuluje lot drona w zadanym kierunku na zadana odleglosc i na zadanej wysokosci
+     * \param[in] deg - kat (w stopniach) okresilajacy kierunek lotu drona
+     * \param[in] wys - wysokosc lotu drona
+     * \param[in] odleglosc - odleglosc, na ktora dron ma poleciec
+     */
     void lec(double deg, double wys, double odleglosc);
-    //! Metoda realizująca animowany lot drona w gore/dol(ujemne)
+    /*! Metoda realizująca animowany lot drona w gore/dol(ujemne)
+     * \param[in] wysokosc - wysokosc lotu drona
+     */
     void lecPion(double wysokosc);
-    //! Metoda realizujaca animowany lot drona do przodu
+    /*! Metoda realizujaca animowany lot drona do przodu
+     * \param[in] dystans - odleglosc, na ktora dron ma poleciec
+     */
     void lecPrzod(double dystans);
-    //! Metoda realizujaca animowany obrut drona w okol osi Z
+    /*! Metoda realizujaca animowany obrut drona wokol osi Z
+     * \param[in] deg - kat(w stopniach) o jako dron ma sie obrocic w miejscu wokol osi Z
+     */
     void obrocZ(double deg);
-    //! Metoda realizujaca obracanie sie wirnikow
+    /*! Metoda realizujaca obracanie sie wirnikow
+     * \param[in] deg - kat (w stopniach) obrotu wirnikow [domyslny = 15]
+    */
     void krecWirnikami(double deg = 15);
 };
 
