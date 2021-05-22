@@ -18,22 +18,35 @@ enum Os
 template <int ROZMIAR>
 class MacierzObr {
 private:
+	//! Tablica wektorow tworzaca macierz
 	std::vector<Wektor<ROZMIAR>> wiersze;
 public:
 	//! Tworzy macierz identycznosciowa
 	MacierzObr();
 	/*!
 	 * Towrzy macierz obrotu względem zadanej osi o zadany kat (w stopniach)
-	 * \param[in] deg kat obrotu
-	 * \param[in] os_obrotu os wzdluz ktorej odbywa sie obracanie
+	 * \param[in] deg - kat obrotu (w stopniach)
+	 * \param[in] os_obrotu - os wzdluz ktorej odbywa sie obracanie
 	 */
 	MacierzObr(double deg, Os os_obrotu = Z);
 
-	//! Przeciazenie operatora realizuje mnozenie macierzy
+	/*! Przeciazenie operatora realizuje mnozenie dwoch macierzy obrotu
+	 * \param[in] this - macierz obrotu mnozona przez druga macierz obrotu
+	 * \param[in] arg2 - macierz obrotu przez ktota mnozony jest obiekt
+	 * \return macierz obrotu bedaca iloczynem dwoch macierzy obrotu (suma obrotow/katow)
+	 */
 	const MacierzObr<ROZMIAR> operator * (const MacierzObr<ROZMIAR> & arg2) const;
-	//! Przeciazenie operatora realizuje mnozenie wektora przez macierz
+	/*! Przeciazenie operatora realizuje mnozenie macierzy obrotu przez wektor
+	 * \param[in] this - macierz obrotu mnozona przez wektor
+	 * \param[in] wektor - wektro obracany macierza obrotu
+	 * \return wektor obrocony o macierz obrotu (o zadanym kacie)
+	 */
 	const Wektor<ROZMIAR> operator * (const Wektor<ROZMIAR> & wektor) const;
-	//! Przeciazenie operatora realizuje pobieranie danych z obiektu
+	/*! Przeciazenie operatora realizuje pobieranie danych z obiektu
+	 * \param[in] this - macierz obrotu, z ktorej pobierane sa dane
+	 * \param[in] ind - indeks danych do pobrania
+	 * \return wektor w polu o numerze ind 
+	 */
 	const Wektor<ROZMIAR> & operator [] (int ind) const;
 };
 
@@ -46,7 +59,7 @@ public:
 double toDeg (double rad);
 /*!
  * Funkcja zamienia wartosc kata w stopniach na radiany
- * \param[in] deg kat w stopniach
+ * \param[in] deg - kat w stopniach
  * \return kat w radianach
  */
 double toRad (double deg);
@@ -54,8 +67,8 @@ double toRad (double deg);
 /*!
  * Przeciazenie operatora wypisywania realizuje wyswietlanie macierzy na wyjsciu standardowym
  *
- * \param[in] Strm strumien
- * \param[in] Mac macierz do wypisania
+ * \param[in] Strm - strumien
+ * \param[in] Mac - macierz do wypisania
  * 
  * \return strumien
  */
