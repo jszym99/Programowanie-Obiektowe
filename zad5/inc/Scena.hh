@@ -22,8 +22,9 @@ protected:
     //std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
     Dron dron;
     std::vector<PlaskowyzProst> plasProst;
+    std::vector<Wzgorze> wzgorza;
 public:
-    /*! Konstuktor przyjmujacy parametry do budowy drona
+    /*! Konstuktor
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
      * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
      */

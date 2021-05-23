@@ -11,8 +11,10 @@ namespace scene
 Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col) : InterfejsRysowania(rys, col), dron(Wektor<3>{0,0,1},MacierzObr<3>{},rys,col)
 {
     elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&dron));
-    plasProst.push_back(PlaskowyzProst(Wektor<3>{10,10,0},MacierzObr<3>{},nullptr,rys,col,5,5,8));
+    plasProst.push_back(PlaskowyzProst(Wektor<3>{15,15,0},MacierzObr<3>{},rys,col,10,16,12));
     elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&plasProst[0]));
+    wzgorza.push_back(Wzgorze(Wektor<3>{-15,15,0},MacierzObr<3>{},rys,col,10,16));
+    elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&wzgorza[0]));
 }
 
 void Scena::Menu()
