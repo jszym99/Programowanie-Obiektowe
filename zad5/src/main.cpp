@@ -25,7 +25,7 @@ int main()
 	Powierzchnia P1(rysownik, "grey");
 	P1.rysuj();
 
-	Scena scena1(punktPocz, obrPocz, std::shared_ptr<drawNS::Draw3DAPI>(rysownik), "black", 1);
+	Scena scena1(rysownik, "black");
 	scena1.Menu();
 
 	return 0;

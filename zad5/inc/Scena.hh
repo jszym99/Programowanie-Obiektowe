@@ -2,24 +2,32 @@
 #define SCENA_HH
 
 #include "Dron.hh"
+#include "InterfejsRysowania.hh"
+#include "InterfejsElemPowierzchni.hh"
+#include "PlaskowyzProst.hh"
+#include "Plaskowyz.hh"
+#include "Wzgorze.hh"
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <vector>
 
 //! Modeluje klase sceny lotu dronem
-class Scena 
+class Scena : public InterfejsRysowania//, public InterfejsElemPowierzchni
 {
 protected:
+    //! Kolekcja elementow rysowalnych
+    std::vector<std::shared_ptr<InterfejsRysowania>> elemRysowalne;
+    //! Kolekcja elementow powierzchni
+    //std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
     Dron dron;
+    std::vector<PlaskowyzProst> plasProst;
 public:
     /*! Konstuktor przyjmujacy parametry do budowy drona
-     * \param[in] bazS - poczatkowy srodek lokalnego ukladu wspolrzednych drona
-     * \param[in] bazO - poczatkwowa orientacja drona
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
      * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
-     * \param[in] skala - skala tworzonego drona
      */
-    Scena(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala = 1) : dron(bazS, bazO, rys, col, skala) {}
+    Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col);
     
     //! Metoda realizujaca menu konsolowe
     void Menu();
@@ -29,6 +37,12 @@ public:
      * \param[in] wys - wysokosc lotu drona
      */
     void AnimacjaRuchu(double deg, double dyst, double wys);
+
+    void rysujWszystkie();
+    
+    void rysuj() override {};
+    //bool czy_nad() override;
+    //bool czy_ladowac() override;
 };
 
 #endif

@@ -8,9 +8,17 @@ namespace scene
     double pochyl = 15; //kat nachylenia podczas lotu
 }
 
+Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col) : InterfejsRysowania(rys, col), dron(Wektor<3>{0,0,1},MacierzObr<3>{},rys,col)
+{
+    elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&dron));
+    plasProst.push_back(PlaskowyzProst(Wektor<3>{10,10,0},MacierzObr<3>{},nullptr,rys,col,5,5,8));
+    elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&plasProst[0]));
+}
+
 void Scena::Menu()
 {
-    dron.rysuj();
+    //dron.rysuj();
+    rysujWszystkie();
     
     while (true)
     {
@@ -60,7 +68,8 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys)
     {
         dron.lecPion(wys/lKlatek);
         dron.krecWirnikami();
-        dron.rysuj();
+        //dron.rysuj();
+        rysujWszystkie();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
@@ -70,7 +79,8 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys)
     {
         dron.obrocZ(deg/lKlatek);
         dron.krecWirnikami();
-        dron.rysuj();
+        //dron.rysuj();
+        rysujWszystkie();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
@@ -81,7 +91,8 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys)
         dron.lecPrzod(dyst/lKlatek);
         dron.rotacja(MacierzObr<3>{scene::pochyl,Y});
         dron.krecWirnikami();
-        dron.rysuj();
+        //dron.rysuj();
+        rysujWszystkie();
         dron.rotacja(MacierzObr<3>{-scene::pochyl,Y});
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
@@ -92,7 +103,16 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys)
     {
         dron.lecPion(-(wys/lKlatek));
         dron.krecWirnikami();
-        dron.rysuj();
+        //dron.rysuj();
+        rysujWszystkie();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
+    }
+}
+
+void Scena::rysujWszystkie()
+{
+    for (std::shared_ptr<InterfejsRysowania> element : elemRysowalne)
+    {
+        element->rysuj();
     }
 }
