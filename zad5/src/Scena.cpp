@@ -15,6 +15,8 @@ Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col) : Interfej
     elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&plasProst[0]));
     wzgorza.push_back(Wzgorze(Wektor<3>{-15,15,0},MacierzObr<3>{},rys,col,10,16));
     elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&wzgorza[0]));
+    plaskowyze.push_back(Plaskowyz(Wektor<3>{-20,-20,0},MacierzObr<3>{},rys,col,12,13));
+    elemRysowalne.push_back(std::shared_ptr<InterfejsRysowania>(&plaskowyze[0]));
 }
 
 void Scena::Menu()

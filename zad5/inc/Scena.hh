@@ -23,6 +23,7 @@ protected:
     Dron dron;
     std::vector<PlaskowyzProst> plasProst;
     std::vector<Wzgorze> wzgorza;
+    std::vector<Plaskowyz> plaskowyze;
 public:
     /*! Konstuktor
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
