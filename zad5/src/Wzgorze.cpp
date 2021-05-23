@@ -11,8 +11,6 @@ namespace hill
 
 Wzgorze::Wzgorze(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double maxPromien, double wysokosc) : UkladW(bazS, bazO), InterfejsRysowania(rys, col)
 {
-
-    std::cout << bazS << std::endl;
     std::srand(hill::seed);
     //Losowanie ilosci wierzcholkow
     unsigned int n = std::rand() % (hill::maxVertex-hill::minVertex) + hill::minVertex;
@@ -27,12 +25,10 @@ Wzgorze::Wzgorze(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Dra
         Wektor<3> wek{dlugosc*1.0,0,0};
         //Losowanie kata obrotu wektora
         unsigned int kat = std::rand() % maxKat + i*maxKat;
-        std::cout << kat << std::endl;
         //Obrot wektora o wylosowany kat
         wek = MacierzObr<3>{kat*1.0} * wek;
         //Wpisanei do tablicy punktow
         punkty.push_back(wek);
-        std::cout << punkty[i] << std::endl;
     }
     //Tworzenie gornego wiercholka
     //Losowanie odleglosci od srdoa gornego wierzcholka
@@ -41,12 +37,10 @@ Wzgorze::Wzgorze(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Dra
     Wektor<3> wek{dlugosc*1.0,0,wysokosc};
     //Losowanie kata obrotu wektora
     unsigned int kat = std::rand() % hill::maxAngle;
-    std::cout << kat << std::endl;
     //Obrot wektora o wylosowany kat
     wek = MacierzObr<3>{kat*1.0} * wek;
     //Wpisanei do tablicy punktow
     punkty.push_back(wek);
-    std::cout << punkty[punkty.size()-1] << std::endl;
     
 }
 
