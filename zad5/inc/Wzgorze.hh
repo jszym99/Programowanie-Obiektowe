@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 //! Modeluje klase wzgorza
-class Wzgorze : public InterfejsRysowania, public UkladW//, public InterfejsElemPowierzchni
+class Wzgorze : public UkladW, public InterfejsRysowania//, public InterfejsElemPowierzchni
 {
 private:
     std::vector<Wektor<3>> punkty;

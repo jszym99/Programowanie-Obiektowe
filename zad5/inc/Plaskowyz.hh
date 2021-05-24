@@ -5,7 +5,7 @@
 #include "InterfejsElemPowierzchni.hh"
 #include "UkladW.hh"
 
-class Plaskowyz : public InterfejsRysowania, public UkladW//, public InterfejsElemPowierzchni
+class Plaskowyz : public UkladW, public InterfejsRysowania//, public InterfejsElemPowierzchni
 {
 private:
     std::vector<Wektor<3>> punkty;
