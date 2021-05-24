@@ -22,8 +22,8 @@ int main()
 	Wektor<3> punktPocz{0,0,1};
 
 	//Rysuje powierzchnie
-	Powierzchnia P1(rysownik, "grey");
-	P1.rysuj();
+	//Powierzchnia P1(rysownik, "grey");
+	//P1.rysuj();
 
 	Scena scena1(rysownik, "black");
 	scena1.Menu();
