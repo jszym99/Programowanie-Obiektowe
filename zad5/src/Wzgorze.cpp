@@ -2,7 +2,7 @@
 
 namespace hill
 {
-    unsigned int seed = 5;
+    unsigned int seed = 5; // dla ulatwienia sprawdzania, docelowo mozna uzaleznic od czasu
     unsigned int minVertex = 3;
     unsigned int maxVertex = 10;
     unsigned int minRad = 1;

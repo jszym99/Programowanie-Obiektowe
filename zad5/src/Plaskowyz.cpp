@@ -2,7 +2,7 @@
 
 namespace plateau
 {
-    unsigned int seed = 5;
+    unsigned int seed = 5; // dla ulatwienia sprawdzania, docelowo mozna uzaleznic od czasu
     unsigned int minVertex = 6;
     unsigned int maxVertex = 12;
     unsigned int minRad = 1;
