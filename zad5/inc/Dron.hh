@@ -12,6 +12,10 @@ private:
     Prostopadloscian korpus;
     //! graniastoslupy tworzace wirniki drona
     std::array<Graniastoslup6, 4> wirnik;
+    //! Predkosc lotu drona
+    double predkosc;
+    //! Predkosc obrotu drona
+    double predkoscObrotu;
 public:
     /*! \brief Konstruktor tworzy drona o danej skali
      * \param[in] bazS - poczatkowy srodek lokalnego ukladu wspolrzednych drona
@@ -19,8 +23,10 @@ public:
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
      * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
      * \param[in] skala - skala tworzonego drona
+     * \param[in] v - predkosc lotu drona [domyslne 0.5]
+     * \param[in] vKat - predkosc obrotu drona [domyslne 15]
      */
-    Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala = 1);
+    Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala = 1, double v = 0.5, double vKat = 15);
 
     //! Metoda rysuje wszystkie figury bedace czesciami drona (korpus i wirniki)
     void rysuj() override;
@@ -46,6 +52,16 @@ public:
      * \param[in] deg - kat (w stopniach) obrotu wirnikow [domyslny = 15]
     */
     void krecWirnikami(double deg = 15);
+    /*! Metoda realizuje pobieranie predkosci lotu drona
+     * \param[in] this - dron
+     * \return predkosc lotu drona
+     */
+    double getPred() {return predkosc;}
+    /*! Metoda realizuje pobieranie predkosci obrotu drona
+     * \param[in] this - dron
+     * \return predkosc pbrotu drona
+     */
+    double getPredObr() {return predkoscObrotu;}
 };
 
 #endif
