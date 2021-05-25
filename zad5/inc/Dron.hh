@@ -56,12 +56,12 @@ public:
      * \param[in] this - dron
      * \return predkosc lotu drona
      */
-    double getPred() {return predkosc;}
+    const double & getPred() const {return predkosc;}
     /*! Metoda realizuje pobieranie predkosci obrotu drona
      * \param[in] this - dron
      * \return predkosc pbrotu drona
      */
-    double getPredObr() {return predkoscObrotu;}
+    const double & getPredObr() const {return predkoscObrotu;}
 };
 
 #endif
