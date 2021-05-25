@@ -24,6 +24,16 @@ public:
     PlaskowyzProst(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc) : Prostopadloscian(bazS+Wektor<3>{0,0,wysokosc/2}, bazO, nullptr, rys, col, dlugosc, szerokosc, wysokosc) {}
     bool czy_nad() override {return true;};
     bool czy_ladowac() override {return true;};
+    /*! Metoda realizuje pobieranie id rysoania
+     * \param[in] this - plaskowyz prostopadloscienny
+     * \return id rysowania elementu
+     */
+    int getId() const override {return id;}
+    /*! Metoda wyswietla dane o obiekcie
+     * \param[in] this - plaskowyz prostopadloscienny
+     * \return nazwa typu obiektu oraz wspolrzedne srodka
+     */
+    void getInfo() const override {std::cout << "Plaskowyz prostopadloscienny" << srodek;}
 };
 
 #endif
