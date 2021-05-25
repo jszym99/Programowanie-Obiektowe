@@ -12,17 +12,21 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <cmath>
+#include <typeinfo>
 
 //! Modeluje klase sceny lotu dronem
-class Scena // : public InterfejsElemPowierzchni
+class Scena : public InterfejsElemPowierzchni
 {
 protected:
     //! Kolekcja elementow rysowalnych
-    std::vector<std::shared_ptr<InterfejsRysowania>> elemRysowalne;
+    //std::vector<std::shared_ptr<InterfejsRysowania>> elemRysowalne;
     //! Kolekcja elementow powierzchni
-    //std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
+    std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
     //! Kolekcja dronow
     std::vector<std::shared_ptr<Dron>> drony;
+    //! Rysownik
+    std::shared_ptr<drawNS::Draw3DAPI> rysownik;
 public:
     /*! Konstuktor
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
@@ -42,8 +46,8 @@ public:
      */
     void AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDrona = 0);
     
-    //bool czy_nad() override;
-    //bool czy_ladowac() override;
+    bool czy_nad() override {return true;};
+    bool czy_ladowac() override {return true;};
 };
 
 #endif
