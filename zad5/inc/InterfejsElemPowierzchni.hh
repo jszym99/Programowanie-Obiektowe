@@ -4,7 +4,7 @@
 class InterfejsElemPowierzchni
 {
 public:
-    InterfejsElemPowierzchni();
+    InterfejsElemPowierzchni() {}
     virtual bool czy_nad() = 0;
     virtual bool czy_ladowac() = 0;
 

@@ -5,7 +5,7 @@
 #include "InterfejsElemPowierzchni.hh"
 #include "UkladW.hh"
 
-class Plaskowyz : public UkladW, public InterfejsRysowania//, public InterfejsElemPowierzchni
+class Plaskowyz : public UkladW, public InterfejsRysowania, public InterfejsElemPowierzchni
 {
 private:
     std::vector<Wektor<3>> punkty;
@@ -19,8 +19,8 @@ public:
      * \param[in] wysokosc - wysokosc graniastoslupa
      */
     Plaskowyz(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double maxPromien, double wysokosc);
-    //bool czy_nad() override;
-    //bool czy_ladowac() override;
+    bool czy_nad() override {return true;};
+    bool czy_ladowac() override {return true;};
     void rysuj() override;
 };
 
