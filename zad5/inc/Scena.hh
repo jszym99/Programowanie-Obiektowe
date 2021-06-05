@@ -8,6 +8,7 @@
 #include "Plaskowyz.hh"
 #include "Wzgorze.hh"
 #include "Powierzchnia.hh"
+#include "InterfejsDrona.hh"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -16,7 +17,7 @@
 #include <typeinfo>
 
 //! Modeluje klase sceny lotu dronem
-class Scena : public InterfejsElemPowierzchni
+class Scena
 {
 protected:
     //! Kolekcja elementow rysowalnych
@@ -24,7 +25,7 @@ protected:
     //! Kolekcja elementow powierzchni
     std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
     //! Kolekcja dronow
-    std::vector<std::shared_ptr<Dron>> drony;
+    std::vector<std::shared_ptr<InterfejsDrona>> drony;
     //! Rysownik
     std::shared_ptr<drawNS::Draw3DAPI> rysownik;
 public:
@@ -45,9 +46,6 @@ public:
      * \param[in] wys - wysokosc lotu drona
      */
     void AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDrona = 0);
-    
-    bool czy_nad() override {return true;};
-    bool czy_ladowac() override {return true;};
 };
 
 #endif

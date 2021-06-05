@@ -3,9 +3,10 @@
 
 #include "Prostopadloscian.hh"
 #include "Graniastoslup.hh"
+#include "InterfejsDrona.hh"
 
 //! Modeluje klase drona skladajacego sie z korpusu i wirnikow
-class Dron : public UkladW, public InterfejsRysowania
+class Dron : public UkladW, public InterfejsRysowania, public InterfejsDrona
 {
 private:
     //! prostopadloscian tworzacy korpus drona
@@ -39,15 +40,15 @@ public:
     /*! Metoda realizująca animowany lot drona w gore/dol(ujemne)
      * \param[in] wysokosc - wysokosc lotu drona
      */
-    void lecPion(double wysokosc);
+    void lecPion(double wysokosc) override;
     /*! Metoda realizujaca animowany lot drona do przodu
      * \param[in] dystans - odleglosc, na ktora dron ma poleciec
      */
-    void lecPrzod(double dystans);
+    void lecPrzod(double dystans) override;
     /*! Metoda realizujaca animowany obrut drona wokol osi Z
      * \param[in] deg - kat(w stopniach) o jako dron ma sie obrocic w miejscu wokol osi Z
      */
-    void obrocZ(double deg);
+    void obrocZ(double deg) override;
     /*! Metoda realizujaca obracanie sie wirnikow
      * \param[in] deg - kat (w stopniach) obrotu wirnikow [domyslny = 15]
     */
@@ -56,12 +57,12 @@ public:
      * \param[in] this - dron
      * \return predkosc lotu drona
      */
-    const double & getPred() const {return predkosc;}
+    const double & getPred() const override {return predkosc;}
     /*! Metoda realizuje pobieranie predkosci obrotu drona
      * \param[in] this - dron
      * \return predkosc pbrotu drona
      */
-    const double & getPredObr() const {return predkoscObrotu;}
+    const double & getPredObr() const override {return predkoscObrotu;}
 };
 
 #endif

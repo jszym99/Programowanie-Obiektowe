@@ -9,6 +9,7 @@ namespace drone
     double wys_korp = 2;
     double r_wirnika = 2.5;
     double wys_wirnika = 1;
+    double pochyl = 10;           //kat nachylenia podczas lotu
 }
 
 Dron::Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double skala,double v, double vKat) : UkladW(bazS, bazO, nullptr), InterfejsRysowania(rys, col), korpus(Wektor<3>{0,0,0},bazO,this,rysownik,kolor,skala*drone::dl_korp,skala*drone::szer_korp,skala*drone::wys_korp),
@@ -40,6 +41,8 @@ void Dron::lec(double deg, double wys, double odleglosc)
 void Dron::lecPion (double wysokosc)
 {
     translacja(Wektor<3>{0,0,wysokosc});
+    krecWirnikami();
+    rysuj();
 }
 
 void Dron::lecPrzod (double dystnas)
@@ -48,11 +51,17 @@ void Dron::lecPrzod (double dystnas)
     wek = orient * wek;
 
     translacja(wek);
+    krecWirnikami();
+    rotacja(MacierzObr<3>{drone::pochyl, Y}); // Pochylenie tylko do rysowania 
+    rysuj();
+    rotacja(MacierzObr<3>{-drone::pochyl, Y}); // Pochylenie tylko do rysowania
 }
 
 void Dron::obrocZ (double deg)
 {
     rotacja(MacierzObr<3>{deg,Z});
+    krecWirnikami();
+    rysuj();
 }
 
 void Dron::krecWirnikami (double deg)

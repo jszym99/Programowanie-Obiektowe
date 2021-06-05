@@ -3,7 +3,6 @@
 namespace scene
 {
     unsigned int frameTime = 100; // milisekundy
-    double pochyl = 15;           //kat nachylenia podczas lotu
 }
 
 Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col)
@@ -12,9 +11,10 @@ Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col)
     // Rysowanie powierzchni
     Powierzchnia(rys, "grey").rysuj();
     // Tworzenie poczatkowego drona
-    drony.push_back(std::shared_ptr<Dron>(new Dron(Wektor<3>{0, 0, 1}, MacierzObr<3>{}, rys, col)));
+    std::shared_ptr<Dron> dron(new Dron(Wektor<3>{0, 0, 1}, MacierzObr<3>{}, rys, col));
     // Rysowanie poczatkowego drona
-    drony[0]->rysuj();
+    dron->rysuj();
+    drony.push_back(dron);
     // Tworzenie i rysowanie plaskowyzu prostopadlosciennego
     std::shared_ptr<PlaskowyzProst> PP1(new PlaskowyzProst(Wektor<3>{15, 15, 0}, MacierzObr<3>{}, rys, col, 10, 16, 12));
     PP1->rysuj();
@@ -405,7 +405,7 @@ void Scena::MenuKrajobrazu()
 
 void Scena::Menu()
 {
-    drony[0]->rysuj();
+    //drony[0]->rysuj();
 
     unsigned int opcja = 0;
     do
@@ -446,8 +446,6 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
     for (int i = 0; i < lKlatek; i++)
     {
         drony[nrDrona]->lecPion(wys / lKlatek);
-        drony[nrDrona]->krecWirnikami();
-        drony[nrDrona]->rysuj();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
@@ -456,8 +454,6 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
     for (int i = 0; i < lKlatek; i++)
     {
         drony[nrDrona]->obrocZ(deg / lKlatek);
-        drony[nrDrona]->krecWirnikami();
-        drony[nrDrona]->rysuj();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
@@ -466,10 +462,6 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
     for (int i = 0; i < lKlatek; i++)
     {
         drony[nrDrona]->lecPrzod(dyst / lKlatek);
-        drony[nrDrona]->rotacja(MacierzObr<3>{scene::pochyl, Y});
-        drony[nrDrona]->krecWirnikami();
-        drony[nrDrona]->rysuj();
-        drony[nrDrona]->rotacja(MacierzObr<3>{-scene::pochyl, Y});
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
@@ -478,8 +470,6 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
     for (int i = 0; i < lKlatek; i++)
     {
         drony[nrDrona]->lecPion(-(wys / lKlatek));
-        drony[nrDrona]->krecWirnikami();
-        drony[nrDrona]->rysuj();
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 }

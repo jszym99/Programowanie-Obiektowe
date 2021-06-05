@@ -9,6 +9,7 @@
 #include "Dron.hh"
 #include "Powierzchnia.hh"
 #include "Scena.hh"
+#include "InterfejsDrona.hh"
 #include "Dr3D_gnuplot_api.hh"
 
 int main()
