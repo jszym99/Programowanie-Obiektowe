@@ -22,8 +22,21 @@ public:
      * \param[in] wysokosc - wysokosc (Z) prostopadloscianu
      */
     PlaskowyzProst(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc) : Prostopadloscian(bazS+Wektor<3>{0,0,wysokosc/2}, bazO, nullptr, rys, col, dlugosc, szerokosc, wysokosc) {}
-    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override {return true;};
-    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override {return true;};
+    /*! Metoda sprawdzajaca czy dron jest nad tym elementem krajobrazu
+     * \param[in] this - element krajobrazu, nad ktorym znajduje sie dron
+     * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
+     * \retval false - dron nie jest nad tym obiektem
+     * \retval true - dron jest nad tym obiektem
+     */
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override;
+    /*! Metoda sprawdza czy dron moze ladowac
+     * \param[in] this - element krajobrazu, nad ktorym znajduje sie dron
+     * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
+     * \param[out] wyokosc - wysokosc, na ktorej dron moze wyladowac
+     * \retval false - dron moze ladowac
+     * \retval true - dron nie moze ladowac
+     */
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override;
     /*! Metoda realizuje pobieranie id rysowania
      * \param[in] this - plaskowyz prostopadloscienny
      * \return id rysowania elementu

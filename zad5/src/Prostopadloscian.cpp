@@ -17,6 +17,13 @@ Prostopadloscian::Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * 
     id = -1; // Ustawia identyfikator rysownika (obiek nie byl jeszcze rysowany)
 }
 
+const Wektor<3> &Prostopadloscian::operator[](int ind) const
+{
+    if (ind < 0 && ind > 7)
+        std::cerr << "Odwolanie poza pamiec" << std::endl;
+    return punkty[ind];
+}
+
 void Prostopadloscian::rysuj()
 {
     if(id != -1) // Jesli obiekt byl rysowany nalezy go usunac

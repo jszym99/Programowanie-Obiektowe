@@ -22,6 +22,9 @@ public:
      */
     Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc);
 
+    //! Przeciazenie operatora realizuje pobieranie danych z obiektu
+    const Wektor<3> &operator[](int ind) const; 
+
     //! Metoda rysujaca prostopadloscian
     void rysuj() override;
     /*! Metoda realizuje pobieranie id rysowania

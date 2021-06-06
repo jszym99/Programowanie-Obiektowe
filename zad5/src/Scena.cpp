@@ -563,9 +563,12 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
             {
                 flagaLad = false;
             }
+            // TODO: poprawić sprawdzanie lądowania
+            std::cout << "Wysokosc elementu: " << wysElem << std::endl;
         }
         if (flagaLad) // Mozna ladowac
         {
+            //std::cout << "Wysokosc elementu: " << wysElem << std::endl;
             break;
         }
         else // Nie mozna ladowac
