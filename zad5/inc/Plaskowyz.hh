@@ -21,14 +21,13 @@ public:
     Plaskowyz(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double maxPromien, double wysokosc);
     bool czy_nad() override {return true;};
     bool czy_ladowac() override {return true;};
-    /*! Metoda realizuje pobieranie id rysoania
+    /*! Metoda realizuje pobieranie id rysowania
      * \param[in] this - plaskowyz
      * \return id rysowania elementu
      */
     int getId() const override {return id;}
     /*! Metoda wyswietla dane o obiekcie
      * \param[in] this - plaskowyz
-     * \return nazwa typu obiektu oraz wspolrzedne srodka
      */
     void getInfo() const override {std::cout << "Plaskowyz" << srodek;}
     void rysuj() override;
