@@ -22,8 +22,8 @@ public:
      * \param[in] wysokosc - wysokosc (Z) prostopadloscianu
      */
     PlaskowyzProst(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc) : Prostopadloscian(bazS+Wektor<3>{0,0,wysokosc/2}, bazO, nullptr, rys, col, dlugosc, szerokosc, wysokosc) {}
-    bool czy_nad() override {return true;};
-    bool czy_ladowac() override {return true;};
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override {return true;};
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override {return true;};
     /*! Metoda realizuje pobieranie id rysowania
      * \param[in] this - plaskowyz prostopadloscienny
      * \return id rysowania elementu

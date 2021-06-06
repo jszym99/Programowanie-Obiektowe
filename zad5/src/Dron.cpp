@@ -93,5 +93,5 @@ void Dron::zmienKolor(std::string col)
 
 double Dron::wielkoscDrona()
 {
-    return ((Wektor<3>{skalaDrona*drone::szer_korp/2,skalaDrona*drone::dl_korp/2,0} - Wektor<3>{srodek[0],srodek[1],0}).dlugosc());
+    return (Wektor<3>{skalaDrona*drone::szer_korp/2,skalaDrona*drone::dl_korp/2,0}).dlugosc();
 }

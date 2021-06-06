@@ -526,6 +526,9 @@ void Scena::Menu()
 
 void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDrona)
 {
+    wys = wys - drony[nrDrona]->getSrdoke()[2]; // wys lotu = wys podana - wys srodka drona
+    double wysLad, wysElem = 0;
+    bool flagaLad = true;
     //lec w gore
     double lKlatek = wys / drony[nrDrona]->getPred();
     for (int i = 0; i < lKlatek; i++)
@@ -550,11 +553,74 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 
+    // Sparawdzanie kolizji
+    do
+    {
+        flagaLad = true;
+        for (std::shared_ptr<InterfejsElemPowierzchni> element : elemPowierzchni)
+        {
+            if (!(element->czy_ladowac(drony[nrDrona], wysElem)))
+            {
+                flagaLad = false;
+            }
+        }
+        if (flagaLad) // Mozna ladowac
+        {
+            break;
+        }
+        else // Nie mozna ladowac
+        {
+            std::cout << "Nie mozna tutaj wyladowac\n";
+            std::cout << "Podaj kierunek lotu (w stopniach [-180;180]): ";
+            std::cin >> deg;
+            // Sprawdzanie poprawnosci typu danych
+            if (std::cin.fail() || deg < -180 || deg > 180)
+            {
+                if (deg < -180 || deg > 180)
+                    std::cout << "Kat poza zakresem";
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+                std::cout << "Niepoprawny format danych\n";
+                continue;
+            }
+            // Przyjmowanie oldeglosci lotu od urzytkownika
+            std::cout << "Podaj odleglosc lotu: ";
+            std::cin >> dyst;
+            // Sprawdzanie poprawnosci typu danych
+            if (std::cin.fail() || dyst <= 0)
+            {
+                if (dyst <= 0)
+                    std::cout << "Odleglosc musi byc dodatnia\n";
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+                std::cout << "Niepoprawny format danych\n";
+                continue;
+            }
+
+            //obroc wokol Z
+            lKlatek = abs(deg) / drony[nrDrona]->getPredObr();
+            for (int i = 0; i < lKlatek; i++)
+            {
+                drony[nrDrona]->obrocZ(deg / lKlatek);
+                std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
+            }
+
+            //lec do przodu
+            lKlatek = dyst / drony[nrDrona]->getPred();
+            for (int i = 0; i < lKlatek; i++)
+            {
+                drony[nrDrona]->lecPrzod(dyst / lKlatek);
+                std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
+            }
+        }
+    } while (!flagaLad);
+
+    wysLad = (drony[nrDrona]->getSrdoke()[2] - wysElem) - 1;
     //lec w dol
-    lKlatek = wys / drony[nrDrona]->getPred();
+    lKlatek = wysLad / drony[nrDrona]->getPred();
     for (int i = 0; i < lKlatek; i++)
     {
-        drony[nrDrona]->lecPion(-(wys / lKlatek));
+        drony[nrDrona]->lecPion(-(wysLad / lKlatek));
         std::this_thread::sleep_for(std::chrono::milliseconds(scene::frameTime));
     }
 }

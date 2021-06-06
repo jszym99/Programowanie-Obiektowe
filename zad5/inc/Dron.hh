@@ -65,8 +65,8 @@ public:
      * \return predkosc pbrotu drona
      */
     const double & getPredObr() const override {return predkoscObrotu;}
-    bool czy_nad() override {return true;};
-    bool czy_ladowac() override {return true;};
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override {return true;};
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override {return true;};
     /*! Metoda realizuje wymazanie drona
      * \param[in] this - dron
      */

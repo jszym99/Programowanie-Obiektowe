@@ -21,8 +21,8 @@ public:
      * \param[in] wysokosc - wysokosc ostroslupa
      */
     Wzgorze(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double maxPromien, double wysokosc);
-    bool czy_nad() override {return true;};
-    bool czy_ladowac() override {return true;};
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override;
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override;
     /*! Metoda realizuje pobieranie id rysowania
      * \param[in] this - wzgorze
      * \return id rysowania elementu

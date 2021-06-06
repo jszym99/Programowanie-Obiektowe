@@ -65,3 +65,36 @@ void Wzgorze::rysuj()
     
     id = rysownik->draw_polyhedron(std::vector<std::vector<drawNS::Point3D>>{wierzcholki,szczyt}, kolor);
 }
+
+bool Wzgorze::czy_nad(std::shared_ptr<InterfejsDrona> dron)
+{
+    double maxPromien = Wektor<2>{punkty[0][0],punkty[0][1]}.dlugosc();
+    for (int i = 1; i < ((int)punkty.size()); i++)
+    {
+        if (Wektor<2>{punkty[i][0],punkty[i][1]}.dlugosc() > maxPromien)
+        {
+            maxPromien = Wektor<2>{punkty[i][0],punkty[i][1]}.dlugosc();
+        }
+    }
+    if ((Wektor<2>{dron->getSrdoke()[0], dron->getSrdoke()[1]} - Wektor<2>{srodek[0], srodek[1]}).dlugosc() <= (maxPromien + dron->wielkoscDrona()))
+    {
+        return true; // Drona nad obiektem
+    }
+    else
+    {
+        return false; // Dron nie jest nad obiektem
+    }
+}
+
+bool Wzgorze::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc)
+{
+    if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
+    {
+        wysokosc = 0;
+        return true; // Mozna landowac
+    }
+    else // Dron jest nad obiektem
+    {
+        return false; // Nie mozna landowac
+    }
+}
