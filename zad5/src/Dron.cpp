@@ -17,7 +17,7 @@ Dron::Dron(Wektor<3> bazS, MacierzObr<3> bazO, std::shared_ptr<drawNS::Draw3DAPI
             Graniastoslup6(Wektor<3>{-skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika),
             Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika),
             Graniastoslup6(Wektor<3>{skala*drone::szer_korp/2,-skala*drone::dl_korp/2,skala*drone::wys_korp/2},bazO,this,rysownik,kolor,skala*drone::r_wirnika, skala*drone::wys_wirnika)})
-            {predkosc = v; predkoscObrotu = vKat;}
+            {predkosc = v; predkoscObrotu = vKat; skalaDrona = skala;}
 
 void Dron::rysuj()
 {
@@ -76,4 +76,22 @@ void Dron::krecWirnikami (double deg)
             wirnik[i].rotacja(MacierzObr<3>{deg,Z});
         }
     }
+}
+void Dron::earaseDrone()
+{
+    rysownik->erase_shape(korpus.getId());
+    for(int i = 0; i < 4; i++)
+        rysownik->erase_shape(wirnik[i].getId());
+}
+
+void Dron::zmienKolor(std::string col)
+{
+    rysownik->change_shape_color(korpus.getId(),col);
+    for(int i = 0; i < 4; i++)
+        rysownik->change_shape_color(wirnik[i].getId(),col);
+}
+
+double Dron::wielkoscDrona()
+{
+    return ((Wektor<3>{skalaDrona*drone::szer_korp/2,skalaDrona*drone::dl_korp/2,0} - Wektor<3>{srodek[0],srodek[1],0}).dlugosc());
 }

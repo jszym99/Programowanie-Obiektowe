@@ -46,13 +46,36 @@ void Scena::MenuDrona()
             continue;
         }
 
+        double wspX, wspY;
+        char checkDron;
+        unsigned int dronId;
+        bool flagaD = true;
+
         switch (opcja)
         {
         case 1: // Interfjes lotu dronem
-
-            //TODO: wybor drona
-
             double kat, dystans, wysokosc;
+
+            // Wybor drona
+            if (drony.size() == 0)
+            {
+                std::cout << "Brak dronow do sterowania\n";
+                break;
+            }
+            else if (drony.size() == 1)
+            {
+                dronId = 0;
+            }
+            else
+            {
+                for (int i = 0; i < (int)drony.size(); i++)
+                {
+                    std::cout << i << " - " << drony[i]->getSrdoke();
+                }
+                std::cout << "Podaj numer drona do sterowania: ";
+                std::cin >> dronId;
+            }
+
             // Przyjmowanie kata od uzytkownika
             std::cout << "Podaj kierunek lotu (w stopniach [-180;180]): ";
             std::cin >> kat;
@@ -94,14 +117,76 @@ void Scena::MenuDrona()
             }
 
             // Rysowanie animacji ruchu drona
-            AnimacjaRuchu(kat, dystans, wysokosc);
+            AnimacjaRuchu(kat, dystans, wysokosc, dronId);
             break;
         case 2: // Usuwanie drona
-            std::cout << "Ta funkcja jeszcze nie dziala\n";
+            if (drony.size() == 0)
+            {
+                std::cout << "Brak dronow do usuniecia\n";
+                break;
+            }
+            for (int i = 0; i < (int)drony.size(); i++)
+            {
+                std::cout << i << " - " << drony[i]->getSrdoke();
+            }
+            std::cout << "Podaj numer drona do usuniecia: ";
+            std::cin >> dronId;
+            // Sprawdzanie poprawnosci typu danych
+            if (std::cin.fail() || dronId < 0 || dronId >= drony.size())
+            {
+                if (dronId < 0 || dronId >= drony.size())
+                    std::cout << "Dron o tym numerze nie istnieje\n";
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+                std::cout << "Niepoprawny format danych\n";
+                continue;
+            }
+            drony[dronId]->zmienKolor("red");
+            do
+            {
+                std::cout << "Czy na pewno chcesz usunac tego drona? [Y]es/[N]o: ";
+                std::cin >> checkDron;
+                // Sprawdzanie poprawnosci typu danych
+                if (std::cin.fail())
+                {
+                    std::cin.clear();
+                    std::cin.ignore(1000, '\n');
+                    std::cout << "Niepoprawny format danych\n";
+                    continue;
+                }
+                // Potweirdzenie wyboru
+                if (checkDron == 'n' || checkDron == 'N')
+                {
+                    drony[dronId]->zmienKolor("black");
+                    flagaD = false;
+                }
+                else if (checkDron == 'y' || checkDron == 'Y')
+                {
+                    // Zmaz drona
+                    drony[dronId]->earaseDrone();
+                    // Usun drona z listy
+                    drony.erase(drony.begin() + dronId);
+                    flagaD = false;
+                }
+                else
+                {
+                    std::cout << "Bledna opcja\n";
+                }
+            } while (flagaD);
             break;
         case 3: // Dodawanie drona
-            std::cout << "Ta funkcja jeszcze nie dziala\n";
-            break;
+        {
+            std::cout << "Podaj spolrzedna X drona: ";
+            std::cin >> wspX;
+            std::cout << "Podaj spolrzedna Y drona: ";
+            std::cin >> wspY;
+            std::shared_ptr<Dron> dron(new Dron(Wektor<3>{wspX, wspY, 1}, MacierzObr<3>{}, rysownik, "black"));
+            // Rysowanie poczatkowego drona
+            dron->rysuj();
+            // Dodanie drona do listy
+            drony.push_back(dron);
+        }
+        break;
         case 0:
             break;
         default:
@@ -131,7 +216,7 @@ void Scena::MenuKrajobrazu()
         }
 
         char check;
-        bool flaga = true;
+        bool flagaK = true;
         switch (opcja)
         {
         case 1: // Usuwanie elementow krajobrazu
@@ -174,19 +259,19 @@ void Scena::MenuKrajobrazu()
                 if (check == 'n' || check == 'N')
                 {
                     rysownik->change_shape_color(elemPowierzchni[elemId]->getId(), "black");
-                    flaga = false;
+                    flagaK = false;
                 }
                 else if (check == 'y' || check == 'Y')
                 {
                     rysownik->erase_shape(elemPowierzchni[elemId]->getId());
                     elemPowierzchni.erase(elemPowierzchni.begin() + elemId);
-                    flaga = false;
+                    flagaK = false;
                 }
                 else
                 {
                     std::cout << "Bledna opcja\n";
                 }
-            }while(flaga);
+            } while (flagaK);
             break;
         case 2: // Dodawanie elementow krajobrazu
             std::cout << "Podaj typ elementu do dodania:\n[1] Wzgorze\n[2] Plaskowyz\n[3] Plaskowyz prostopadloscienny\n";

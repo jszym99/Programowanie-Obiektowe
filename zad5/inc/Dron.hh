@@ -4,9 +4,10 @@
 #include "Prostopadloscian.hh"
 #include "Graniastoslup.hh"
 #include "InterfejsDrona.hh"
+#include "InterfejsElemPowierzchni.hh"
 
 //! Modeluje klase drona skladajacego sie z korpusu i wirnikow
-class Dron : public UkladW, public InterfejsRysowania, public InterfejsDrona
+class Dron : public UkladW, public InterfejsRysowania, public InterfejsDrona, public InterfejsElemPowierzchni
 {
 private:
     //! prostopadloscian tworzacy korpus drona
@@ -17,6 +18,7 @@ private:
     double predkosc;
     //! Predkosc obrotu drona
     double predkoscObrotu;
+    double skalaDrona;
 public:
     /*! \brief Konstruktor tworzy drona o danej skali
      * \param[in] bazS - poczatkowy srodek lokalnego ukladu wspolrzednych drona
@@ -63,6 +65,27 @@ public:
      * \return predkosc pbrotu drona
      */
     const double & getPredObr() const override {return predkoscObrotu;}
+    bool czy_nad() override {return true;};
+    bool czy_ladowac() override {return true;};
+    /*! Metoda realizuje wymazanie drona
+     * \param[in] this - dron
+     */
+    void earaseDrone() override;
+    /*! Metoda realizuje zmiane koloru drona
+     * \param[in] this - dron
+     * \param[in] col - kolor docelowy
+     */
+    void zmienKolor(std::string col) override;
+    /*! Metoda realizuje pobieranie wspolrzednych srodka drona
+     * \param[in] this - dron
+     * \return wspolrzedne srodka drona
+     */
+    const Wektor<3> & getSrdoke() const {return srodek;}
+    /*! Metoda realizuje liczenie wielksci drona
+     * \param[in] this - dron
+     * \return wielkosc drona
+     */
+    double wielkoscDrona();
 };
 
 #endif

@@ -24,6 +24,11 @@ public:
 
     //! Metoda rysujaca prostopadloscian
     void rysuj() override;
+    /*! Metoda realizuje pobieranie id rysowania
+     * \param[in] this - prostopadloscian
+     * \return id rysowania elementu
+     */
+    int getId() const {return id;}
 };
 
 #endif
