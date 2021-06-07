@@ -74,6 +74,9 @@ void Scena::MenuDrona()
                 }
                 std::cout << "Podaj numer drona do sterowania: ";
                 std::cin >> dronId;
+
+                // Zmiana koloru sterowanego drona
+                drony[dronId]->zmienKolor("blue");
             }
 
             // Przyjmowanie kata od uzytkownika
@@ -556,15 +559,28 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
     // Sparawdzanie kolizji
     do
     {
+        wysElem = 0;
         flagaLad = true;
+        // Dodanie dronow do listy elementow krajobrazu (poza sterowanym dronem)
+        for (int i = 0; i < (int)drony.size(); i++)
+        {
+            if (i != (int)nrDrona)
+            {
+                elemPowierzchni.push_back(std::dynamic_pointer_cast<InterfejsElemPowierzchni>(drony[i]));
+            }
+        }
+        // Sprawdzenie kolizji z elementami krajobrazu
         for (std::shared_ptr<InterfejsElemPowierzchni> element : elemPowierzchni)
         {
             if (!(element->czy_ladowac(drony[nrDrona], wysElem)))
             {
                 flagaLad = false;
             }
-            // TODO: poprawić sprawdzanie lądowania
-            std::cout << "Wysokosc elementu: " << wysElem << std::endl;
+            
+        }
+        for (int i = 0; i < (int)drony.size() - 1; i++)
+        {
+            elemPowierzchni.erase(elemPowierzchni.end());
         }
         if (flagaLad) // Mozna ladowac
         {

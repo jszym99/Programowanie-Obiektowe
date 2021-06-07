@@ -93,7 +93,6 @@ bool Plaskowyz::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysok
 {
     if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
     {
-        wysokosc = 0;
         return true; // Mozna landowac
     }
     else

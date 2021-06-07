@@ -24,23 +24,21 @@ bool PlaskowyzProst::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & 
 {
     if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
     {
-        wysokosc = 0;
         return true; // Mozna landowac
     }
     else
     {
         double minPromien = Wektor<2>{(*this)[0][0],(*this)[0][1]}.dlugosc();
-        for (int i = 1; i < 4; i++)
+        /*for (int i = 1; i < 4; i++)
         {
             if (Wektor<2>{(*this)[i][0],(*this)[i][1]}.dlugosc() < minPromien)
             {
                 minPromien = Wektor<2>{(*this)[i][0],(*this)[i][1]}.dlugosc();
             }
-        }
+        }*/
         if((Wektor<2>{dron->getSrdoke()[0], dron->getSrdoke()[1]} - Wektor<2>{srodek[0], srodek[1]}).dlugosc() < abs(minPromien - dron->wielkoscDrona()))
         {
-            wysokosc = 12;//(*this)[7][2];
-            std::cout << "Wysokość: " << wysokosc << std::endl;
+            wysokosc = 2*(*this)[7][2];
             return true; // Mozna landowac
         }
         else

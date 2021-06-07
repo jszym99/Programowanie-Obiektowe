@@ -65,8 +65,21 @@ public:
      * \return predkosc pbrotu drona
      */
     const double & getPredObr() const override {return predkoscObrotu;}
-    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override {return true;};
-    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override {return true;};
+    /*! Metoda sprawdzajaca czy dron jest nad tym dronem
+     * \param[in] this - dron, nad ktorym znajduje sie sterowany dron
+     * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
+     * \retval false - dron nie jest nad tym obiektem
+     * \retval true - dron jest nad tym obiektem
+     */
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override;
+    /*! Metoda sprawdza czy dron moze ladowac
+     * \param[in] this - dron, nad ktorym znajduje sie sterowany dron
+     * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
+     * \param[out] wyokosc - wysokosc, na ktorej dron moze wyladowac
+     * \retval false - dron moze ladowac
+     * \retval true - dron nie moze ladowac
+     */
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override;
     /*! Metoda realizuje wymazanie drona
      * \param[in] this - dron
      */
