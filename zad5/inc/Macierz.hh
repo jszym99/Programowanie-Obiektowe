@@ -31,19 +31,16 @@ public:
 	MacierzObr(double deg, Os os_obrotu = Z);
 
 	/*! Przeciazenie operatora realizuje mnozenie dwoch macierzy obrotu
-	 * \param[in] this - macierz obrotu mnozona przez druga macierz obrotu
 	 * \param[in] arg2 - macierz obrotu przez ktota mnozony jest obiekt
 	 * \return macierz obrotu bedaca iloczynem dwoch macierzy obrotu (suma obrotow/katow)
 	 */
 	const MacierzObr<ROZMIAR> operator * (const MacierzObr<ROZMIAR> & arg2) const;
 	/*! Przeciazenie operatora realizuje mnozenie macierzy obrotu przez wektor
-	 * \param[in] this - macierz obrotu mnozona przez wektor
 	 * \param[in] wektor - wektro obracany macierza obrotu
 	 * \return wektor obrocony o macierz obrotu (o zadanym kacie)
 	 */
 	const Wektor<ROZMIAR> operator * (const Wektor<ROZMIAR> & wektor) const;
 	/*! Przeciazenie operatora realizuje pobieranie danych z obiektu
-	 * \param[in] this - macierz obrotu, z ktorej pobierane sa dane
 	 * \param[in] ind - indeks danych do pobrania
 	 * \return wektor w polu o numerze ind 
 	 */

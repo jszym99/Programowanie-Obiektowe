@@ -56,49 +56,41 @@ public:
     */
     void krecWirnikami(double deg = 15);
     /*! Metoda realizuje pobieranie predkosci lotu drona
-     * \param[in] this - dron
      * \return predkosc lotu drona
      */
     const double & getPred() const override {return predkosc;}
     /*! Metoda realizuje pobieranie predkosci obrotu drona
-     * \param[in] this - dron
-     * \return predkosc pbrotu drona
+     * \return predkosc predkosc brotu drona
      */
     const double & getPredObr() const override {return predkoscObrotu;}
     /*! Metoda sprawdzajaca czy dron jest nad tym dronem
-     * \param[in] this - dron, nad ktorym znajduje sie sterowany dron
      * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
      * \retval false - dron nie jest nad tym obiektem
      * \retval true - dron jest nad tym obiektem
      */
-    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) override;
+    bool czy_nad(std::shared_ptr<InterfejsDrona> dron) const override;
     /*! Metoda sprawdza czy dron moze ladowac
-     * \param[in] this - dron, nad ktorym znajduje sie sterowany dron
      * \param[in] dron - wskaznik na drona, ktorego kolizja jest sprawdzana
      * \param[out] wyokosc - wysokosc, na ktorej dron moze wyladowac
      * \retval false - dron moze ladowac
      * \retval true - dron nie moze ladowac
      */
-    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) override;
+    bool czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) const override;
     /*! Metoda realizuje wymazanie drona
-     * \param[in] this - dron
      */
     void earaseDrone() override;
     /*! Metoda realizuje zmiane koloru drona
-     * \param[in] this - dron
      * \param[in] col - kolor docelowy
      */
     void zmienKolor(std::string col) override;
     /*! Metoda realizuje pobieranie wspolrzednych srodka drona
-     * \param[in] this - dron
      * \return wspolrzedne srodka drona
      */
     const Wektor<3> & getSrdoke() const {return srodek;}
     /*! Metoda realizuje liczenie wielksci drona
-     * \param[in] this - dron
      * \return wielkosc drona
      */
-    double wielkoscDrona();
+    double wielkoscDrona() const;
 };
 
 #endif

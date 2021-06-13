@@ -10,11 +10,21 @@ Scena::Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col)
     rysownik = rys;
     // Rysowanie powierzchni
     Powierzchnia(rys, "grey").rysuj();
-    // Tworzenie poczatkowego drona
-    std::shared_ptr<Dron> dron(new Dron(Wektor<3>{0, 0, 1}, MacierzObr<3>{}, rys, col));
+    // Tworzenie poczatkowego drona nr 1
+    std::shared_ptr<Dron> dron1(new Dron(Wektor<3>{0, 0, 1}, MacierzObr<3>{}, rys, col));
     // Rysowanie poczatkowego drona
-    dron->rysuj();
-    drony.push_back(dron);
+    dron1->rysuj();
+    drony.push_back(dron1);
+    // Tworzenie poczatkowego drona nr 1
+    std::shared_ptr<Dron> dron2(new Dron(Wektor<3>{15, 15, 13}, MacierzObr<3>{}, rys, col));
+    // Rysowanie poczatkowego drona
+    dron2->rysuj();
+    drony.push_back(dron2);
+    // Tworzenie poczatkowego drona nr 1
+    std::shared_ptr<Dron> dron3(new Dron(Wektor<3>{-20, -20, 14}, MacierzObr<3>{}, rys, col));
+    // Rysowanie poczatkowego drona
+    dron3->rysuj();
+    drony.push_back(dron3);
     // Tworzenie i rysowanie plaskowyzu prostopadlosciennego
     std::shared_ptr<PlaskowyzProst> PP1(new PlaskowyzProst(Wektor<3>{15, 15, 0}, MacierzObr<3>{}, rys, col, 10, 16, 12));
     PP1->rysuj();

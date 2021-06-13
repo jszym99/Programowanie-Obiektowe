@@ -24,7 +24,6 @@ public:
     //! Metoda rysujaca graniastoslup
     void rysuj() override;
     /*! Metoda realizuje pobieranie id rysowania
-     * \param[in] this - graniastoslup
      * \return id rysowania elementu
      */
     int getId() const {return id;}

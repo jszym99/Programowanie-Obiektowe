@@ -69,7 +69,7 @@ void Plaskowyz::rysuj()
     id = rysownik->draw_polyhedron(std::vector<std::vector<drawNS::Point3D>>{podstawaDol, podstawaGora}, kolor);
 }
 
-bool Plaskowyz::czy_nad(std::shared_ptr<InterfejsDrona> dron)
+bool Plaskowyz::czy_nad(std::shared_ptr<InterfejsDrona> dron) const
 {
     double maxPromien = Wektor<2>{punkty[0][0],punkty[0][1]}.dlugosc();
     for (int i = 1; i < ((int)punkty.size()); i++)
@@ -89,7 +89,7 @@ bool Plaskowyz::czy_nad(std::shared_ptr<InterfejsDrona> dron)
     }
 }
 
-bool Plaskowyz::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc)
+bool Plaskowyz::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) const
 {
     if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
     {

@@ -91,12 +91,12 @@ void Dron::zmienKolor(std::string col)
         rysownik->change_shape_color(wirnik[i].getId(),col);
 }
 
-double Dron::wielkoscDrona()
+double Dron::wielkoscDrona() const
 {
     return (Wektor<3>{skalaDrona*drone::szer_korp/2,skalaDrona*drone::dl_korp/2,0}).dlugosc();
 }
 
-bool Dron::czy_nad(std::shared_ptr<InterfejsDrona> dron)
+bool Dron::czy_nad(std::shared_ptr<InterfejsDrona> dron) const
 {
     /*double maxPromien = this->wielkoscDrona();
     for (int i = 1; i < ((int)punkty.size()); i++)
@@ -116,7 +116,7 @@ bool Dron::czy_nad(std::shared_ptr<InterfejsDrona> dron)
     }
 }
 
-bool Dron::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc)
+bool Dron::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) const
 {
     if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
     {

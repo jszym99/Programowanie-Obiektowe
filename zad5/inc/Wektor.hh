@@ -32,48 +32,40 @@ public:
 	Wektor(const Wektor & nowy);
 
 	/*! Dodawanie wektorow
-	 * \param[in] this - pierwszy skladnik dowania
 	 * \param[in] Wek2 - drugi skladnik dodawania
 	 * \return suma dwoch wektorow
 	 */
 	Wektor<ROZMIAR> operator + (const Wektor<ROZMIAR> & Wek2) const;
 	/*! Odejmowanie wektorow
-	 * \param[in] this - pierwszy skladnik odejmowania
 	 * \param[in] Wek2 - drugi skladnik odejmowania
 	 * \return roznica dwoch wektorow
 	 */
 	Wektor<ROZMIAR> operator - (const Wektor<ROZMIAR> & Wek2) const;
 	/*! Iloczyn skalarny
-	 * \param[in] this - pierwszy skladnik mnozenia skalarnego
 	 * \param[in] Wek2 - drugi skladnik mnozenia skalarnego
 	 * \return iloczyn skalarny dwoch wektorow
 	 */
 	double operator * (const Wektor<ROZMIAR> & Wek2) const;
 	/*! Mnożenie przez liczbe
-	 * \param[in] this - wektor mnozony (skalowany) przez liczbe
 	 * \param[in] k - liczba, przez ktora mnozony (skalowany) jest wektor
 	 * \return wektor przemnozony (przeskalowany) przez liczbe k
 	 */
 	Wektor<ROZMIAR> operator * (const double & k) const;
 	/*! Dzielenie przez liczbe
-	 * \param[in] this - wektor dzielony (skalowany) przez liczbe
 	 * \param[in] k - liczba, przez ktora dzielony (skalowany) jest wektor
 	 * \return wektor podzielony (przeskalowany) przez liczbe k
 	 */
 	Wektor<ROZMIAR> operator / (const double & k) const;
 	/*! Przeciazenie operatora realizuje pobieranie danych z obiektu
-	 * \param[in] this - wektor, z ktorego pobierane sa dane
 	 * \param[in] ind - indek danych do pobrania
 	 * \return liczba w polu o danym indeksie
 	 */
 	const double & operator [] (int ind) const;
 	/*! Przeciazenie operatora realizuje wpisywanie danych do obiektu
-	 * \param[in] this - wektor, do ktorego wpisywane sa dane
 	 * \param[in] ind - indeks pola, do ktorego wpisywane sa dane
 	 */
 	double & operator [] (int ind);
 	/*! Metoda liczaca dlugosc wektora
-	 * \param[in] this - wektor, ktorego dlugosc jest liczona
 	 * \return dlugosc wektora
 	 */
 	double dlugosc () const;

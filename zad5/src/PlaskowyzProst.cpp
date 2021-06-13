@@ -1,6 +1,6 @@
 #include "PlaskowyzProst.hh"
 
-bool PlaskowyzProst::czy_nad(std::shared_ptr<InterfejsDrona> dron)
+bool PlaskowyzProst::czy_nad(std::shared_ptr<InterfejsDrona> dron) const
 {
     double maxPromien = Wektor<2>{(*this)[0][0],(*this)[0][1]}.dlugosc();
     for (int i = 1; i < 4; i++)
@@ -20,7 +20,7 @@ bool PlaskowyzProst::czy_nad(std::shared_ptr<InterfejsDrona> dron)
     }
 }
 
-bool PlaskowyzProst::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc)
+bool PlaskowyzProst::czy_ladowac(std::shared_ptr<InterfejsDrona> dron, double & wysokosc) const
 {
     if (!(*this).czy_nad(dron)) // Dron nie jest nad obiektem
     {
