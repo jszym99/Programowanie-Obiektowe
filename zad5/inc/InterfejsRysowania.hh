@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 
+
+//! \brief Modeluje klase interfejsu rysowania
 class InterfejsRysowania
 {
 protected:
@@ -12,12 +14,12 @@ protected:
     int id;
     std::string kolor;
 public:
-    /*! Konstruktor
+    /*! \brief Konstruktor
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
      * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
      */
     InterfejsRysowania (std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col) : rysownik(rys), kolor(col) {}
-    //! Metoda wirtualna realizujaca rysowanie
+    //! \brief Metoda wirtualna realizujaca rysowanie elementu
     virtual void rysuj () = 0;
 };
 

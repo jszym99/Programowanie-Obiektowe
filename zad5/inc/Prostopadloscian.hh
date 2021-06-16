@@ -4,13 +4,13 @@
 #include "UkladW.hh"
 #include "InterfejsRysowania.hh"
 
-//! Modeluje klase dla prostopadloscianu
+//! \brief Modeluje klase dla prostopadloscianu
 class Prostopadloscian : public UkladW, public InterfejsRysowania
 {
 private:
 	std::array<Wektor<3>, 8> punkty;
 public:
-    /*! Konstruktor tworzy prostopadloscian o zadanych dlugosciach krawedzi
+    /*! \brief Konstruktor tworzy prostopadloscian o zadanych dlugosciach krawedzi
      * \param[in] bazS - poczatkowy srodek lokalnego ukladu wspolrzednych graniastoslupa
      * \param[in] bazO - poczatkwowa orientacja lokalnego ukladu wspolrzednych graniastoslupa
      * \param[in] wsk - wskaznik na rodzica
@@ -22,12 +22,12 @@ public:
      */
     Prostopadloscian(Wektor<3> bazS, MacierzObr<3> bazO, UkladW * wsk, std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col, double dlugosc, double szerokosc, double wysokosc);
 
-    //! Przeciazenie operatora realizuje pobieranie danych z obiektu
+    //! \brief Przeciazenie operatora realizuje pobieranie danych z obiektu
     const Wektor<3> &operator[](int ind) const; 
 
-    //! Metoda rysujaca prostopadloscian
+    //! \brief Metoda rysujaca prostopadloscian
     void rysuj() override;
-    /*! Metoda realizuje pobieranie id rysowania
+    /*! \brief Metoda realizuje pobieranie id rysowania
      * \return id rysowania elementu
      */
     int getId() const {return id;}

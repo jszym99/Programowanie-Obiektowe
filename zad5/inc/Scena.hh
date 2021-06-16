@@ -16,31 +16,31 @@
 #include <cmath>
 #include <typeinfo>
 
-//! Modeluje klase sceny lotu dronem
+//! \brief Modeluje klase sceny lotu dronem
 class Scena
 {
 protected:
-    //! Kolekcja elementow rysowalnych
-    //std::vector<std::shared_ptr<InterfejsRysowania>> elemRysowalne;
-    //! Kolekcja elementow powierzchni
+    //! \brief Kolekcja elementow powierzchni
     std::vector<std::shared_ptr<InterfejsElemPowierzchni>> elemPowierzchni;
-    //! Kolekcja dronow
+    //! \brief Kolekcja dronow
     std::vector<std::shared_ptr<InterfejsDrona>> drony;
-    //! Rysownik
+    //! \brief Rysownik
     std::shared_ptr<drawNS::Draw3DAPI> rysownik;
 public:
-    /*! Konstuktor
+    /*! \brief Konstuktor
      * \param[in] rys - wskaznik na rysownik APIGnuPlot3D
      * \param[in] col - kolor rysowanego tworzonego elementu wykorzystywany przy rysowaniu
      */
     Scena(std::shared_ptr<drawNS::Draw3DAPI> rys, std::string col);
     
+    //! \brief Metoda realizuje menu drona
     void MenuDrona();
+    //! \brief Metoda realizuje menu elementow krajobrazu
     void MenuKrajobrazu();
-    //! Metoda realizujaca menu konsolowe
+    //! \brief Metoda realizujaca menu konsolowe
     void Menu();
     
-    /*! Metoda realizujaca animacje ruchu drona
+    /*! \brief Metoda realizujaca animacje ruchu drona
      * \param[in] deg - kat (w stopniach) okresilajacy kierunek lotu drona
      * \param[in] dyst - odleglosc, na ktora dron ma poleciec
      * \param[in] wys - wysokosc lotu drona

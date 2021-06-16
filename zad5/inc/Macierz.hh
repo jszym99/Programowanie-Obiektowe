@@ -14,33 +14,33 @@ enum Os
 	X,
 };
 
-//! Modeluje klase dla macierzy
+//! \brief Modeluje klase dla macierzy
 template <int ROZMIAR>
 class MacierzObr {
 private:
-	//! Tablica wektorow tworzaca macierz
+	//! \brief Tablica wektorow tworzaca macierz
 	std::vector<Wektor<ROZMIAR>> wiersze;
 public:
-	//! Tworzy macierz identycznosciowa
+	//! \brief Tworzy macierz identycznosciowa
 	MacierzObr();
 	/*!
-	 * Towrzy macierz obrotu względem zadanej osi o zadany kat (w stopniach)
+	 * \brief Towrzy macierz obrotu względem zadanej osi o zadany kat (w stopniach)
 	 * \param[in] deg - kat obrotu (w stopniach)
 	 * \param[in] os_obrotu - os wzdluz ktorej odbywa sie obracanie
 	 */
 	MacierzObr(double deg, Os os_obrotu = Z);
 
-	/*! Przeciazenie operatora realizuje mnozenie dwoch macierzy obrotu
+	/*! \brief Przeciazenie operatora realizuje mnozenie dwoch macierzy obrotu
 	 * \param[in] arg2 - macierz obrotu przez ktota mnozony jest obiekt
 	 * \return macierz obrotu bedaca iloczynem dwoch macierzy obrotu (suma obrotow/katow)
 	 */
 	const MacierzObr<ROZMIAR> operator * (const MacierzObr<ROZMIAR> & arg2) const;
-	/*! Przeciazenie operatora realizuje mnozenie macierzy obrotu przez wektor
+	/*! \brief Przeciazenie operatora realizuje mnozenie macierzy obrotu przez wektor
 	 * \param[in] wektor - wektro obracany macierza obrotu
 	 * \return wektor obrocony o macierz obrotu (o zadanym kacie)
 	 */
 	const Wektor<ROZMIAR> operator * (const Wektor<ROZMIAR> & wektor) const;
-	/*! Przeciazenie operatora realizuje pobieranie danych z obiektu
+	/*! \brief Przeciazenie operatora realizuje pobieranie danych z obiektu
 	 * \param[in] ind - indeks danych do pobrania
 	 * \return wektor w polu o numerze ind 
 	 */
@@ -48,21 +48,21 @@ public:
 };
 
 /*! 
- * Funkcja zamienia wartosc kata w radianach na stopnie
+ * \brief Funkcja zamienia wartosc kata w radianach na stopnie
  * 
  * \param[in] rad kat w radianach
  * \return kat w stopniach
  */
 double toDeg (double rad);
 /*!
- * Funkcja zamienia wartosc kata w stopniach na radiany
+ * \brief Funkcja zamienia wartosc kata w stopniach na radiany
  * \param[in] deg - kat w stopniach
  * \return kat w radianach
  */
 double toRad (double deg);
 
 /*!
- * Przeciazenie operatora wypisywania realizuje wyswietlanie macierzy na wyjsciu standardowym
+ * \brief Przeciazenie operatora wypisywania realizuje wyswietlanie macierzy na wyjsciu standardowym
  *
  * \param[in] Strm - strumien
  * \param[in] Mac - macierz do wypisania
