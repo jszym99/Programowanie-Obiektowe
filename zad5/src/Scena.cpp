@@ -84,6 +84,16 @@ void Scena::MenuDrona()
                 }
                 std::cout << "Podaj numer drona do sterowania: ";
                 std::cin >> dronId;
+                // Sprawdzanie poprawnosci typu danych
+                if (std::cin.fail() || dronId < 0 || dronId >= drony.size())
+                {
+                    if (dronId < 0 || dronId >= drony.size())
+                        std::cout << "Dron o tym numerze nie istnieje\n";
+                    std::cin.clear();
+                    std::cin.ignore(1000, '\n');
+                    std::cout << "Niepoprawny format danych\n";
+                    continue;
+                }
 
                 // Zmiana koloru sterowanego drona
                 drony[dronId]->zmienKolor("blue");
@@ -586,7 +596,6 @@ void Scena::AnimacjaRuchu(double deg, double dyst, double wys, unsigned int nrDr
             {
                 flagaLad = false;
             }
-            
         }
         for (int i = 0; i < (int)drony.size() - 1; i++)
         {
